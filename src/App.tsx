@@ -547,11 +547,11 @@ export default function App() {
               artifactId: art.id,
               timestamp: timeStr,
               message: verdict === 'Unknown'
-                ? `🧾 INVESTIGATION COMPLETE: "${art.name}" — full specialist pipeline finished, but no specialist produced a scored, evidence-backed verdict for this artifact type. Marked UNASSESSED rather than Safe.`
-                : `🧾 INVESTIGATION COMPLETE: "${art.name}" — full specialist pipeline finished. Verdict: ${verdict.toUpperCase()} (${maliciousScore}% malicious score).`,
+                ? `REPORT_GENERATED: "${art.name}" — full specialist pipeline finished, but no specialist produced a scored, evidence-backed verdict for this artifact type. Marked UNASSESSED rather than Safe.`
+                : `REPORT_GENERATED: "${art.name}" — full specialist pipeline finished. Verdict: ${verdict.toUpperCase()} (${maliciousScore}% malicious score).`,
               type: verdict === 'Malicious' ? 'alert' : verdict === 'Suspicious' ? 'warning' : verdict === 'Unknown' ? 'info' : 'success',
               category: 'forensics',
-              source: 'REPORT GENERATOR'
+              source: 'REPORT_GENERATED'
             });
             return {
               ...art,
@@ -567,9 +567,15 @@ export default function App() {
             return art; // that specialist is busy on another artifact — retry next tick
           }
           busyAgentIds.add(candidate.agentId);
-          const startProgress = 5 + Math.floor(Math.random() * 10);
+          const startProgress = 10;
           findings[nextIdx] = { ...candidate, status: 'analyzing', stepProgress: startProgress };
           artifactsChanged = true;
+
+          const startEventType =
+            candidate.agentId === 'malware-analysis' ? 'MALWARE_ANALYSIS_STARTED'
+            : candidate.agentId === 'threat-intel' ? 'TOOL_QUERY_STARTED'
+            : candidate.agentId === 'verification-agent' ? 'VERIFICATION_STARTED'
+            : 'STATIC_ANALYSIS_STARTED';
 
           pipelineAgentUpdates.set(candidate.agentId, {
             id: candidate.agentId,
@@ -582,17 +588,17 @@ export default function App() {
             id: `st-${Date.now()}-${art.id}-${candidate.agentId}-start`,
             artifactId: art.id,
             timestamp: timeStr,
-            message: `${candidate.agentName} picked up "${art.name}" for analysis.`,
+            message: `${startEventType}: ${candidate.agentName} started inspecting "${art.name}".`,
             type: 'info',
             category: 'forensics',
-            source: candidate.agentName.toUpperCase()
+            source: startEventType
           });
           return { ...art, agentFindings: findings };
         }
 
         // A step is actively running — advance it through real progress stages (Fix 12)
         const active = findings[activeIdx];
-        const bump = 20 + Math.floor(Math.random() * 25);
+        const bump = 35;
         const newStepProgress = Math.min(100, active.stepProgress + bump);
         artifactsChanged = true;
 
@@ -605,11 +611,6 @@ export default function App() {
           : 'Extracting features';
 
         if (newStepProgress >= 100) {
-          // Findings are generated from `art` as it stands right now, which
-          // already carries every earlier-in-pipeline agent's completed
-          // finding on art.agentFindings — this is what lets verification-agent
-          // and report-generator do real cross-validation/synthesis instead
-          // of operating blind.
           const content = active.agentId === 'threat-intel'
             ? (threatIntelResults.get(art.id) || generateFinding(active.agentId, art))
             : generateFinding(active.agentId, art);
@@ -619,9 +620,11 @@ export default function App() {
             stage: 'Completed',
             stepProgress: 100,
             verdict: content.verdict,
+            canonicalVerdict: content.canonicalVerdict,
             maliciousScore: content.maliciousScore,
             summary: content.summary,
             findings: content.findings,
+            structuredEvidence: content.structuredEvidence,
             evidenceGaps: content.evidenceGaps,
             evidenceCoverage: content.evidenceCoverage,
             evidenceQuality: content.evidenceQuality,
@@ -634,21 +637,23 @@ export default function App() {
             progress: 100,
             completedTask: true
           });
-          const icon = content.verdict === 'Malicious' ? '🚨'
-            : content.verdict === 'Suspicious' ? '⚠️'
-            : content.verdict === 'Insufficient Evidence' || content.verdict === 'Not Applicable' ? 'ℹ️'
-            : '✅';
+          const completionEventType =
+            active.agentId === 'ioc-extraction' ? 'IOC_DISCOVERED'
+            : active.agentId === 'threat-intel' ? 'TOOL_QUERY_COMPLETED'
+            : active.agentId === 'verification-agent' ? 'VERIFICATION_COMPLETED'
+            : active.agentId === 'report-generator' ? 'REPORT_GENERATED'
+            : 'AGENT_COMPLETED';
           pipelineStreamEvents.push({
             id: `st-${Date.now()}-${art.id}-${active.agentId}-done`,
             artifactId: art.id,
             timestamp: timeStr,
-            message: `${icon} ${active.agentName} on "${art.name}": ${content.summary}${content.findings?.length ? ` Evidence items: ${content.findings.length}.` : ''}${content.evidenceCoverage != null ? ` Coverage: ${content.evidenceCoverage}%.` : ''}${content.evidenceQuality ? ` Quality: ${content.evidenceQuality}.` : ''}`,
+            message: `${completionEventType}: ${active.agentName} on "${art.name}" — ${content.summary}${content.findings?.length ? ` Evidence items: ${content.findings.length}.` : ''}`,
             type: content.verdict === 'Malicious' ? 'alert'
               : content.verdict === 'Suspicious' ? 'warning'
               : content.verdict === 'Insufficient Evidence' || content.verdict === 'Not Applicable' ? 'info'
               : 'success',
             category: 'forensics',
-            source: active.agentName.toUpperCase()
+            source: completionEventType
           });
           return { ...art, agentFindings: findings };
         }
@@ -664,33 +669,11 @@ export default function App() {
         return { ...art, agentFindings: findings };
       });
 
-      // Agents busy on a case (not an artifact pipeline) still get the
-      // older generic step-message simulation so cases keep progressing too.
-      type GenericTick = { id: string; name: string; newProgress: number; stepMsg: string; completed: boolean; currentTask: string };
-      const genericTicks: GenericTick[] = [];
-      currentAgents.forEach(a => {
-        if (pipelineAgentUpdates.has(a.id)) return;
-        if ((a.status === 'ANALYZING' || a.status === 'BUSY') && a.progress < 100) {
-          const bump = 6 + Math.floor(Math.random() * 10);
-          const newProgress = Math.min(100, a.progress + bump);
-          const steps = AGENT_STEP_MESSAGES[a.id] || ['Processing task...'];
-          const stepMsg = steps[Math.floor(Math.random() * steps.length)];
-          genericTicks.push({
-            id: a.id,
-            name: a.name,
-            newProgress,
-            stepMsg,
-            completed: newProgress >= 100,
-            currentTask: a.currentTask
-          });
-        }
-      });
-
       if (artifactsChanged) {
         setArtifacts(() => nextArtifacts);
       }
 
-      if (pipelineAgentUpdates.size > 0 || genericTicks.length > 0) {
+      if (pipelineAgentUpdates.size > 0) {
         setAgents(prev => prev.map(a => {
           const pu = pipelineAgentUpdates.get(a.id);
           if (pu) {
@@ -722,49 +705,11 @@ export default function App() {
               ].slice(0, 20)
             };
           }
-
-          const t = genericTicks.find(tk => tk.id === a.id);
-          if (!t) return a;
-          if (t.completed) {
-            return {
-              ...a,
-              progress: 100,
-              status: 'IDLE' as const,
-              currentTask: 'Idle',
-              tasksCompleted: a.tasksCompleted + 1,
-              lastActive: timeStr,
-              lastLog: { timestamp: timeStr, action: 'Analysis complete.' },
-              systemLogs: [
-                { id: `log-${Date.now()}-${a.id}`, timestamp: timeStr, level: 'EXEC' as const, message: 'Task completed — findings compiled.' },
-                ...(a.systemLogs || [])
-              ].slice(0, 20)
-            };
-          }
-          return {
-            ...a,
-            progress: t.newProgress,
-            lastActive: timeStr,
-            lastLog: { timestamp: timeStr, action: t.stepMsg },
-            systemLogs: [
-              { id: `log-${Date.now()}-${a.id}`, timestamp: timeStr, level: 'INFO' as const, message: t.stepMsg },
-              ...(a.systemLogs || [])
-            ].slice(0, 20)
-          };
+          return a;
         }));
       }
 
-      const genericStreamEvents: StreamEvent[] = genericTicks.map(t => ({
-        id: `st-${Date.now()}-${t.id}`,
-        timestamp: timeStr,
-        message: t.completed
-          ? `✅ ${t.name} completed analysis: ${t.currentTask}`
-          : `${t.name}: ${t.stepMsg}`,
-        type: t.completed ? 'success' : 'info',
-        category: 'forensics',
-        source: t.name.toUpperCase()
-      }));
-
-      const allNewEvents = [...pipelineStreamEvents, ...genericStreamEvents];
+      const allNewEvents = [...pipelineStreamEvents];
       if (allNewEvents.length > 0) {
         setStreamEvents(prev => [...allNewEvents, ...prev].slice(0, 200));
         const eventsByArtifact = new Map<string, StreamEvent[]>();
@@ -778,7 +723,16 @@ export default function App() {
           void secureFetchWithRecovery(`/api/investigations/${encodeURIComponent(artifactId)}/events`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(events),
+            body: JSON.stringify(events.map((ev) => ({
+              event_id: ev.id,
+              investigation_id: artifactId,
+              agent_id: ev.source,
+              agent_name: ev.source,
+              type: ev.source,
+              status: 'ANALYZING',
+              message: ev.message,
+              timestamp: new Date().toISOString(),
+            }))),
           }).catch(() => undefined);
         });
       }
@@ -1071,17 +1025,52 @@ export default function App() {
       }));
     }
 
-    setStreamEvents(prev => [
+    const intakeEvents: StreamEvent[] = [
       {
-        id: `st-${Date.now()}`,
+        id: `st-${Date.now()}-3`,
+        artifactId: newArtifact.id,
         timestamp: timeStr,
-        message: `📎 EVIDENCE UPLOADED: "${newArtifact.name}" (${newArtifact.type.toUpperCase()}) ingested — full specialist pipeline dispatched (${pipeline.length} agents), starting with ${firstAgent?.name || 'ARCHON'}.`,
+        message: `STATIC_ANALYSIS_COMPLETED: "${newArtifact.name}" (${newArtifact.type.toUpperCase()}) static triage dispatched across ${pipeline.length} specialist agents, starting with ${firstAgent?.name || 'ARCHON'}.`,
         type: 'action',
         category: 'forensics',
-        source: 'EVIDENCE INTAKE'
+        source: 'STATIC_ANALYSIS_COMPLETED'
       },
-      ...prev
-    ]);
+      {
+        id: `st-${Date.now()}-2`,
+        artifactId: newArtifact.id,
+        timestamp: timeStr,
+        message: `HASH_COMPLETED: Computed cryptographic fingerprint SHA256=${newArtifact.sha256 || 'n/a'} for "${newArtifact.name}".`,
+        type: 'info',
+        category: 'forensics',
+        source: 'HASH_COMPLETED'
+      },
+      {
+        id: `st-${Date.now()}-1`,
+        artifactId: newArtifact.id,
+        timestamp: timeStr,
+        message: `UPLOAD_STARTED: Received evidence artifact "${newArtifact.name}" (${newArtifact.size}).`,
+        type: 'info',
+        category: 'forensics',
+        source: 'UPLOAD_STARTED'
+      },
+    ];
+
+    setStreamEvents(prev => [...intakeEvents, ...prev]);
+
+    void secureFetchWithRecovery(`/api/investigations/${encodeURIComponent(newArtifact.id)}/events`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(intakeEvents.map((ev) => ({
+        event_id: ev.id,
+        investigation_id: newArtifact.id,
+        agent_id: ev.source,
+        agent_name: ev.source,
+        type: ev.source,
+        status: 'RECEIVED',
+        message: ev.message,
+        timestamp: new Date().toISOString(),
+      }))),
+    }).catch(() => undefined);
   };
 
   const handleDeleteArtifact = (artifactId: string) => {

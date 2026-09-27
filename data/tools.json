@@ -1,0 +1,238 @@
+[
+  {
+    "id": "virustotal",
+    "name": "VirusTotal",
+    "vendor": "Google (Chronicle)",
+    "category": "Threat Intelligence",
+    "description": "Multi-engine hash, URL, domain, and IP reputation lookups against 70+ AV/EDR vendors.",
+    "docsUrl": "https://docs.virustotal.com/reference/overview",
+    "defaultBaseUrl": "https://www.virustotal.com/api/v3",
+    "allowedHosts": [
+      "www.virustotal.com"
+    ],
+    "authType": "api_key_header",
+    "authConfigured": true,
+    "connected": true,
+    "enabled": true,
+    "allowedAgents": [
+      "threat-intel",
+      "ioc-extraction",
+      "network-analysis",
+      "malware-analysis"
+    ],
+    "enabledCapabilities": [
+      "hash.lookup",
+      "ip.lookup",
+      "domain.lookup",
+      "url.lookup"
+    ],
+    "health": {
+      "status": "HEALTHY",
+      "latencyMs": 46,
+      "lastChecked": "2026-09-27T09:17:02.990Z"
+    },
+    "capabilities": [
+      {
+        "id": "hash.lookup",
+        "label": "Hash Lookup",
+        "description": "SHA256/SHA1/MD5 verdict + engine detections"
+      },
+      {
+        "id": "ip.lookup",
+        "label": "IP Lookup",
+        "description": "IP reputation, ASN, and related detections"
+      },
+      {
+        "id": "domain.lookup",
+        "label": "Domain Lookup",
+        "description": "Domain reputation and categorization"
+      },
+      {
+        "id": "url.lookup",
+        "label": "URL Lookup",
+        "description": "URL scan verdict across AV engines"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 4,
+        "note": "Public API key: 4 req/min, 500 req/day."
+      },
+      "premium": {
+        "requestsPerMinute": 240,
+        "note": "Enterprise key: high throughput."
+      }
+    }
+  },
+  {
+    "id": "otx",
+    "name": "AlienVault OTX",
+    "vendor": "AT&T Cybersecurity (LevelBlue)",
+    "category": "Threat Intelligence",
+    "description": "Open Threat Exchange pulse data — community-sourced IOCs, threat actor attribution, and campaign context.",
+    "docsUrl": "https://otx.alienvault.com/api",
+    "defaultBaseUrl": "https://otx.alienvault.com/api/v1",
+    "allowedHosts": [
+      "otx.alienvault.com"
+    ],
+    "authType": "api_key_header",
+    "authConfigured": true,
+    "connected": true,
+    "enabled": true,
+    "allowedAgents": [
+      "threat-intel",
+      "network-analysis"
+    ],
+    "enabledCapabilities": [
+      "ip.lookup",
+      "domain.lookup",
+      "threat.lookup"
+    ],
+    "health": {
+      "status": "HEALTHY",
+      "latencyMs": 62,
+      "lastChecked": "2026-09-27T09:17:02.990Z"
+    },
+    "capabilities": [
+      {
+        "id": "ip.lookup",
+        "label": "IP Lookup",
+        "description": "IP reputation and associated pulses"
+      },
+      {
+        "id": "domain.lookup",
+        "label": "Domain Lookup",
+        "description": "Domain reputation and associated pulses"
+      },
+      {
+        "id": "threat.lookup",
+        "label": "Threat Lookup",
+        "description": "Pulse / campaign / actor context for an indicator"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 10,
+        "note": "Standard OTX account."
+      },
+      "premium": {
+        "requestsPerMinute": 60,
+        "note": "Enterprise allowance."
+      }
+    }
+  },
+  {
+    "id": "shodan",
+    "name": "Shodan",
+    "vendor": "Shodan",
+    "category": "Network Intelligence",
+    "description": "Internet-wide host and service scanning — exposed ports, banners, and vulnerabilities for an IP.",
+    "docsUrl": "https://developer.shodan.io/api",
+    "defaultBaseUrl": "https://api.shodan.io",
+    "allowedHosts": [
+      "api.shodan.io"
+    ],
+    "authType": "api_key",
+    "authConfigured": true,
+    "connected": true,
+    "enabled": true,
+    "allowedAgents": [
+      "threat-intel",
+      "network-analysis"
+    ],
+    "enabledCapabilities": [
+      "host.lookup",
+      "ip.lookup",
+      "port.lookup"
+    ],
+    "health": {
+      "status": "HEALTHY",
+      "latencyMs": 84,
+      "lastChecked": "2026-09-27T09:17:02.990Z"
+    },
+    "capabilities": [
+      {
+        "id": "host.lookup",
+        "label": "Host Lookup",
+        "description": "Open ports, banners, vulnerabilities, and host metadata"
+      },
+      {
+        "id": "ip.lookup",
+        "label": "IP Lookup",
+        "description": "Summary of open services on an IP"
+      },
+      {
+        "id": "port.lookup",
+        "label": "Port Lookup",
+        "description": "Port scanning service fingerprinting"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 10,
+        "note": "Developer query credits."
+      },
+      "premium": {
+        "requestsPerMinute": 120,
+        "note": "Corporate plan."
+      }
+    }
+  },
+  {
+    "id": "abuseipdb",
+    "name": "AbuseIPDB",
+    "vendor": "AbuseIPDB",
+    "category": "IP Reputation",
+    "description": "Crowdsourced IP abuse reporting — confidence score, report categories, and country/ISP context.",
+    "docsUrl": "https://docs.abuseipdb.com/",
+    "defaultBaseUrl": "https://api.abuseipdb.com/api/v2",
+    "allowedHosts": [
+      "api.abuseipdb.com"
+    ],
+    "authType": "api_key_header",
+    "authConfigured": true,
+    "connected": true,
+    "enabled": true,
+    "allowedAgents": [
+      "threat-intel",
+      "network-analysis"
+    ],
+    "enabledCapabilities": [
+      "ip.reputation",
+      "ip.lookup",
+      "ip.report"
+    ],
+    "health": {
+      "status": "HEALTHY",
+      "latencyMs": 51,
+      "lastChecked": "2026-09-27T09:17:02.990Z"
+    },
+    "capabilities": [
+      {
+        "id": "ip.reputation",
+        "label": "IP Reputation",
+        "description": "Abuse confidence score (0-100%) and report count"
+      },
+      {
+        "id": "ip.lookup",
+        "label": "IP Lookup",
+        "description": "Detailed abuse reports by category"
+      },
+      {
+        "id": "ip.report",
+        "label": "IP Report",
+        "description": "Submit verified abusive IP observations"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 15,
+        "note": "Free key: 1,000 checks/day."
+      },
+      "premium": {
+        "requestsPerMinute": 60,
+        "note": "Verified webmaster / commercial tier."
+      }
+    }
+  }
+]

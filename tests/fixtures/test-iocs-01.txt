@@ -1,0 +1,22 @@
+# Test Fixture 01: Standard Mixed Incident Indicators
+# Total Expected Indicators: 12
+
+[Network Infrastructure]
+IPv4 Address: 185.220.101.44
+Domain: c2.darkfleet-soc.io
+URL: https://update-windows-defender.online/en/check.php
+Email Contact: threat-actor@adversary-infra.cc
+
+[Cryptographic Hashes]
+SHA256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+SHA1: 2fd4e1c67a2d28fced849ee1bb76e7391b93eb12
+MD5: 098f6bcd4621d373cade4e832627b4f6
+
+[Host Artifacts & Persistence]
+Registry Key: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\WinDefenderUpdate
+File Path: C:\Windows\Temp\beacon_x64.dll
+Named Mutex: Global\ZoneTransfer_Mutex_8921
+
+[Threat Intelligence Context]
+Exploited Vulnerability: CVE-2024-38812
+MITRE ATT&CK: T1059.001

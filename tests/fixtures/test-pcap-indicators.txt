@@ -1,0 +1,11 @@
+# Test Fixture 04: Packet Capture & Network Forensics Indicators
+# Total Expected Indicators: 8
+
+Source Endpoint: 198.51.100.99
+Target SNI Domain: c2-listener.darkfleet.net
+Observed HTTP GET URL: https://c2-listener.darkfleet.net/api/v1/heartbeat
+HTTP Client User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) CobaltStrike/4.8
+DNS Resolution Record: IN CNAME telemetry-ns1
+Cert Issuer Contact: cert-authority@darkfleet.net
+TLS Certificate MD5 Fingerprint: 3a4f6d89b1c2e4a5f6e8c0d1e2f3a4b5
+Impacket Synchronization Mutex: Global\ZoneTransfer_Pcap_Sync

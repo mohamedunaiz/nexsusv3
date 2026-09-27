@@ -1,0 +1,14 @@
+# Test Fixture 02: Defanged Indicators & Advanced Artifacts
+# Total Expected Indicators: 10
+
+Defanged C2 URL: hxxps://malicious-c2[.]org/stage2[.]bin
+Defanged External Host IP: 194[.]26[.]29[.]112
+Defanged Rendezvous Domain: botnet-gate[.]top
+
+Fuzzy Hash SSDEEP: 384:9fK123456789012345678901234567890:c91
+Locality Sensitive Hash TLSH: T10123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF01234567
+Debug PDB Path: C:\dev\target_build\loader.pdb
+Scheduled Task: schtasks /create /tn "SystemUpdater" /tr "regsvr32 /s scrobj"
+Named Mutex: Global\CobaltStrike_Mutex_4812
+DNS Query Record: IN TXT v=spf1_redirect_c2
+Shadow Copy Deletion: vssadmin delete shadows /all /quiet

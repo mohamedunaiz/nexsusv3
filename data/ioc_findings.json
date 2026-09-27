@@ -1,0 +1,121 @@
+[
+  {
+    "type": "hash",
+    "value": "cobaltstrike",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "url",
+    "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "WININET.dll",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "KERNEL32.dll",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "Global\\CobaltStrike_Mutex_99",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "ip",
+    "value": "185.220.101.44",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "url",
+    "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "cobalt_beacon_x64.exe",
+    "threatScore": 90,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: cobalt_beacon_x64.exe"
+  },
+  {
+    "type": "hash",
+    "value": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
+    "threatScore": 94,
+    "firstSeen": "2026-03-12",
+    "source": "Malware Analysis"
+  },
+  {
+    "type": "ip",
+    "value": "185.220.101.5",
+    "threatScore": 82,
+    "firstSeen": "2026-03-14",
+    "source": "AlienVault OTX"
+  },
+  {
+    "type": "domain",
+    "value": "c2.darkfleet-soc.io",
+    "threatScore": 98,
+    "firstSeen": "2026-03-15",
+    "source": "IOC Extraction"
+  },
+  {
+    "type": "url",
+    "value": "https://c2.darkfleet-soc.io/beacon/stage2",
+    "threatScore": 95,
+    "firstSeen": "2026-03-15",
+    "source": "Network Analysis"
+  },
+  {
+    "type": "ip",
+    "value": "194.26.29.112",
+    "threatScore": 100,
+    "firstSeen": "2026-03-18",
+    "source": "AbuseIPDB"
+  },
+  {
+    "type": "hash",
+    "value": "post_train_implant_v2.bin",
+    "threatScore": 20,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: post_train_implant_v2.bin"
+  },
+  {
+    "type": "hash",
+    "value": "pre_train_implant.bin",
+    "threatScore": 20,
+    "firstSeen": "2026-09-27",
+    "source": "Sample: pre_train_implant.bin"
+  }
+]

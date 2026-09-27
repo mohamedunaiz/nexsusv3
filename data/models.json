@@ -1,0 +1,50 @@
+[
+  {
+    "version": "v3.6-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 19,
+    "deployedAt": "2026-09-27"
+  },
+  {
+    "version": "v3.4-heuristic-forest",
+    "status": "DEPLOYED",
+    "accuracy": 96.4,
+    "f1Score": 0.958,
+    "samplesTrained": 235,
+    "deployedAt": "2026-03-12"
+  },
+  {
+    "version": "v3.3-gradient-boost",
+    "status": "ARCHIVED",
+    "accuracy": 94.2,
+    "f1Score": 0.938,
+    "samplesTrained": 180,
+    "deployedAt": "2026-02-18"
+  },
+  {
+    "version": "v3.5-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 14,
+    "deployedAt": "2026-09-27"
+  },
+  {
+    "version": "v3.4-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 10,
+    "deployedAt": "2026-09-27"
+  },
+  {
+    "version": "v3.3-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 6,
+    "deployedAt": "2026-09-27"
+  }
+]

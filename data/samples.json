@@ -1,0 +1,2126 @@
+[
+  {
+    "id": "samp-371403-184a53",
+    "analysisId": "ana-371403-184a53",
+    "storagePath": "/app/applet/data/samples_store/184a53882c5c82832f5738a0d314e962edc9fa1100b7d6c006a9c2b6dcdc4312.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "184a53882c5c82832f5738a0d314e962edc9fa1100b7d6c006a9c2b6dcdc4312",
+    "sha1": "2e16e5a59bb97e8e12fd11f305159a322b2ee0d9",
+    "md5": "afe84c706cf86fb260a57886e2c74cdc",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 92,
+      "ruleConfidence": 90,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.6-adaptive-dataset",
+      "modelConfidence": 65,
+      "observedCharacteristics": [
+        "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501371374]",
+        "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501371374]",
+          "kind": "string",
+          "family": "ShadowNexusAPT",
+          "severity": "high",
+          "detail": "Matched rule: Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501371374]"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-322983-e19673",
+          "id": "samp-322983-e19673",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.29)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.26)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.32)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.32); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.27)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.29 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-371379-d57a02",
+          "id": "samp-371379-d57a02",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.20)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.29 vs 5.20); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.29,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.29,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.2,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "184a53882c5c82832f5738a0d314e962edc9fa1100b7d6c006a9c2b6dcdc4312",
+      "sha1": "2e16e5a59bb97e8e12fd11f305159a322b2ee0d9",
+      "md5": "afe84c706cf86fb260a57886e2c74cdc",
+      "sizeBytes": 129,
+      "entropyOverall": 5.29,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.29,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790501371402",
+    "createdAt": "2026-09-27T09:29:31.402Z",
+    "updatedAt": "2026-09-27T09:29:31.402Z"
+  },
+  {
+    "id": "samp-ds-1790501371395-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "eafa8909359f59e9322cfd5a1e7efbc9a9fc491ae33ef2d4b3390e4e5867cd0e",
+    "sha1": "4a1da48ab18ad5c801931113af97deca3255238e",
+    "md5": "5744c8bd250527826b15d36ec9dbb66c",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 4.96,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 4.96,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:29:31.395Z",
+    "updatedAt": "2026-09-27T09:29:31.395Z"
+  },
+  {
+    "id": "samp-ds-1790501371393-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "cc6272872a4a5f8ffdf540d8878a5cdca7453cfa54e550281b5356c534518d66",
+    "sha1": "73dd5b92342ca4192d9234be86516cb77acb1fb9",
+    "md5": "733e3b95cf4191cfa5d540393b77d1fe",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 4.94,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 4.94,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.14,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:29:31.393Z",
+    "updatedAt": "2026-09-27T09:29:31.393Z"
+  },
+  {
+    "id": "samp-371379-d57a02",
+    "analysisId": "ana-371379-d57a02",
+    "storagePath": "/app/applet/data/samples_store/d57a02b2ada70d0406fbf219391ed58a71153323206d95bc5d5ce41b1919b889.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "d57a02b2ada70d0406fbf219391ed58a71153323206d95bc5d5ce41b1919b889",
+    "sha1": "589280cca763b4e4d7ce88fd404cffe2bbea9710",
+    "md5": "2ae63807bd00716434b4e9e2714d5040",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": "ShadowNexusAPT",
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.20 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-322948-18b03f",
+          "id": "samp-322948-18b03f",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.20 vs 5.23)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.20 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778095-1954aa",
+          "id": "samp-778095-1954aa",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.20 vs 5.16)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.20 vs 5.16); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322983-e19673",
+          "id": "samp-322983-e19673",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.20 vs 5.29)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.20 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.20 vs 5.26)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.20 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.20 vs 5.32)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.20 vs 5.32); family attribution remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.2,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.2,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.18,
+      "printableStringRatio": 1,
+      "vector": [
+        0.65,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "d57a02b2ada70d0406fbf219391ed58a71153323206d95bc5d5ce41b1919b889",
+      "sha1": "589280cca763b4e4d7ce88fd404cffe2bbea9710",
+      "md5": "2ae63807bd00716434b4e9e2714d5040",
+      "sizeBytes": 94,
+      "entropyOverall": 5.2,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.2,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790501371377",
+    "createdAt": "2026-09-27T09:29:31.377Z",
+    "updatedAt": "2026-09-27T09:29:31.377Z"
+  },
+  {
+    "id": "samp-371246-91cd3d",
+    "analysisId": "ana-371246-91cd3d",
+    "storagePath": "/app/applet/data/samples_store/91cd3da8ae6459b164f4c1b9d41aa1014110aff48f543c659c3ff038c60c9b35.bin",
+    "name": "cobalt_beacon_x64.exe",
+    "sha256": "91cd3da8ae6459b164f4c1b9d41aa1014110aff48f543c659c3ff038c60c9b35",
+    "sha1": "0627f638ea466116de06eb9f0123697cb60c5186",
+    "md5": "a530472191c92714f6d40affe1cc9c3c",
+    "sizeBytes": 2048,
+    "fileFormat": "pe",
+    "label": "malicious",
+    "family": "Cobalt Strike",
+    "verdict": "malicious",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 90,
+      "similarityConfidence": 37,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 100,
+      "observedCharacteristics": [
+        "Parsed PE (x86-64 (AMD64), Windows Console (CUI), 2 sections, entrypoint 0x1000)",
+        "Identified high-risk memory/process APIs: VirtualAlloc, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread, InternetOpenA",
+        "Discovered suspicious opcode/command strings: wininet, virtualalloc, virtualallocex, writeprocessmemory",
+        "Reflective DLL injection / Remote thread creation primitives",
+        "Hardcoded Command & Control (C2) endpoint configuration",
+        "High-risk PE import: process hollowing / memory dumping API",
+        "37% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc), Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread); family attribution to Cobalt Strike remains unconfirmed."
+      ],
+      "suspiciousImports": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Reflective DLL injection / Remote thread creation primitives",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Reflective DLL injection / Remote thread creation primitives"
+        },
+        {
+          "ruleId": "rule-hit-2",
+          "ruleName": "Hardcoded Command & Control (C2) endpoint configuration",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Hardcoded Command & Control (C2) endpoint configuration"
+        },
+        {
+          "ruleId": "rule-hit-3",
+          "ruleName": "High-risk PE import: process hollowing / memory dumping API",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: High-risk PE import: process hollowing / memory dumping API"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-001",
+          "id": "samp-001",
+          "name": "beacon_x64_stage2.dll",
+          "score": 37,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (VirtualAlloc)",
+            "Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread)"
+          ],
+          "attributionStatement": "37% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc), Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread); family attribution to Cobalt Strike remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "Cobalt Strike"
+    },
+    "features": {
+      "totalBytes": 2048,
+      "entropy": 1.31,
+      "detectedFormat": "pe",
+      "magicHex": "4D5A000000000000",
+      "peHeaders": {
+        "isPE": true,
+        "machine": "x86-64 (AMD64)",
+        "subsystem": "Windows Console (CUI)",
+        "is64Bit": true,
+        "entryPointRva": 4096,
+        "imageBase": "0x0",
+        "sectionCount": 2,
+        "timeDateStamp": 1711509670
+      },
+      "sectionCount": 2,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 12,
+      "stringsWithOffsets": [
+        {
+          "value": ".text",
+          "offset": 392,
+          "hexOffset": "0x0188",
+          "encoding": "ascii",
+          "length": 5
+        },
+        {
+          "value": "`.rdata",
+          "offset": 431,
+          "hexOffset": "0x01AF",
+          "encoding": "ascii",
+          "length": 7
+        },
+        {
+          "value": "KERNEL32.dll",
+          "offset": 1568,
+          "hexOffset": "0x0620",
+          "encoding": "ascii",
+          "length": 12
+        },
+        {
+          "value": "WININET.dll",
+          "offset": 1581,
+          "hexOffset": "0x062D",
+          "encoding": "ascii",
+          "length": 11
+        },
+        {
+          "value": "VirtualAllocEx",
+          "offset": 1593,
+          "hexOffset": "0x0639",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "WriteProcessMemory",
+          "offset": 1608,
+          "hexOffset": "0x0648",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "CreateRemoteThread",
+          "offset": 1627,
+          "hexOffset": "0x065B",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "InternetOpenA",
+          "offset": 1646,
+          "hexOffset": "0x066E",
+          "encoding": "ascii",
+          "length": 13
+        },
+        {
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+          "offset": 1660,
+          "hexOffset": "0x067C",
+          "encoding": "ascii",
+          "length": 44
+        },
+        {
+          "value": "185.220.101.44",
+          "offset": 1705,
+          "hexOffset": "0x06A9",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+          "offset": 1720,
+          "hexOffset": "0x06B8",
+          "encoding": "ascii",
+          "length": 64
+        },
+        {
+          "value": "Global\\CobaltStrike_Mutex_99",
+          "offset": 1785,
+          "hexOffset": "0x06F9",
+          "encoding": "ascii",
+          "length": 28
+        }
+      ],
+      "suspiciousStrings": [
+        "wininet",
+        "virtualalloc",
+        "virtualallocex",
+        "writeprocessmemory",
+        "createremotethread",
+        "internetopen",
+        "beacon",
+        "c2",
+        "cobaltstrike"
+      ],
+      "suspiciousStringsDetailed": [
+        {
+          "pattern": "wininet",
+          "offset": "0x062D",
+          "value": "WININET.dll"
+        },
+        {
+          "pattern": "virtualalloc",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "virtualallocex",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "writeprocessmemory",
+          "offset": "0x0648",
+          "value": "WriteProcessMemory"
+        },
+        {
+          "pattern": "createremotethread",
+          "offset": "0x065B",
+          "value": "CreateRemoteThread"
+        },
+        {
+          "pattern": "internetopen",
+          "offset": "0x066E",
+          "value": "InternetOpenA"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "c2",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x06B8",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist"
+        },
+        {
+          "pattern": "cobaltstrike",
+          "offset": "0x06F9",
+          "value": "Global\\CobaltStrike_Mutex_99"
+        }
+      ],
+      "networkIndicatorStrings": [
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+        "185.220.101.44",
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "persistenceIndicatorStrings": [
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "uniqueByteRatio": 0.28,
+      "printableStringRatio": 0.13,
+      "vector": [
+        0.16,
+        1,
+        0.6,
+        1
+      ],
+      "peSuspiciousImportedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "importedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "sha256": "91cd3da8ae6459b164f4c1b9d41aa1014110aff48f543c659c3ff038c60c9b35",
+      "sha1": "0627f638ea466116de06eb9f0123697cb60c5186",
+      "md5": "a530472191c92714f6d40affe1cc9c3c",
+      "sizeBytes": 2048,
+      "entropyOverall": 1.31,
+      "fileFormat": "pe",
+      "peSections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 2
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-e2e-1790501371182",
+    "createdAt": "2026-09-27T09:29:31.230Z",
+    "updatedAt": "2026-09-27T09:29:31.230Z"
+  },
+  {
+    "id": "samp-322983-e19673",
+    "analysisId": "ana-322983-e19673",
+    "storagePath": "/app/applet/data/samples_store/e19673a85189b3088ab39247915ff130e7f04c4e42dc50186d1d58c3f58394d7.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "e19673a85189b3088ab39247915ff130e7f04c4e42dc50186d1d58c3f58394d7",
+    "sha1": "c83ca0406697b21c46273439272faab74965941f",
+    "md5": "a2c1018766a2d7889fecea7413f89c72",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 92,
+      "ruleConfidence": 90,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.5-adaptive-dataset",
+      "modelConfidence": 65,
+      "observedCharacteristics": [
+        "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501322942]",
+        "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501322942]",
+          "kind": "string",
+          "family": "ShadowNexusAPT",
+          "severity": "high",
+          "detail": "Matched rule: Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790501322942]"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.26)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.32)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.29 vs 5.32); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.27)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.29 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322948-18b03f",
+          "id": "samp-322948-18b03f",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.23)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.29 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778095-1954aa",
+          "id": "samp-778095-1954aa",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.29 vs 5.16)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.29 vs 5.16); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.29,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.29,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.2,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "e19673a85189b3088ab39247915ff130e7f04c4e42dc50186d1d58c3f58394d7",
+      "sha1": "c83ca0406697b21c46273439272faab74965941f",
+      "md5": "a2c1018766a2d7889fecea7413f89c72",
+      "sizeBytes": 129,
+      "entropyOverall": 5.29,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.29,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790501322982",
+    "createdAt": "2026-09-27T09:28:42.982Z",
+    "updatedAt": "2026-09-27T09:28:42.982Z"
+  },
+  {
+    "id": "samp-ds-1790501322973-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "2d362761145410681121f7538d0467b5eb6c24ec4e96400c867c223c52a09c2a",
+    "sha1": "281583ac2f7baef2d0827ed594679e657b2cb3a5",
+    "md5": "f57c886780f5e1fadcb1f1b28b25c666",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 5,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 5,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.63,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:28:42.973Z",
+    "updatedAt": "2026-09-27T09:28:42.973Z"
+  },
+  {
+    "id": "samp-ds-1790501322971-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "c9c1b82705c21a41ff87a0570bee5fc8ab246c4b50da8ef4576aeba081d26c52",
+    "sha1": "2db02d6ca6fc3657fab4ef76656c14554ac30857",
+    "md5": "ffdb2719fa96066240f1c959cb65e8e8",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 4.97,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 4.97,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:28:42.971Z",
+    "updatedAt": "2026-09-27T09:28:42.971Z"
+  },
+  {
+    "id": "samp-322948-18b03f",
+    "analysisId": "ana-322948-18b03f",
+    "storagePath": "/app/applet/data/samples_store/18b03f959d3f7765ca86ce5e7beffd8f77c0af80b6d0f68671123bbe8969f298.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "18b03f959d3f7765ca86ce5e7beffd8f77c0af80b6d0f68671123bbe8969f298",
+    "sha1": "9fa3e23cb108d6756f68c04b14a877cdd129a5fe",
+    "md5": "7cf0f7e54245f3b9590757adb4650c19",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": "ShadowNexusAPT",
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.26)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.27)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778095-1954aa",
+          "id": "samp-778095-1954aa",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.16)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.16); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.32)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.32); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-ds-1790500623300-1",
+          "id": "samp-ds-1790500623300-1",
+          "name": "shadow_nexus_train_2.bin",
+          "score": 18,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.05)"
+          ],
+          "attributionStatement": "18% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (5.23 vs 5.05); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.23,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.18,
+      "printableStringRatio": 1,
+      "vector": [
+        0.65,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "18b03f959d3f7765ca86ce5e7beffd8f77c0af80b6d0f68671123bbe8969f298",
+      "sha1": "9fa3e23cb108d6756f68c04b14a877cdd129a5fe",
+      "md5": "7cf0f7e54245f3b9590757adb4650c19",
+      "sizeBytes": 94,
+      "entropyOverall": 5.23,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790501322946",
+    "createdAt": "2026-09-27T09:28:42.946Z",
+    "updatedAt": "2026-09-27T09:28:42.946Z"
+  },
+  {
+    "id": "samp-778111-5646e3",
+    "analysisId": "ana-778111-5646e3",
+    "storagePath": "/app/applet/data/samples_store/5646e3991149df7fef1ed6a0b3fd79a06c0a43c439aeee2b350eaf2fc5c98d9d.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "5646e3991149df7fef1ed6a0b3fd79a06c0a43c439aeee2b350eaf2fc5c98d9d",
+    "sha1": "06bb96cbf7aedaf96429db46e194719c00c61868",
+    "md5": "c19405ab66b6b93b9e43e419dc584067",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 92,
+      "ruleConfidence": 90,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.4-adaptive-dataset",
+      "modelConfidence": 65,
+      "observedCharacteristics": [
+        "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790500778089]",
+        "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.26 vs 5.27); family attribution remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790500778089]",
+          "kind": "string",
+          "family": "ShadowNexusAPT",
+          "severity": "high",
+          "detail": "Matched rule: Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790500778089]"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.26 vs 5.27)"
+          ],
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.26 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778095-1954aa",
+          "id": "samp-778095-1954aa",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.26 vs 5.16)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.26 vs 5.16); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.26 vs 5.32)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.26 vs 5.32); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-ds-1790500623300-1",
+          "id": "samp-ds-1790500623300-1",
+          "name": "shadow_nexus_train_2.bin",
+          "score": 18,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.26 vs 5.05)"
+          ],
+          "attributionStatement": "18% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (5.26 vs 5.05); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-ds-1790500623300-0",
+          "id": "samp-ds-1790500623300-0",
+          "name": "shadow_nexus_train_1.bin",
+          "score": 18,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.26 vs 5.02)"
+          ],
+          "attributionStatement": "18% feature similarity to Sample \"shadow_nexus_train_1.bin\"; shared features: Entropy proximity (5.26 vs 5.02); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.26,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.26,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.2,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "5646e3991149df7fef1ed6a0b3fd79a06c0a43c439aeee2b350eaf2fc5c98d9d",
+      "sha1": "06bb96cbf7aedaf96429db46e194719c00c61868",
+      "md5": "c19405ab66b6b93b9e43e419dc584067",
+      "sizeBytes": 129,
+      "entropyOverall": 5.26,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.26,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790500778111",
+    "createdAt": "2026-09-27T09:19:38.111Z",
+    "updatedAt": "2026-09-27T09:19:38.111Z"
+  },
+  {
+    "id": "samp-ds-1790500778102-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "8ff8bc82df42c9728a7bd1f500057388a9d1373dfa9e22231346a43f6c0e5e46",
+    "sha1": "a833a52250fc343650fff8bd8bf8ca83d34eb8f5",
+    "md5": "80df227dbb5912236479eb9d5f08c3f7",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 4.92,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 4.92,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.14,
+      "printableStringRatio": 1,
+      "vector": [
+        0.61,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:19:38.102Z",
+    "updatedAt": "2026-09-27T09:19:38.102Z"
+  },
+  {
+    "id": "samp-ds-1790500778101-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "71580c48f1e00882c9d9d5458254c36875f1ae4d43a5dce9c2db2f809b223e47",
+    "sha1": "e4c9d21e610413638cb3f462b901d188a53f6666",
+    "md5": "de1380a6290ff8e4513e05e92748ce06",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 4.9,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 4.9,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.14,
+      "printableStringRatio": 1,
+      "vector": [
+        0.61,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:19:38.101Z",
+    "updatedAt": "2026-09-27T09:19:38.101Z"
+  },
+  {
+    "id": "samp-778095-1954aa",
+    "analysisId": "ana-778095-1954aa",
+    "storagePath": "/app/applet/data/samples_store/1954aa7817b60694c1df6394d73349766397dc44b2a84527540dabc028fb4c54.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "1954aa7817b60694c1df6394d73349766397dc44b2a84527540dabc028fb4c54",
+    "sha1": "7fd862a447f18ad700a6db22a403baeb21f90e60",
+    "md5": "67f6ea713c4fc7998e28b4c9625db21f",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": "ShadowNexusAPT",
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 19,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "19% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (5.16 vs 5.05); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-ds-1790500623300-1",
+          "id": "samp-ds-1790500623300-1",
+          "name": "shadow_nexus_train_2.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.16 vs 5.05)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (5.16 vs 5.05); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-ds-1790500623300-0",
+          "id": "samp-ds-1790500623300-0",
+          "name": "shadow_nexus_train_1.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.16 vs 5.02)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"shadow_nexus_train_1.bin\"; shared features: Entropy proximity (5.16 vs 5.02); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.16 vs 5.27)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.16 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 18,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.16 vs 5.32)"
+          ],
+          "attributionStatement": "18% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.16 vs 5.32); family attribution remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.16,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.16,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.18,
+      "printableStringRatio": 1,
+      "vector": [
+        0.65,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "1954aa7817b60694c1df6394d73349766397dc44b2a84527540dabc028fb4c54",
+      "sha1": "7fd862a447f18ad700a6db22a403baeb21f90e60",
+      "md5": "67f6ea713c4fc7998e28b4c9625db21f",
+      "sizeBytes": 94,
+      "entropyOverall": 5.16,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.16,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790500778094",
+    "createdAt": "2026-09-27T09:19:38.094Z",
+    "updatedAt": "2026-09-27T09:19:38.094Z"
+  },
+  {
+    "id": "samp-623309-5d9601",
+    "analysisId": "ana-623309-5d9601",
+    "storagePath": "/app/applet/data/samples_store/5d9601762ceec3275970fd409a7f604bd3b0c999b8e23500bfe087e5b7ae171e.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "5d9601762ceec3275970fd409a7f604bd3b0c999b8e23500bfe087e5b7ae171e",
+    "sha1": "170624c4a1d9992da949cd4bb4c074139032e129",
+    "md5": "9f64a8817a2844e30ffefa05ec52ea85",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": null,
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 19,
+      "modelVersion": "v3.3-adaptive-dataset",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.32 vs 5.27); family attribution remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 19,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.32 vs 5.27)"
+          ],
+          "attributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.32 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-ds-1790500623300-1",
+          "id": "samp-ds-1790500623300-1",
+          "name": "shadow_nexus_train_2.bin",
+          "score": 17,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.32 vs 5.05)"
+          ],
+          "attributionStatement": "17% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (5.32 vs 5.05); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": null
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.32,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.32,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.21,
+      "printableStringRatio": 1,
+      "vector": [
+        0.67,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "5d9601762ceec3275970fd409a7f604bd3b0c999b8e23500bfe087e5b7ae171e",
+      "sha1": "170624c4a1d9992da949cd4bb4c074139032e129",
+      "md5": "9f64a8817a2844e30ffefa05ec52ea85",
+      "sizeBytes": 129,
+      "entropyOverall": 5.32,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.32,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790500623309",
+    "createdAt": "2026-09-27T09:17:03.309Z",
+    "updatedAt": "2026-09-27T09:17:03.309Z"
+  },
+  {
+    "id": "samp-ds-1790500623300-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "349de08de69cbc9c84b2645ee8920a9bfccffb29ee80acd0e488834f1a58fbcd",
+    "sha1": "561c1aa436c915c3ef9b5da8a6d70036fb292720",
+    "md5": "ef1938139452bc30e8fb4e560a1bbe19",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 5.05,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 5.05,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.16,
+      "printableStringRatio": 1,
+      "vector": [
+        0.63,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:17:03.300Z",
+    "updatedAt": "2026-09-27T09:17:03.300Z"
+  },
+  {
+    "id": "samp-ds-1790500623300-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "ecea61a7cb7080a3516f851b7e609b037dc87419a3284e4a068813728b99e7f6",
+    "sha1": "482f8fe960d66a687798af572e31c7a080e502e3",
+    "md5": "ae02d61fd23277b4170a5ef868c0d718",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 5.02,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 5.02,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.16,
+      "printableStringRatio": 1,
+      "vector": [
+        0.63,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:17:03.300Z",
+    "updatedAt": "2026-09-27T09:17:03.300Z"
+  },
+  {
+    "id": "samp-623288-3f9f01",
+    "analysisId": "ana-623288-3f9f01",
+    "storagePath": "/app/applet/data/samples_store/3f9f01b3df494fc67500fc8ffa51bbb2a26a18be119693b7ba67f18487438d8b.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "3f9f01b3df494fc67500fc8ffa51bbb2a26a18be119693b7ba67f18487438d8b",
+    "sha1": "b1d6e4cabec145f6449b5b8b833fc781cc887d24",
+    "md5": "995a82f473a3a32cba04c6816fca8d27",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": null,
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 0,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "No malicious code signatures identified in static string or header inspection"
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": null
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.27,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.27,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.19,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "3f9f01b3df494fc67500fc8ffa51bbb2a26a18be119693b7ba67f18487438d8b",
+      "sha1": "b1d6e4cabec145f6449b5b8b833fc781cc887d24",
+      "md5": "995a82f473a3a32cba04c6816fca8d27",
+      "sizeBytes": 94,
+      "entropyOverall": 5.27,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.27,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790500623288",
+    "createdAt": "2026-09-27T09:17:03.288Z",
+    "updatedAt": "2026-09-27T09:17:03.288Z"
+  },
+  {
+    "id": "samp-001",
+    "name": "beacon_x64_stage2.dll",
+    "sha256": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
+    "sha1": "1234567890abcdef1234567890abcdef12345678",
+    "md5": "abcdef0123456789abcdef0123456789",
+    "sizeBytes": 294912,
+    "fileFormat": "pe",
+    "label": "malicious",
+    "family": "Cobalt Strike",
+    "verdict": "malicious",
+    "confidence": 94,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 94,
+      "staticConfidence": 91,
+      "ruleConfidence": 95,
+      "similarityConfidence": 89,
+      "observedCharacteristics": [
+        "Detected Beacon configuration block with named pipe transport",
+        "Reflective DLL loading routine with VirtualAlloc/VirtualProtect call sequence",
+        "Suspicious API imports: InternetConnectA, HttpOpenRequestA, VirtualAllocEx"
+      ],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-cs-beacon",
+          "ruleName": "CobaltStrike_Beacon_Config",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "critical",
+          "detail": "Matched beacon header watermark string in .rdata section"
+        }
+      ],
+      "similarSamples": [],
+      "likelyFamily": "Cobalt Strike"
+    },
+    "features": {
+      "totalBytes": 294912,
+      "entropy": 7.24,
+      "sectionCount": 5,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 131072,
+          "rawSize": 131072,
+          "entropy": 6.81,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 65536,
+          "rawSize": 65536,
+          "entropy": 7.89,
+          "rwx": false
+        },
+        {
+          "name": ".data",
+          "virtualSize": 32768,
+          "rawSize": 32768,
+          "entropy": 4.12,
+          "rwx": false
+        }
+      ],
+      "totalStrings": 842,
+      "suspiciousStrings": [
+        "VirtualAlloc",
+        "HttpOpenRequestA",
+        "beacon.dll",
+        "ReflectiveLoader"
+      ],
+      "networkIndicatorStrings": [
+        "https://c2.darkfleet-soc.io/submit.php"
+      ],
+      "persistenceIndicatorStrings": [
+        "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+      ],
+      "uniqueByteRatio": 0.88,
+      "printableStringRatio": 0.12,
+      "vector": [
+        0.94,
+        0.81,
+        0.72,
+        0.65
+      ],
+      "peSuspiciousImportedApis": [
+        "VirtualAlloc",
+        "VirtualProtect",
+        "InternetOpenA",
+        "CreateRemoteThread"
+      ]
+    },
+    "uploadedBy": "Analyst Sarah Chen",
+    "caseId": "case-alpha-01",
+    "createdAt": "2026-09-27T05:17:03.006Z",
+    "updatedAt": "2026-09-27T05:17:03.006Z"
+  },
+  {
+    "id": "samp-002",
+    "name": "lockbit_encryptor_v3.exe",
+    "sha256": "9f8e7d6c5b4a3210fedcba9876543210fedcba9876543210fedcba9876543210",
+    "sha1": "fedcba9876543210fedcba9876543210fedcba98",
+    "md5": "fedcba9876543210fedcba9876543210",
+    "sizeBytes": 419840,
+    "fileFormat": "pe",
+    "label": "malicious",
+    "family": "LockBit 3.0",
+    "verdict": "malicious",
+    "confidence": 98,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 98,
+      "staticConfidence": 96,
+      "ruleConfidence": 99,
+      "similarityConfidence": 94,
+      "observedCharacteristics": [
+        "Mass file enumeration and high-speed cryptographic loop (AES-256-GCM + Curve25519)",
+        "Volume Shadow Copy truncation command: vssadmin delete shadows /all /quiet",
+        "Thread pool injection targeting network share discovery"
+      ],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-lockbit-note",
+          "ruleName": "LockBit3_Ransom_Note_Pattern",
+          "kind": "string",
+          "family": "LockBit 3.0",
+          "severity": "critical",
+          "detail": "Matched LockBit 3.0 README ransom instructions string"
+        }
+      ],
+      "similarSamples": [],
+      "likelyFamily": "LockBit 3.0"
+    },
+    "features": {
+      "totalBytes": 419840,
+      "entropy": 7.91,
+      "sectionCount": 4,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 200000,
+          "rawSize": 200000,
+          "entropy": 7.94,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 90000,
+          "rawSize": 90000,
+          "entropy": 7.82,
+          "rwx": false
+        }
+      ],
+      "totalStrings": 620,
+      "suspiciousStrings": [
+        "vssadmin delete shadows",
+        "bcdedit /set default recoveryenabled No",
+        "LockBit 3.0"
+      ],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.94,
+      "printableStringRatio": 0.08,
+      "vector": [
+        0.98,
+        0.92,
+        0.88,
+        0.79
+      ],
+      "peSuspiciousImportedApis": [
+        "CryptAcquireContextW",
+        "CryptGenRandom",
+        "GetLogicalDriveStringsW"
+      ]
+    },
+    "uploadedBy": "Archon Auto-Triage",
+    "caseId": "case-omega-09",
+    "createdAt": "2026-09-26T15:17:03.006Z",
+    "updatedAt": "2026-09-26T15:17:03.006Z"
+  },
+  {
+    "id": "samp-003",
+    "name": "curl_x64_windows.exe",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "md5": "d41d8cd98f00b204e9800998ecf8427e",
+    "sizeBytes": 1542144,
+    "fileFormat": "pe",
+    "label": "benign",
+    "family": null,
+    "verdict": "clean",
+    "confidence": 12,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 12,
+      "staticConfidence": 8,
+      "ruleConfidence": 0,
+      "similarityConfidence": 15,
+      "observedCharacteristics": [
+        "Valid Authenticode digital signature by The cURL Project",
+        "Standard libcurl HTTP/3 client library compilation flags",
+        "No malicious API call heuristics or persistence keys"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": null
+    },
+    "features": {
+      "totalBytes": 1542144,
+      "entropy": 6.12,
+      "sectionCount": 4,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 900000,
+          "rawSize": 900000,
+          "entropy": 6.45,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 400000,
+          "rawSize": 400000,
+          "entropy": 5.62,
+          "rwx": false
+        }
+      ],
+      "totalStrings": 4120,
+      "suspiciousStrings": [],
+      "networkIndicatorStrings": [
+        "https://curl.se/docs/"
+      ],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.65,
+      "printableStringRatio": 0.28,
+      "vector": [
+        0.12,
+        0.15,
+        0.2,
+        0.05
+      ],
+      "peSuspiciousImportedApis": []
+    },
+    "uploadedBy": "Analyst Mark Vance",
+    "caseId": "case-triage-03",
+    "createdAt": "2026-09-25T21:17:03.006Z",
+    "updatedAt": "2026-09-25T21:17:03.006Z"
+  }
+]

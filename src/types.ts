@@ -26,21 +26,26 @@ export type AgentProgressStage =
  */
 export interface EvidenceFinding {
   claim: string;
+  finding?: string;
   evidence: string;
   source: string;
   confidence: number; // 0-1
-  evidenceType?: EvidenceNature;
+  artifact?: string;
   location?: string; // e.g. "offset 0x18A2 (line 14)"
+  analysis_method?: string;
+  timestamp?: string;
+  limitation?: string;
+  limitations?: string;
+  evidenceType?: EvidenceNature;
   context?: string; // surrounding text snippet
   relatedArtifact?: string;
-  limitation?: string;
   externalEnrichment?: {
     tool: string;
     verdict: string;
     confidence: number;
     detail: string;
     latencyMs?: number;
-    status: 'SUCCESS' | 'UNAVAILABLE' | 'FAILED';
+    status: 'SUCCESS' | 'UNAVAILABLE' | 'FAILED' | 'NOT_CONFIGURED' | 'QUERY_FAILED' | 'NO_MALICIOUS_DETECTIONS';
   };
 }
 

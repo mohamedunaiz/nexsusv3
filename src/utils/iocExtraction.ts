@@ -52,13 +52,13 @@ function isSemanticVersion(value: string, context?: string): boolean {
 
 function normalizeDefangedValue(raw: string): string {
   let normalized = raw.trim();
-  normalized = normalized.replace(/hxxp/gi, 'http');
   normalized = normalized.replace(/hxxps/gi, 'https');
+  normalized = normalized.replace(/hxxp/gi, 'http');
+  normalized = normalized.replace(/(https?)\s*:\s*\/\//gi, '$1://');
   normalized = normalized.replace(/\[\.\]/gi, '.');
   normalized = normalized.replace(/\[\@\]/gi, '@');
   normalized = normalized.replace(/\(\.?\)/gi, '.');
   normalized = normalized.replace(/\(\[\]\)/gi, '');
-  normalized = normalized.replace(/\s+/g, '');
   normalized = normalized.replace(/\[(?:\.|@)\]/g, (m) => (m === '[.]' ? '.' : '@'));
   normalized = normalized.replace(/(?<=\w)\[\.\](?=\w)/g, '.');
   if (/^\d\[\.\]\d/.test(normalized)) normalized = normalized.replace(/\[\.\]/g, '.');
@@ -301,10 +301,10 @@ function inferRoleAndEvidence(context: string, type: ExtractedIOCType): {
 }
 
 // Well-known MITRE ATT&CK Software (Cobalt Strike, Mimikatz, etc.)
-const KNOWN_ATTACK_SOFTWARE_REGEX = /\b(?:S\d{4}|Cobalt\s*Strike|Mimikatz|PsExec|BloodHound|Empire|Metasploit|Qakbot|Emotet|TrickBot|AgentTesla|RedLine|IcedID|BlackCat|LockBit|Conti|DarkSide|REvil|Ryuk|BazarLoader|AsyncRAT|Remcos|Sliver|Havoc|Brute\s*Ratel)\b/gi;
+const KNOWN_ATTACK_SOFTWARE_REGEX = /(?<![a-zA-Z0-9.\-_\/])\b(?:S\d{4}|Cobalt\s*Strike|Mimikatz|PsExec|BloodHound|Empire|Metasploit|Qakbot|Emotet|TrickBot|AgentTesla|RedLine|IcedID|BlackCat|LockBit|Conti|DarkSide|REvil|Ryuk|BazarLoader|AsyncRAT|Remcos|Sliver|Havoc|Brute\s*Ratel)\b(?![a-zA-Z0-9.\-_\/])/gi;
 
 // Well-known MITRE ATT&CK Groups (APT28, Lazarus, etc.)
-const KNOWN_ATTACK_GROUPS_REGEX = /\b(?:G\d{4}|APT28|APT29|APT33|APT34|APT38|APT41|Lazarus(?:\s*Group)?|FIN7|FIN8|Sandworm|Cozy\s*Bear|Fancy\s*Bear|Turla|Volt\s*Typhoon|Salt\s*Typhoon|Scattered\s*Spider|Silence|Wizard\s*Spider|TA505|TA551|Kimsuky|Mustang\s*Panda)\b/gi;
+const KNOWN_ATTACK_GROUPS_REGEX = /(?<![a-zA-Z0-9.\-_\/])\b(?:G\d{4}|APT28|APT29|APT33|APT34|APT38|APT41|Lazarus(?:\s*Group)?|FIN7|FIN8|Sandworm|Cozy\s*Bear|Fancy\s*Bear|Turla|Volt\s*Typhoon|Salt\s*Typhoon|Scattered\s*Spider|Silence|Wizard\s*Spider|TA505|TA551|Kimsuky|Mustang\s*Panda)\b(?![a-zA-Z0-9.\-_\/])/gi;
 
 // Order matters: specific patterns and longer hex hashes before general domains
 const DETECTORS: Detector[] = [
@@ -313,7 +313,7 @@ const DETECTORS: Detector[] = [
   { type: 'sha256', re: /\b[a-fA-F0-9]{64}\b/g, confidence: 0.98 },
   { type: 'sha1', re: /\b[a-fA-F0-9]{40}\b/g, confidence: 0.9 },
   { type: 'md5', re: /\b[a-fA-F0-9]{32}\b/g, confidence: 0.85 },
-  { type: 'ssdeep', re: /\b\d{1,6}:[A-Za-z0-9/+]{10,}:[A-Za-z0-9/+]{5,}\b/g, confidence: 0.95 },
+  { type: 'ssdeep', re: /\b\d{1,6}:[A-Za-z0-9/+]{10,}:[A-Za-z0-9/+]{3,}\b/g, confidence: 0.95 },
   { type: 'tlsh', re: /\bT1[0-9A-Fa-f]{68,72}\b/gi, confidence: 0.95 },
 
   // Threat Intel & Vulnerabilities
@@ -344,7 +344,7 @@ const DETECTORS: Detector[] = [
   // DNS Records
   {
     type: 'dns_record',
-    re: /\bIN\s+(?:A|AAAA|CNAME|TXT|MX|NS)\s+[a-zA-Z0-9._\-]+\b/gi,
+    re: /\bIN\s+(?:A|AAAA|CNAME|TXT|MX|NS)\s+[a-zA-Z0-9._\-=]+\b/gi,
     confidence: 0.9,
   },
 
@@ -380,7 +380,7 @@ const DETECTORS: Detector[] = [
   // Mutexes (Windows Named Mutexes & Common Malware Mutex Names)
   {
     type: 'mutex',
-    re: /\b(?:Global\\|Local\\)[A-Za-z0-9_.\-{}]{4,64}\b|\b(?:Mutex_[A-Za-z0-9_]+|[A-Za-z0-9_]+_Mutex|ZoneTransfer_Mutex)\b/g,
+    re: /(?<![\\\/])\b(?:Global\\|Local\\)[A-Za-z0-9_.\-{}]{4,64}\b(?![\\\/])|\b(?:Mutex_[A-Za-z0-9_]+|[A-Za-z0-9_]+_Mutex|ZoneTransfer_Mutex)\b/g,
     confidence: 0.95,
   },
 
@@ -479,7 +479,7 @@ const DETECTORS: Detector[] = [
   // Executable / Script Filenames
   {
     type: 'filename',
-    re: /\b[A-Za-z0-9_\-]{3,64}\.(?:exe|dll|sys|ps1|bat|cmd|vbs|js|vbe|scr|elf|so|dylib|bin|sh|msc|cpl)\b/gi,
+    re: /(?<![\\\/a-zA-Z0-9._\-])\b[A-Za-z0-9_\-]{3,64}\.(?:exe|dll|sys|ps1|bat|cmd|vbs|js|vbe|scr|elf|so|dylib|bin|sh|msc|cpl)\b/gi,
     confidence: 0.85,
     validate: (v) => !v.endsWith('.ts') && !v.endsWith('.tsx') && !v.endsWith('.json'),
   },
@@ -500,6 +500,7 @@ const DETECTORS: Detector[] = [
     type: 'windows_path',
     re: /\b(?:[A-Za-z]:\\|%[A-Za-z_]+%\\)(?:[^\s"'<>|:*?]+\\)*[^\s"'<>|:*?]+\.[A-Za-z0-9]{1,5}\b/g,
     confidence: 0.75,
+    validate: (v) => !v.toLowerCase().endsWith('.pdb'),
   },
 
   // Linux / UNIX Filesystem Paths
@@ -519,7 +520,7 @@ const DETECTORS: Detector[] = [
   // Domains & FQDNs
   {
     type: 'domain',
-    re: /\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+(?:com|net|org|io|co|ru|cn|info|biz|xyz|top|club|online|site|dev|app|to|cc|tk|ml|ga|cf|icu|shop|buzz|rest|wiki|click|link|su|pro|live)\b/gi,
+    re: /(?<![@\/a-zA-Z0-9._\-])\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+(?:com|net|org|io|co|ru|cn|info|biz|xyz|top|club|online|site|dev|app|to|cc|tk|ml|ga|cf|icu|shop|buzz|rest|wiki|click|link|su|pro|live)\b(?![:\/])/gi,
     confidence: 0.65,
     validate: (v) => !/^\d+(\.\d+){3}$/.test(v) && !/^[a-fA-F0-9]{32,}$/.test(v),
   },
@@ -609,30 +610,32 @@ function extractFromText(text: string, source: string, recursionDepth = 0): Extr
     let b64Match: RegExpExecArray | null;
     while ((b64Match = b64Regex.exec(text)) !== null) {
       const b64Val = b64Match[1];
+      if (/^[a-fA-F0-9]{32,128}$/.test(b64Val) || /^T1[0-9A-Fa-f]{68,72}$/i.test(b64Val)) {
+        continue;
+      }
       const decoded = tryDecodeBase64(b64Val);
-      const { lineNumber, offset } = contextAround(text, b64Val);
-
-      // Record the encoded string indicator itself
-      out.push({
-        type: 'encoded_string',
-        value: b64Val.length > 60 ? `${b64Val.slice(0, 57)}...` : b64Val,
-        source: `${source} (encoded base64)`,
-        location: `${source} (line ${lineNumber}, offset ${offset})`,
-        offset,
-        lineNumber,
-        context: `Base64 encoded block (${b64Val.length} chars)`,
-        category: 'malware_artifact',
-        agent: 'ioc-extraction',
-        confidence: 0.9,
-        role: 'payload_drop',
-        roleEvidence: 'Encoded executable payload or cradle string',
-        firstSeen: new Date().toISOString(),
-        occurrences: 1,
-        locations: [`${source} (line ${lineNumber}, offset ${offset})`],
-      });
-
       const decodedPayload = decoded.utf8 || decoded.utf16le;
       if (decodedPayload) {
+        const { lineNumber, offset } = contextAround(text, b64Val);
+        // Record the encoded string indicator itself
+        out.push({
+          type: 'encoded_string',
+          value: b64Val.length > 60 ? `${b64Val.slice(0, 57)}...` : b64Val,
+          source: `${source} (encoded base64)`,
+          location: `${source} (line ${lineNumber}, offset ${offset})`,
+          offset,
+          lineNumber,
+          context: `Base64 encoded block (${b64Val.length} chars)`,
+          category: 'malware_artifact',
+          agent: 'ioc-extraction',
+          confidence: 0.9,
+          role: 'payload_drop',
+          roleEvidence: 'Encoded executable payload or cradle string',
+          firstSeen: new Date().toISOString(),
+          occurrences: 1,
+          locations: [`${source} (line ${lineNumber}, offset ${offset})`],
+        });
+
         const nestedIOCs = extractFromText(
           decodedPayload,
           `decoded payload (base64) from ${source} line ${lineNumber}`,
