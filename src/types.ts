@@ -47,11 +47,29 @@ export interface EvidenceFinding {
     latencyMs?: number;
     status: 'SUCCESS' | 'UNAVAILABLE' | 'FAILED' | 'NOT_CONFIGURED' | 'QUERY_FAILED' | 'NO_MALICIOUS_DETECTIONS';
   };
+  severity?: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  reason?: string;
+  whyDetected?: {
+    evidence: string;
+    extractionMethod: string;
+    agentReasoning: string;
+    externalConfirmation: string;
+  };
 }
 
 export interface AgentFinding {
+  id?: string;
   agentId: string;
   agentName: string;
+  title?: string;
+  description?: string;
+  severity?: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  confidence?: number;
+  evidence?: EvidenceReference[];
+  indicators?: string[];
+  source?: string;
+  findingStatus?: 'confirmed' | 'probable' | 'suspicious' | 'unknown';
+  standardizedFindings?: StandardizedAgentFinding[];
   status: 'pending' | 'analyzing' | 'complete' | 'failed';
   stage?: AgentProgressStage;
   stepProgress: number;
@@ -127,6 +145,9 @@ export interface EvidenceArtifact {
     activeSignals: string[];
     fusionWeights: Record<string, number>;
   };
+  evidenceContext?: EvidenceContext;
+  consensus?: AgentConsensusSummary;
+  finalVerdictDetail?: FinalVerdictDetail;
 }
 
 export type AgentStatus = 'ACTIVE' | 'IDLE' | 'BUSY' | 'OFFLINE' | 'ANALYZING';
@@ -364,6 +385,9 @@ export interface ToolDefinition {
   health: ToolHealth;
   connectedBy: string | null;
   connectedAt: string | null;
+  supportedIocTypes?: string[];
+  rateLimit?: string;
+  timeoutMs?: number;
 }
 
 export interface ToolExecutionLog {
@@ -495,6 +519,10 @@ export interface MalwareSimilarityMatch {
   importSimilarity?: number;
   stringSimilarity?: number;
   sectionSimilarity?: number;
+  sharedIndicatorsCount?: number;
+  sharedTechniquesCount?: number;
+  sharedStructuralFeaturesCount?: number;
+  attributionStatement?: string;
 }
 
 export interface MalwareVerdictResult {
@@ -712,6 +740,7 @@ export interface StructuredFinding {
 export interface CorrelatedFinding {
   id: string;
   indicatorOrClaim: string;
+  finding?: string;
   type: string;
   confidence: number;
   evidenceChecklist: {
@@ -721,6 +750,10 @@ export interface CorrelatedFinding {
   }[];
   status: 'HIGH' | 'MEDIUM' | 'LOW';
   contributingAgents: string[];
+  supportingAgents?: string[];
+  supportingEvidence?: string[];
+  contradictingEvidence?: string[];
+  externalConfirmations?: string[];
   timestamp: string;
 }
 
@@ -731,7 +764,7 @@ export interface VerificationItem {
   agentAgreement: string;
   contradictionCheck: string;
   confidence: number;
-  status: 'SUPPORTED' | 'CONTRADICTED' | 'INSUFFICIENT EVIDENCE' | 'UNAVAILABLE' | 'VERIFIED' | 'UNVERIFIED';
+  status: 'SUPPORTED' | 'PARTIALLY SUPPORTED' | 'CONTRADICTED' | 'INSUFFICIENT EVIDENCE' | 'UNAVAILABLE' | 'VERIFIED' | 'UNVERIFIED';
   evaluatedAt: string;
 }
 
@@ -783,7 +816,134 @@ export interface InvestigationReport {
     status: 'SUCCESS' | 'UNAVAILABLE' | 'FAILED';
   }>;
 }
-// --- Real IOC extraction (src/utils/iocExtraction.ts) ----------------------
+export interface EvidenceReference {
+  id: string;
+  artifact: string;
+  source: string;
+  location: string;
+  evidence: string;
+  extractionMethod: string;
+  agentReasoning: string;
+  externalConfirmation?: string;
+  confidence: number;
+}
+
+export interface StandardizedAgentFinding {
+  id: string;
+  agentId: string;
+  title: string;
+  description: string;
+  severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  confidence: number;
+  evidence: EvidenceReference[];
+  indicators: string[];
+  techniques: string[];
+  source: string;
+  status: 'confirmed' | 'probable' | 'suspicious' | 'unknown';
+  limitations: string[];
+  reason?: string;
+}
+
+export interface PEFeatures {
+  isPE: boolean;
+  machine: string;
+  subsystem: string;
+  is64Bit: boolean;
+  entryPointRva: number;
+  imageBase: string;
+  sectionCount: number;
+  timeDateStamp: number;
+  importedDlls?: string[];
+  suspiciousApis?: string[];
+  rwxSections?: string[];
+}
+
+export interface ELFFeatures {
+  isELF: boolean;
+  class: '32-bit' | '64-bit';
+  endianness: 'little' | 'big';
+  machine: string;
+  type: string;
+}
+
+export interface SectionInfo {
+  name: string;
+  virtualSize: number;
+  virtualAddress?: number;
+  rawSize: number;
+  rawAddress?: number;
+  entropy: number;
+  rwx: boolean;
+  characteristics?: number;
+}
+
+export interface EvidenceContext {
+  fileId: string;
+  fileName: string;
+  fileType: string;
+  size: number;
+  hashes: {
+    md5?: string;
+    sha1?: string;
+    sha256: string;
+  };
+  strings: string[];
+  urls: string[];
+  domains: string[];
+  ips: string[];
+  filePaths: string[];
+  registryKeys: string[];
+  pe?: PEFeatures;
+  elf?: ELFFeatures;
+  imports: string[];
+  exports: string[];
+  entropy?: number;
+  sections?: SectionInfo[];
+  extractedArtifacts: Array<{
+    type: string;
+    value: string;
+    normalizedValue?: string;
+    source: string;
+    location: string;
+    occurrences: number;
+    locations: string[];
+    context?: string;
+    confidence: number;
+  }>;
+  sourceMetadata: Record<string, unknown>;
+}
+
+export interface AgentConsensusSummary {
+  malwareAnalysis: 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'UNAVAILABLE';
+  iocExtraction: 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'UNAVAILABLE';
+  threatIntelligence: 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'UNAVAILABLE';
+  networkAnalysis: 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'UNAVAILABLE';
+  verification: 'CONFIRMED' | 'SUPPORTED' | 'PARTIALLY SUPPORTED' | 'REVIEW REQUIRED' | 'CONTRADICTED' | 'INSUFFICIENT EVIDENCE';
+  requiresReview: boolean;
+  disagreements: string[];
+}
+
+export interface FinalVerdictDetail {
+  verdict: 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'REVIEW REQUIRED';
+  confidence: number;
+  primaryEvidence: string[];
+  supportingAgents: string[];
+  contradictions: string[];
+  limitations: string[];
+  consensus: AgentConsensusSummary;
+}
+
+export interface SystemEvaluationMetrics {
+  detectionAccuracy: number;
+  iocRecall: number;
+  iocPrecision: number;
+  falsePositiveRate: number;
+  agentAgreement: number;
+  evidenceCoverage: number;
+  toolSuccessRate: number;
+  analysisCompletionRate: number;
+  averageInvestigationTimeMs: number;
+}
 // Every value here is pattern-matched out of actual artifact text (names,
 // preview content, malware-intel string findings) — never randomly
 // generated. See iocExtraction.ts for the detectors.

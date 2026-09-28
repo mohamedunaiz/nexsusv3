@@ -533,6 +533,166 @@
       "status": "SUCCESS",
       "message": "TOOL_QUERY_COMPLETED: VirusTotal: MALICIOUS DETECTIONS (flagged across threat intelligence feeds for 185.220.101.5)",
       "timestamp": "2026-09-27T09:29:31.337Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790503172790-917",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"8.8.8.8\"",
+      "timestamp": "2026-09-27T09:59:32.790Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790503172791-729",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "NO_MALICIOUS_DETECTIONS",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: NO MALICIOUS DETECTIONS",
+      "timestamp": "2026-09-27T09:59:32.791Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790503172802-260",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"8.8.8.8\"",
+      "timestamp": "2026-09-27T09:59:32.802Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790503172802-220",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "QUERY_FAILED",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: QUERY FAILED for \"8.8.8.8\"",
+      "timestamp": "2026-09-27T09:59:32.802Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790503172810-106",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"185.220.101.44\"",
+      "timestamp": "2026-09-27T09:59:32.810Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790503172810-616",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "NOT_CONFIGURED",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: NOT CONFIGURED for \"185.220.101.44\"",
+      "timestamp": "2026-09-27T09:59:32.810Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790503172815-82",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"185.220.101.5\"",
+      "timestamp": "2026-09-27T09:59:32.815Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790503172816-411",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "SUCCESS",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: MALICIOUS DETECTIONS (flagged across threat intelligence feeds for 185.220.101.5)",
+      "timestamp": "2026-09-27T09:59:32.816Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790563490859-444",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"8.8.8.8\"",
+      "timestamp": "2026-09-28T02:44:50.859Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790563490861-796",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "NO_MALICIOUS_DETECTIONS",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: NO MALICIOUS DETECTIONS",
+      "timestamp": "2026-09-28T02:44:50.861Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790563490874-274",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"8.8.8.8\"",
+      "timestamp": "2026-09-28T02:44:50.874Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790563490874-500",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "QUERY_FAILED",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: QUERY FAILED for \"8.8.8.8\"",
+      "timestamp": "2026-09-28T02:44:50.874Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790563490883-751",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"185.220.101.44\"",
+      "timestamp": "2026-09-28T02:44:50.883Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790563490883-442",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "NOT_CONFIGURED",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: NOT CONFIGURED for \"185.220.101.44\"",
+      "timestamp": "2026-09-28T02:44:50.883Z"
+    },
+    {
+      "event_id": "evt-tool-start-1790563490900-981",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Querying VirusTotal (ip.lookup) for indicator \"185.220.101.5\"",
+      "timestamp": "2026-09-28T02:44:50.900Z"
+    },
+    {
+      "event_id": "evt-tool-done-1790563490902-464",
+      "investigation_id": "case-tool-test",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "status": "SUCCESS",
+      "message": "TOOL_QUERY_COMPLETED: VirusTotal: MALICIOUS DETECTIONS (flagged across threat intelligence feeds for 185.220.101.5)",
+      "timestamp": "2026-09-28T02:44:50.902Z"
     }
   ],
   "inv-case-1790500623273": [
@@ -2035,6 +2195,974 @@
       "status": "COMPLETED",
       "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=MALICIOUS (92% confidence) with 1 evidence-backed findings.",
       "timestamp": "2026-09-27T09:29:31.405Z"
+    }
+  ],
+  "case-e2e-1790503172666": [
+    {
+      "event_id": "evt-up-1790503172715-1",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"cobalt_beacon_x64.exe\" into persistent evidence vault.",
+      "timestamp": "2026-09-27T09:59:32.715Z"
+    },
+    {
+      "event_id": "evt-up-1790503172716-2",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98 (2048 bytes) for \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-27T09:59:32.716Z"
+    },
+    {
+      "event_id": "evt-up-1790503172716-3",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-27T09:59:32.716Z"
+    },
+    {
+      "event_id": "evt-up-1790503172718-4",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=PE, entropy=1.31, sections=2, strings=12.",
+      "timestamp": "2026-09-27T09:59:32.718Z"
+    },
+    {
+      "event_id": "evt-up-1790503172732-5",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 10 unique indicator(s) from \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-27T09:59:32.732Z"
+    },
+    {
+      "event_id": "evt-up-1790503172732-6",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-27T09:59:32.732Z"
+    },
+    {
+      "event_id": "evt-up-1790503172736-7",
+      "investigation_id": "case-e2e-1790503172666",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=MALICIOUS (99% confidence) with 20 evidence-backed findings.",
+      "timestamp": "2026-09-27T09:59:32.736Z"
+    }
+  ],
+  "inv-case-1790503172769": [
+    {
+      "event_id": "evt-1790503172771-1",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "canonicalEvent": "file.received",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Evidence \"agent_audit_sample.ps1\" (164 bytes) received and persisted.",
+      "timestamp": "2026-09-27T09:59:21.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-2",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "canonicalEvent": "hash.calculated",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af, SHA1: 860889f5bca419305dc17d0e687ed4e2138f19d0",
+      "timestamp": "2026-09-27T09:59:22.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-3",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "canonicalEvent": "extraction.started",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for \"agent_audit_sample.ps1\".",
+      "timestamp": "2026-09-27T09:59:23.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-4",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "canonicalEvent": "file.identified",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Format=script, Entropy=5.34, Sections=1, Strings=0.",
+      "timestamp": "2026-09-27T09:59:24.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-5",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "canonicalEvent": "ioc.discovered",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 7 unique indicators with line and byte-offset provenance.",
+      "timestamp": "2026-09-27T09:59:25.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-6",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "canonicalEvent": "agent.started",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.",
+      "timestamp": "2026-09-27T09:59:26.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-7",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "canonicalEvent": "tool.started",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Dispatching 2 indicators to external tool gateway.",
+      "timestamp": "2026-09-27T09:59:27.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-8",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "canonicalEvent": "tool.completed",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.",
+      "timestamp": "2026-09-27T09:59:28.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-9",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "specialists",
+      "agent_name": "Specialist Agents",
+      "type": "AGENT_COMPLETED",
+      "canonicalEvent": "agent.finding",
+      "status": "ANALYZING",
+      "message": "AGENT_COMPLETED: Specialist fleet produced 6 structured, evidence-backed agent findings.",
+      "timestamp": "2026-09-27T09:59:29.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-10",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_STARTED",
+      "canonicalEvent": "verification.started",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.",
+      "timestamp": "2026-09-27T09:59:30.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-11",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_COMPLETED",
+      "canonicalEvent": "verification.completed",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_COMPLETED: Generated verification matrix with 15 audited items.",
+      "timestamp": "2026-09-27T09:59:31.771Z"
+    },
+    {
+      "event_id": "evt-1790503172771-12",
+      "investigation_id": "inv-case-1790503172769",
+      "agent_id": "report-generator",
+      "agent_name": "Report Generator",
+      "type": "REPORT_GENERATED",
+      "canonicalEvent": "verdict.generated",
+      "status": "COMPLETED",
+      "message": "REPORT_GENERATED: Investigation Report INV-2026-4633 compiled with canonical verdict MALICIOUS.",
+      "timestamp": "2026-09-27T09:59:32.771Z"
+    }
+  ],
+  "inv-case-1790503172823": [
+    {
+      "event_id": "evt-1790503172826-1",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "canonicalEvent": "file.received",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Evidence \"truth_beacon.exe\" (64 bytes) received and persisted.",
+      "timestamp": "2026-09-27T09:59:21.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-2",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "canonicalEvent": "hash.calculated",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e, SHA1: 5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+      "timestamp": "2026-09-27T09:59:22.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-3",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "canonicalEvent": "extraction.started",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for \"truth_beacon.exe\".",
+      "timestamp": "2026-09-27T09:59:23.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-4",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "canonicalEvent": "file.identified",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Format=text, Entropy=4.83, Sections=1, Strings=0.",
+      "timestamp": "2026-09-27T09:59:24.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-5",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "canonicalEvent": "ioc.discovered",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 3 unique indicators with line and byte-offset provenance.",
+      "timestamp": "2026-09-27T09:59:25.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-6",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "canonicalEvent": "agent.started",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.",
+      "timestamp": "2026-09-27T09:59:26.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-7",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "canonicalEvent": "tool.started",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Dispatching 2 indicators to external tool gateway.",
+      "timestamp": "2026-09-27T09:59:27.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-8",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "canonicalEvent": "tool.completed",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.",
+      "timestamp": "2026-09-27T09:59:28.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-9",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "specialists",
+      "agent_name": "Specialist Agents",
+      "type": "AGENT_COMPLETED",
+      "canonicalEvent": "agent.finding",
+      "status": "ANALYZING",
+      "message": "AGENT_COMPLETED: Specialist fleet produced 6 structured, evidence-backed agent findings.",
+      "timestamp": "2026-09-27T09:59:29.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-10",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_STARTED",
+      "canonicalEvent": "verification.started",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.",
+      "timestamp": "2026-09-27T09:59:30.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-11",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_COMPLETED",
+      "canonicalEvent": "verification.completed",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_COMPLETED: Generated verification matrix with 12 audited items.",
+      "timestamp": "2026-09-27T09:59:31.826Z"
+    },
+    {
+      "event_id": "evt-1790503172826-12",
+      "investigation_id": "inv-case-1790503172823",
+      "agent_id": "report-generator",
+      "agent_name": "Report Generator",
+      "type": "REPORT_GENERATED",
+      "canonicalEvent": "verdict.generated",
+      "status": "COMPLETED",
+      "message": "REPORT_GENERATED: Investigation Report INV-2026-5177 compiled with canonical verdict MALICIOUS.",
+      "timestamp": "2026-09-27T09:59:32.826Z"
+    }
+  ],
+  "case-1790503172836": [
+    {
+      "event_id": "evt-up-1790503172836-1",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"pre_train_implant.bin\" into persistent evidence vault.",
+      "timestamp": "2026-09-27T09:59:32.836Z"
+    },
+    {
+      "event_id": "evt-up-1790503172836-2",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0 (94 bytes) for \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-27T09:59:32.836Z"
+    },
+    {
+      "event_id": "evt-up-1790503172837-3",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-27T09:59:32.837Z"
+    },
+    {
+      "event_id": "evt-up-1790503172837-4",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=TEXT, entropy=5.23, sections=1, strings=0.",
+      "timestamp": "2026-09-27T09:59:32.837Z"
+    },
+    {
+      "event_id": "evt-up-1790503172837-5",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 1 unique indicator(s) from \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-27T09:59:32.837Z"
+    },
+    {
+      "event_id": "evt-up-1790503172837-6",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-27T09:59:32.837Z"
+    },
+    {
+      "event_id": "evt-up-1790503172839-7",
+      "investigation_id": "case-1790503172836",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=CLEAN (99% confidence) with 1 evidence-backed findings.",
+      "timestamp": "2026-09-27T09:59:32.839Z"
+    }
+  ],
+  "case-1790503172884": [
+    {
+      "event_id": "evt-up-1790503172884-1",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"post_train_implant_v2.bin\" into persistent evidence vault.",
+      "timestamp": "2026-09-27T09:59:32.884Z"
+    },
+    {
+      "event_id": "evt-up-1790503172885-2",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805 (129 bytes) for \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-27T09:59:32.885Z"
+    },
+    {
+      "event_id": "evt-up-1790503172885-3",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-27T09:59:32.885Z"
+    },
+    {
+      "event_id": "evt-up-1790503172885-4",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=TEXT, entropy=5.3, sections=1, strings=0.",
+      "timestamp": "2026-09-27T09:59:32.885Z"
+    },
+    {
+      "event_id": "evt-up-1790503172885-5",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 1 unique indicator(s) from \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-27T09:59:32.885Z"
+    },
+    {
+      "event_id": "evt-up-1790503172885-6",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-27T09:59:32.885Z"
+    },
+    {
+      "event_id": "evt-up-1790503172888-7",
+      "investigation_id": "case-1790503172884",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=MALICIOUS (92% confidence) with 1 evidence-backed findings.",
+      "timestamp": "2026-09-27T09:59:32.888Z"
+    }
+  ],
+  "case-e2e-1790563490652": [
+    {
+      "event_id": "evt-up-1790563490738-1",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"cobalt_beacon_x64.exe\" into persistent evidence vault.",
+      "timestamp": "2026-09-28T02:44:50.738Z"
+    },
+    {
+      "event_id": "evt-up-1790563490738-2",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9 (2048 bytes) for \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-28T02:44:50.738Z"
+    },
+    {
+      "event_id": "evt-up-1790563490740-3",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-28T02:44:50.740Z"
+    },
+    {
+      "event_id": "evt-up-1790563490743-4",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=PE, entropy=1.31, sections=2, strings=12.",
+      "timestamp": "2026-09-28T02:44:50.743Z"
+    },
+    {
+      "event_id": "evt-up-1790563490761-5",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 10 unique indicator(s) from \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-28T02:44:50.761Z"
+    },
+    {
+      "event_id": "evt-up-1790563490761-6",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"cobalt_beacon_x64.exe\".",
+      "timestamp": "2026-09-28T02:44:50.761Z"
+    },
+    {
+      "event_id": "evt-up-1790563490768-7",
+      "investigation_id": "case-e2e-1790563490652",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=MALICIOUS (99% confidence) with 20 evidence-backed findings.",
+      "timestamp": "2026-09-28T02:44:50.768Z"
+    }
+  ],
+  "inv-case-1790563490822": [
+    {
+      "event_id": "evt-1790563490826-1",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "canonicalEvent": "file.received",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Evidence \"agent_audit_sample.ps1\" (164 bytes) received and persisted.",
+      "timestamp": "2026-09-28T02:44:39.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-2",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "canonicalEvent": "hash.calculated",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af, SHA1: 860889f5bca419305dc17d0e687ed4e2138f19d0",
+      "timestamp": "2026-09-28T02:44:40.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-3",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "canonicalEvent": "extraction.started",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for \"agent_audit_sample.ps1\".",
+      "timestamp": "2026-09-28T02:44:41.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-4",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "canonicalEvent": "file.identified",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Format=script, Entropy=5.34, Sections=1, Strings=0.",
+      "timestamp": "2026-09-28T02:44:42.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-5",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "canonicalEvent": "ioc.discovered",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 7 unique indicators with line and byte-offset provenance.",
+      "timestamp": "2026-09-28T02:44:43.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-6",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "canonicalEvent": "agent.started",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.",
+      "timestamp": "2026-09-28T02:44:44.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-7",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "canonicalEvent": "tool.started",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Dispatching 2 indicators to external tool gateway.",
+      "timestamp": "2026-09-28T02:44:45.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-8",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "canonicalEvent": "tool.completed",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.",
+      "timestamp": "2026-09-28T02:44:46.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-9",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "specialists",
+      "agent_name": "Specialist Agents",
+      "type": "AGENT_COMPLETED",
+      "canonicalEvent": "agent.finding",
+      "status": "ANALYZING",
+      "message": "AGENT_COMPLETED: Specialist fleet produced 6 structured, evidence-backed agent findings.",
+      "timestamp": "2026-09-28T02:44:47.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-10",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_STARTED",
+      "canonicalEvent": "verification.started",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.",
+      "timestamp": "2026-09-28T02:44:48.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-11",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_COMPLETED",
+      "canonicalEvent": "verification.completed",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_COMPLETED: Generated verification matrix with 15 audited items.",
+      "timestamp": "2026-09-28T02:44:49.826Z"
+    },
+    {
+      "event_id": "evt-1790563490826-12",
+      "investigation_id": "inv-case-1790563490822",
+      "agent_id": "report-generator",
+      "agent_name": "Report Generator",
+      "type": "REPORT_GENERATED",
+      "canonicalEvent": "verdict.generated",
+      "status": "COMPLETED",
+      "message": "REPORT_GENERATED: Investigation Report INV-2026-4865 compiled with canonical verdict MALICIOUS.",
+      "timestamp": "2026-09-28T02:44:50.826Z"
+    }
+  ],
+  "inv-case-1790563490917": [
+    {
+      "event_id": "evt-1790563490920-1",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "canonicalEvent": "file.received",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Evidence \"truth_beacon.exe\" (64 bytes) received and persisted.",
+      "timestamp": "2026-09-28T02:44:39.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-2",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "canonicalEvent": "hash.calculated",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e, SHA1: 5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+      "timestamp": "2026-09-28T02:44:40.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-3",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "canonicalEvent": "extraction.started",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for \"truth_beacon.exe\".",
+      "timestamp": "2026-09-28T02:44:41.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-4",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "canonicalEvent": "file.identified",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Format=text, Entropy=4.83, Sections=1, Strings=0.",
+      "timestamp": "2026-09-28T02:44:42.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-5",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "canonicalEvent": "ioc.discovered",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 3 unique indicators with line and byte-offset provenance.",
+      "timestamp": "2026-09-28T02:44:43.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-6",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "canonicalEvent": "agent.started",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.",
+      "timestamp": "2026-09-28T02:44:44.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-7",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_STARTED",
+      "canonicalEvent": "tool.started",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_STARTED: Dispatching 2 indicators to external tool gateway.",
+      "timestamp": "2026-09-28T02:44:45.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-8",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "threat-intel",
+      "agent_name": "Threat Intelligence",
+      "type": "TOOL_QUERY_COMPLETED",
+      "canonicalEvent": "tool.completed",
+      "status": "ANALYZING",
+      "message": "TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.",
+      "timestamp": "2026-09-28T02:44:46.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-9",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "specialists",
+      "agent_name": "Specialist Agents",
+      "type": "AGENT_COMPLETED",
+      "canonicalEvent": "agent.finding",
+      "status": "ANALYZING",
+      "message": "AGENT_COMPLETED: Specialist fleet produced 6 structured, evidence-backed agent findings.",
+      "timestamp": "2026-09-28T02:44:47.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-10",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_STARTED",
+      "canonicalEvent": "verification.started",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.",
+      "timestamp": "2026-09-28T02:44:48.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-11",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "verification-agent",
+      "agent_name": "Verification Agent",
+      "type": "VERIFICATION_COMPLETED",
+      "canonicalEvent": "verification.completed",
+      "status": "VERIFYING",
+      "message": "VERIFICATION_COMPLETED: Generated verification matrix with 12 audited items.",
+      "timestamp": "2026-09-28T02:44:49.920Z"
+    },
+    {
+      "event_id": "evt-1790563490920-12",
+      "investigation_id": "inv-case-1790563490917",
+      "agent_id": "report-generator",
+      "agent_name": "Report Generator",
+      "type": "REPORT_GENERATED",
+      "canonicalEvent": "verdict.generated",
+      "status": "COMPLETED",
+      "message": "REPORT_GENERATED: Investigation Report INV-2026-4519 compiled with canonical verdict MALICIOUS.",
+      "timestamp": "2026-09-28T02:44:50.920Z"
+    }
+  ],
+  "case-1790563490935": [
+    {
+      "event_id": "evt-up-1790563490935-1",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"pre_train_implant.bin\" into persistent evidence vault.",
+      "timestamp": "2026-09-28T02:44:50.935Z"
+    },
+    {
+      "event_id": "evt-up-1790563490935-2",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887 (94 bytes) for \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-28T02:44:50.935Z"
+    },
+    {
+      "event_id": "evt-up-1790563490936-3",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-28T02:44:50.936Z"
+    },
+    {
+      "event_id": "evt-up-1790563490937-4",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=TEXT, entropy=5.23, sections=1, strings=0.",
+      "timestamp": "2026-09-28T02:44:50.937Z"
+    },
+    {
+      "event_id": "evt-up-1790563490937-5",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 1 unique indicator(s) from \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-28T02:44:50.937Z"
+    },
+    {
+      "event_id": "evt-up-1790563490937-6",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"pre_train_implant.bin\".",
+      "timestamp": "2026-09-28T02:44:50.937Z"
+    },
+    {
+      "event_id": "evt-up-1790563490943-7",
+      "investigation_id": "case-1790563490935",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=CLEAN (99% confidence) with 1 evidence-backed findings.",
+      "timestamp": "2026-09-28T02:44:50.943Z"
+    }
+  ],
+  "case-1790563490972": [
+    {
+      "event_id": "evt-up-1790563490972-1",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "system",
+      "agent_name": "Evidence Intake",
+      "type": "UPLOAD_STARTED",
+      "status": "RECEIVED",
+      "message": "UPLOAD_STARTED: Receiving artifact \"post_train_implant_v2.bin\" into persistent evidence vault.",
+      "timestamp": "2026-09-28T02:44:50.972Z"
+    },
+    {
+      "event_id": "evt-up-1790563490972-2",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "system",
+      "agent_name": "Fingerprint Engine",
+      "type": "HASH_COMPLETED",
+      "status": "VALIDATING",
+      "message": "HASH_COMPLETED: Computed SHA256=ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d (129 bytes) for \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-28T02:44:50.972Z"
+    },
+    {
+      "event_id": "evt-up-1790563490973-3",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_STARTED: Parsing file headers, sections, imports, strings, and Shannon entropy for \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-28T02:44:50.973Z"
+    },
+    {
+      "event_id": "evt-up-1790563490973-4",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "malware-analysis",
+      "agent_name": "Static Analyzer",
+      "type": "STATIC_ANALYSIS_COMPLETED",
+      "status": "ANALYZING",
+      "message": "STATIC_ANALYSIS_COMPLETED: Detected format=TEXT, entropy=5.31, sections=1, strings=0.",
+      "timestamp": "2026-09-28T02:44:50.973Z"
+    },
+    {
+      "event_id": "evt-up-1790563490974-5",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "ioc-extraction",
+      "agent_name": "IOC Extraction",
+      "type": "IOC_DISCOVERED",
+      "status": "ANALYZING",
+      "message": "IOC_DISCOVERED: Extracted 1 unique indicator(s) from \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-28T02:44:50.974Z"
+    },
+    {
+      "event_id": "evt-up-1790563490974-6",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "MALWARE_ANALYSIS_STARTED",
+      "status": "ANALYZING",
+      "message": "MALWARE_ANALYSIS_STARTED: Running similarity comparison and learned classifier on \"post_train_implant_v2.bin\".",
+      "timestamp": "2026-09-28T02:44:50.974Z"
+    },
+    {
+      "event_id": "evt-up-1790563490978-7",
+      "investigation_id": "case-1790563490972",
+      "agent_id": "malware-analysis",
+      "agent_name": "Malware Analysis",
+      "type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "message": "AGENT_COMPLETED: Malware Intelligence Engine finalized verdict=MALICIOUS (92% confidence) with 1 evidence-backed findings.",
+      "timestamp": "2026-09-28T02:44:50.978Z"
     }
   ]
 }

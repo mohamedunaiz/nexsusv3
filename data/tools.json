@@ -234,5 +234,142 @@
         "note": "Verified webmaster / commercial tier."
       }
     }
+  },
+  {
+    "id": "urlscan",
+    "name": "URLScan",
+    "vendor": "urlscan.io",
+    "category": "URL & Phishing Analysis",
+    "description": "Automated website and URL inspection — DOM analysis, HTTP transactions, TLS certificates, and brand impersonation detection.",
+    "docsUrl": "https://urlscan.io/docs/api/",
+    "defaultBaseUrl": "https://urlscan.io/api/v1",
+    "allowedHosts": [
+      "urlscan.io"
+    ],
+    "authType": "api_key_header",
+    "authConfigured": true,
+    "connected": true,
+    "enabled": true,
+    "allowedAgents": [
+      "threat-intel",
+      "network-analysis",
+      "ioc-extraction"
+    ],
+    "enabledCapabilities": [
+      "url.lookup",
+      "domain.lookup"
+    ],
+    "health": {
+      "status": "HEALTHY",
+      "latencyMs": 58,
+      "lastChecked": "2026-09-28T02:44:50.417Z"
+    },
+    "capabilities": [
+      {
+        "id": "url.lookup",
+        "label": "URL Scan & Verdict",
+        "description": "Inspect HTTP transactions, redirects, and phishing reputation"
+      },
+      {
+        "id": "domain.lookup",
+        "label": "Domain Search",
+        "description": "Historical scans and certificates for a domain"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 10,
+        "note": "Public/unlisted scans: 10 req/min."
+      },
+      "premium": {
+        "requestsPerMinute": 120,
+        "note": "Private commercial scans."
+      }
+    },
+    "supportedIocTypes": [
+      "url",
+      "domain",
+      "fqdn",
+      "ipv4"
+    ],
+    "rateLimit": "10 req/min",
+    "timeoutMs": 5000,
+    "planTier": "free"
+  },
+  {
+    "id": "custom-tool",
+    "name": "Custom Tool",
+    "vendor": "Internal SOC / Custom REST",
+    "category": "Custom Threat Connector",
+    "description": "Configurable REST threat-intelligence or internal SIEM/TIP connector for organization-specific IOC enrichment.",
+    "docsUrl": "https://www.first.org/tlp/",
+    "defaultBaseUrl": "https://tip.internal.soc/api/v1",
+    "allowedHosts": [
+      "tip.internal.soc"
+    ],
+    "authType": "api_key_header",
+    "authConfigured": false,
+    "connected": false,
+    "enabled": false,
+    "allowedAgents": [
+      "threat-intel",
+      "ioc-extraction",
+      "malware-analysis"
+    ],
+    "enabledCapabilities": [
+      "hash.lookup",
+      "ip.lookup",
+      "domain.lookup",
+      "url.lookup"
+    ],
+    "health": {
+      "status": "DISCONNECTED",
+      "latencyMs": null,
+      "lastChecked": null
+    },
+    "capabilities": [
+      {
+        "id": "hash.lookup",
+        "label": "Custom Hash Lookup",
+        "description": "Query internal TIP for SHA256/MD5 sightings"
+      },
+      {
+        "id": "ip.lookup",
+        "label": "Custom IP Lookup",
+        "description": "Query internal firewall/SIEM logs for IP sightings"
+      },
+      {
+        "id": "domain.lookup",
+        "label": "Custom Domain Lookup",
+        "description": "Query internal DNS sinkhole & passive DNS"
+      },
+      {
+        "id": "url.lookup",
+        "label": "Custom URL Lookup",
+        "description": "Query internal web proxy telemetry"
+      }
+    ],
+    "planLimits": {
+      "free": {
+        "requestsPerMinute": 30,
+        "note": "Standard internal gateway."
+      },
+      "premium": {
+        "requestsPerMinute": 300,
+        "note": "High-throughput internal cluster."
+      }
+    },
+    "supportedIocTypes": [
+      "sha256",
+      "sha1",
+      "md5",
+      "ipv4",
+      "ipv6",
+      "domain",
+      "url"
+    ],
+    "rateLimit": "30 req/min",
+    "timeoutMs": 5000,
+    "planTier": "free"
   }
 ]

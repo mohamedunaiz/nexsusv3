@@ -1,5 +1,2213 @@
 [
   {
+    "id": "samp-490974-ac2eee",
+    "analysisId": "ana-490974-ac2eee",
+    "storagePath": "/app/applet/data/samples_store/ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d",
+    "sha1": "6ff9750ad07320d2f366cd3ff3da6ab5872ba86d",
+    "md5": "565e001242edd335617d99e06a96d3df",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 92,
+      "ruleConfidence": 90,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.8-adaptive-dataset",
+      "modelConfidence": 65,
+      "observedCharacteristics": [
+        "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790563490933]",
+        "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.30); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790563490933]",
+          "kind": "string",
+          "family": "ShadowNexusAPT",
+          "severity": "high",
+          "detail": "Matched rule: Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790563490933]"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-172886-818f93",
+          "id": "samp-172886-818f93",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.31 vs 5.30)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.30); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-371403-184a53",
+          "id": "samp-371403-184a53",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.31 vs 5.29)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322983-e19673",
+          "id": "samp-322983-e19673",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.31 vs 5.29)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.31 vs 5.26)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.31 vs 5.32)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.31 vs 5.32); family attribution remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "evidenceContext": {
+      "fileId": "samp-490974-ac2eee",
+      "fileName": "post_train_implant_v2.bin",
+      "fileType": "text",
+      "size": 129,
+      "hashes": {
+        "md5": "565e001242edd335617d99e06a96d3df",
+        "sha1": "6ff9750ad07320d2f366cd3ff3da6ab5872ba86d",
+        "sha256": "ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d"
+      },
+      "strings": [],
+      "urls": [],
+      "domains": [],
+      "ips": [],
+      "filePaths": [
+        "post_train_implant_v2.bin"
+      ],
+      "registryKeys": [],
+      "imports": [],
+      "exports": [],
+      "entropy": 5.31,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.31,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "post_train_implant_v2.bin",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "post_train_implant_v2.bin",
+          "confidence": 0.93
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-1790563490972",
+        "storedFilePath": "/app/applet/data/samples_store/ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.31,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.31,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.21,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d",
+      "sha1": "6ff9750ad07320d2f366cd3ff3da6ab5872ba86d",
+      "md5": "565e001242edd335617d99e06a96d3df",
+      "sizeBytes": 129,
+      "entropyOverall": 5.31,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.31,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790563490972",
+    "createdAt": "2026-09-28T02:44:50.972Z",
+    "updatedAt": "2026-09-28T02:44:50.972Z"
+  },
+  {
+    "id": "samp-ds-1790563490957-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "8dbc301530fdce1e9c618caeffbba40103cec0d1d1715b13bf1d078213850818",
+    "sha1": "2baf39ba2644d7adee0381ecdd799c4d661141ba",
+    "md5": "c364bb0d8f4145557640b604c5b8d579",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 4.99,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 4.99,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-28T02:44:50.957Z",
+    "updatedAt": "2026-09-28T02:44:50.957Z"
+  },
+  {
+    "id": "samp-ds-1790563490953-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "b72ff99e6c3e8ca40520398bb8a09a45ef40a8492e968b4cc66b77576c418ef4",
+    "sha1": "825439e9bccd20bbd6cb18a105f3f93340485dfb",
+    "md5": "d24a4494a0a44e681eb3db96d67bde57",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 4.96,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 4.96,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-28T02:44:50.953Z",
+    "updatedAt": "2026-09-28T02:44:50.953Z"
+  },
+  {
+    "id": "samp-490937-7f4b7c",
+    "analysisId": "ana-490937-7f4b7c",
+    "storagePath": "/app/applet/data/samples_store/7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887",
+    "sha1": "f179da9f6f5c894793faa31a4ae3a20bbb1b75a7",
+    "md5": "e2fb817b70326d39e409b17678593263",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": "ShadowNexusAPT",
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-172837-22ec79",
+          "id": "samp-172837-22ec79",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.23)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-371379-d57a02",
+          "id": "samp-371379-d57a02",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.20)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.20); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322948-18b03f",
+          "id": "samp-322948-18b03f",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.23)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.26)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.27)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.27); family attribution remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "evidenceContext": {
+      "fileId": "samp-490937-7f4b7c",
+      "fileName": "pre_train_implant.bin",
+      "fileType": "text",
+      "size": 94,
+      "hashes": {
+        "md5": "e2fb817b70326d39e409b17678593263",
+        "sha1": "f179da9f6f5c894793faa31a4ae3a20bbb1b75a7",
+        "sha256": "7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887"
+      },
+      "strings": [],
+      "urls": [],
+      "domains": [],
+      "ips": [],
+      "filePaths": [
+        "pre_train_implant.bin"
+      ],
+      "registryKeys": [],
+      "imports": [],
+      "exports": [],
+      "entropy": 5.23,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "pre_train_implant.bin",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "pre_train_implant.bin",
+          "confidence": 0.93
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-1790563490935",
+        "storedFilePath": "/app/applet/data/samples_store/7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.23,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.18,
+      "printableStringRatio": 1,
+      "vector": [
+        0.65,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887",
+      "sha1": "f179da9f6f5c894793faa31a4ae3a20bbb1b75a7",
+      "md5": "e2fb817b70326d39e409b17678593263",
+      "sizeBytes": 94,
+      "entropyOverall": 5.23,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790563490935",
+    "createdAt": "2026-09-28T02:44:50.935Z",
+    "updatedAt": "2026-09-28T02:44:50.935Z"
+  },
+  {
+    "id": "samp-490762-e39fe2",
+    "analysisId": "ana-490762-e39fe2",
+    "storagePath": "/app/applet/data/samples_store/e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9.bin",
+    "name": "cobalt_beacon_x64.exe",
+    "sha256": "e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9",
+    "sha1": "0b1c259507a9e51e3ece4a92eeb61a3899623b5b",
+    "md5": "daab4dde59f7ea8e03e75c9a16eff557",
+    "sizeBytes": 2048,
+    "fileFormat": "pe",
+    "label": "malicious",
+    "family": "Cobalt Strike",
+    "verdict": "malicious",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 90,
+      "similarityConfidence": 90,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 100,
+      "observedCharacteristics": [
+        "Parsed PE (x86-64 (AMD64), Windows Console (CUI), 2 sections, entrypoint 0x1000)",
+        "Identified high-risk memory/process APIs: VirtualAlloc, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread, InternetOpenA",
+        "Discovered suspicious opcode/command strings: wininet, virtualalloc, virtualallocex, writeprocessmemory",
+        "Reflective DLL injection / Remote thread creation primitives",
+        "Hardcoded Command & Control (C2) endpoint configuration",
+        "High-risk PE import: process hollowing / memory dumping API",
+        "90% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (wininet, virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory), Entropy proximity (1.31 vs 1.31); family attribution to Cobalt Strike remains unconfirmed."
+      ],
+      "suspiciousImports": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Reflective DLL injection / Remote thread creation primitives",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Reflective DLL injection / Remote thread creation primitives"
+        },
+        {
+          "ruleId": "rule-hit-2",
+          "ruleName": "Hardcoded Command & Control (C2) endpoint configuration",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Hardcoded Command & Control (C2) endpoint configuration"
+        },
+        {
+          "ruleId": "rule-hit-3",
+          "ruleName": "High-risk PE import: process hollowing / memory dumping API",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: High-risk PE import: process hollowing / memory dumping API"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-172733-acd85e",
+          "id": "samp-172733-acd85e",
+          "name": "cobalt_beacon_x64.exe",
+          "score": 90,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (wininet, virtualalloc, virtualallocex)",
+            "Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory)",
+            "Entropy proximity (1.31 vs 1.31)"
+          ],
+          "sharedIndicatorsCount": 12,
+          "sharedTechniquesCount": 1,
+          "sharedStructuralFeaturesCount": 6,
+          "attributionStatement": "90% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (wininet, virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory), Entropy proximity (1.31 vs 1.31); family attribution to Cobalt Strike remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-371246-91cd3d",
+          "id": "samp-371246-91cd3d",
+          "name": "cobalt_beacon_x64.exe",
+          "score": 90,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (wininet, virtualalloc, virtualallocex)",
+            "Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory)",
+            "Entropy proximity (1.31 vs 1.31)"
+          ],
+          "sharedIndicatorsCount": 12,
+          "sharedTechniquesCount": 1,
+          "sharedStructuralFeaturesCount": 6,
+          "attributionStatement": "90% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (wininet, virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory), Entropy proximity (1.31 vs 1.31); family attribution to Cobalt Strike remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-001",
+          "id": "samp-001",
+          "name": "beacon_x64_stage2.dll",
+          "score": 37,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (VirtualAlloc)",
+            "Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread)"
+          ],
+          "sharedIndicatorsCount": 1,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 3,
+          "attributionStatement": "37% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc), Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread); family attribution to Cobalt Strike remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "Cobalt Strike"
+    },
+    "evidenceContext": {
+      "fileId": "samp-490762-e39fe2",
+      "fileName": "cobalt_beacon_x64.exe",
+      "fileType": "pe",
+      "size": 2048,
+      "hashes": {
+        "md5": "daab4dde59f7ea8e03e75c9a16eff557",
+        "sha1": "0b1c259507a9e51e3ece4a92eeb61a3899623b5b",
+        "sha256": "e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9"
+      },
+      "strings": [
+        "wininet",
+        "virtualalloc",
+        "virtualallocex",
+        "writeprocessmemory",
+        "createremotethread",
+        "internetopen",
+        "beacon",
+        "c2",
+        "cobaltstrike"
+      ],
+      "urls": [
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+      ],
+      "domains": [],
+      "ips": [
+        "185.220.101.44"
+      ],
+      "filePaths": [
+        "cobalt_beacon_x64.exe",
+        "KERNEL32.dll",
+        "WININET.dll"
+      ],
+      "registryKeys": [
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist"
+      ],
+      "pe": {
+        "isPE": true,
+        "machine": "x86-64 (AMD64)",
+        "subsystem": "Windows Console (CUI)",
+        "is64Bit": true,
+        "entryPointRva": 4096,
+        "imageBase": "0x0",
+        "sectionCount": 2,
+        "timeDateStamp": 1711508062
+      },
+      "imports": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "exports": [],
+      "entropy": 1.31,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "cobalt_beacon_x64.exe",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "cobalt_beacon_x64.exe",
+          "confidence": 0.95
+        },
+        {
+          "type": "url",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x067C)",
+          "occurrences": 2,
+          "locations": [
+            "preview content (line 1, offset 0x067C)",
+            "static analysis: network strings (line 3, offset 0x003C)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "ipv4",
+          "value": "185.220.101.44",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06A9)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06A9)",
+            "static analysis: network strings (line 2, offset 0x002D)",
+            "static analysis: network strings (line 3, offset 0x0069)"
+          ],
+          "context": "NET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "mutex",
+          "value": "Global\\CobaltStrike_Mutex_99",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06F9)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06F9)",
+            "static analysis: network strings (line 3, offset 0x00B9)",
+            "static analysis: persistence strings (line 2, offset 0x0082)"
+          ],
+          "context": "//c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "registry_path",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06B8)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06B8)",
+            "static analysis: network strings (line 3, offset 0x0078)",
+            "static analysis: persistence strings (line 2, offset 0x0041)"
+          ],
+          "context": "AllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "filename",
+          "value": "KERNEL32.dll",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x0620)",
+          "occurrences": 1,
+          "locations": [
+            "preview content (line 1, offset 0x0620)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon",
+          "confidence": 0.95
+        },
+        {
+          "type": "filename",
+          "value": "WININET.dll",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x062D)",
+          "occurrences": 1,
+          "locations": [
+            "preview content (line 1, offset 0x062D)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220",
+          "confidence": 0.95
+        },
+        {
+          "type": "url",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+          "source": "static analysis: network strings",
+          "location": "static analysis: network strings (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: network strings (line 1, offset 0x0000)"
+          ],
+          "context": "http://c2.darkfleet-soc.io/stage2/beacon.bin 185.220.101.44 http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersi",
+          "confidence": 1
+        },
+        {
+          "type": "registry_path",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+          "source": "static analysis: persistence strings",
+          "location": "static analysis: persistence strings (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: persistence strings (line 1, offset 0x0000)"
+          ],
+          "context": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "attack_software",
+          "value": "cobaltstrike",
+          "source": "static analysis: suspicious strings",
+          "location": "static analysis: suspicious strings (line 9, offset 0x0061)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: suspicious strings (line 9, offset 0x0061)"
+          ],
+          "context": "wininet virtualalloc virtualallocex writeprocessmemory createremotethread internetopen beacon c2 cobaltstrike",
+          "confidence": 1
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-e2e-1790563490652",
+        "storedFilePath": "/app/applet/data/samples_store/e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 2048,
+      "entropy": 1.31,
+      "detectedFormat": "pe",
+      "magicHex": "4D5A000000000000",
+      "peHeaders": {
+        "isPE": true,
+        "machine": "x86-64 (AMD64)",
+        "subsystem": "Windows Console (CUI)",
+        "is64Bit": true,
+        "entryPointRva": 4096,
+        "imageBase": "0x0",
+        "sectionCount": 2,
+        "timeDateStamp": 1711508062
+      },
+      "sectionCount": 2,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 12,
+      "stringsWithOffsets": [
+        {
+          "value": ".text",
+          "offset": 392,
+          "hexOffset": "0x0188",
+          "encoding": "ascii",
+          "length": 5
+        },
+        {
+          "value": "`.rdata",
+          "offset": 431,
+          "hexOffset": "0x01AF",
+          "encoding": "ascii",
+          "length": 7
+        },
+        {
+          "value": "KERNEL32.dll",
+          "offset": 1568,
+          "hexOffset": "0x0620",
+          "encoding": "ascii",
+          "length": 12
+        },
+        {
+          "value": "WININET.dll",
+          "offset": 1581,
+          "hexOffset": "0x062D",
+          "encoding": "ascii",
+          "length": 11
+        },
+        {
+          "value": "VirtualAllocEx",
+          "offset": 1593,
+          "hexOffset": "0x0639",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "WriteProcessMemory",
+          "offset": 1608,
+          "hexOffset": "0x0648",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "CreateRemoteThread",
+          "offset": 1627,
+          "hexOffset": "0x065B",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "InternetOpenA",
+          "offset": 1646,
+          "hexOffset": "0x066E",
+          "encoding": "ascii",
+          "length": 13
+        },
+        {
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+          "offset": 1660,
+          "hexOffset": "0x067C",
+          "encoding": "ascii",
+          "length": 44
+        },
+        {
+          "value": "185.220.101.44",
+          "offset": 1705,
+          "hexOffset": "0x06A9",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+          "offset": 1720,
+          "hexOffset": "0x06B8",
+          "encoding": "ascii",
+          "length": 64
+        },
+        {
+          "value": "Global\\CobaltStrike_Mutex_99",
+          "offset": 1785,
+          "hexOffset": "0x06F9",
+          "encoding": "ascii",
+          "length": 28
+        }
+      ],
+      "suspiciousStrings": [
+        "wininet",
+        "virtualalloc",
+        "virtualallocex",
+        "writeprocessmemory",
+        "createremotethread",
+        "internetopen",
+        "beacon",
+        "c2",
+        "cobaltstrike"
+      ],
+      "suspiciousStringsDetailed": [
+        {
+          "pattern": "wininet",
+          "offset": "0x062D",
+          "value": "WININET.dll"
+        },
+        {
+          "pattern": "virtualalloc",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "virtualallocex",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "writeprocessmemory",
+          "offset": "0x0648",
+          "value": "WriteProcessMemory"
+        },
+        {
+          "pattern": "createremotethread",
+          "offset": "0x065B",
+          "value": "CreateRemoteThread"
+        },
+        {
+          "pattern": "internetopen",
+          "offset": "0x066E",
+          "value": "InternetOpenA"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "c2",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x06B8",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist"
+        },
+        {
+          "pattern": "cobaltstrike",
+          "offset": "0x06F9",
+          "value": "Global\\CobaltStrike_Mutex_99"
+        }
+      ],
+      "networkIndicatorStrings": [
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+        "185.220.101.44",
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "persistenceIndicatorStrings": [
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "uniqueByteRatio": 0.28,
+      "printableStringRatio": 0.13,
+      "vector": [
+        0.16,
+        1,
+        0.6,
+        1
+      ],
+      "peSuspiciousImportedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "importedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "sha256": "e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9",
+      "sha1": "0b1c259507a9e51e3ece4a92eeb61a3899623b5b",
+      "md5": "daab4dde59f7ea8e03e75c9a16eff557",
+      "sizeBytes": 2048,
+      "entropyOverall": 1.31,
+      "fileFormat": "pe",
+      "peSections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 2
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-e2e-1790563490652",
+    "createdAt": "2026-09-28T02:44:50.738Z",
+    "updatedAt": "2026-09-28T02:44:50.738Z"
+  },
+  {
+    "id": "samp-172886-818f93",
+    "analysisId": "ana-172886-818f93",
+    "storagePath": "/app/applet/data/samples_store/818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805.bin",
+    "name": "post_train_implant_v2.bin",
+    "sha256": "818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805",
+    "sha1": "0347e55914808d1fa4450be149f3dd56642a01a9",
+    "md5": "dfb0f51c100e75ca9c0fa293a996801a",
+    "sizeBytes": 129,
+    "fileFormat": "text",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 92,
+      "ruleConfidence": 90,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.7-adaptive-dataset",
+      "modelConfidence": 65,
+      "observedCharacteristics": [
+        "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790503172833]",
+        "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.30 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790503172833]",
+          "kind": "string",
+          "family": "ShadowNexusAPT",
+          "severity": "high",
+          "detail": "Matched rule: Learned dataset match: \"shadow_nexus_train_1.bin\" (ShadowNexusAPT) via [nexsus_apt_novel_implant_watermark_1790503172833]"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-371403-184a53",
+          "id": "samp-371403-184a53",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.30 vs 5.29)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.30 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322983-e19673",
+          "id": "samp-322983-e19673",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.30 vs 5.29)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.30 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.30 vs 5.26)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.30 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623309-5d9601",
+          "id": "samp-623309-5d9601",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.30 vs 5.32)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.30 vs 5.32); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.30 vs 5.27)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.30 vs 5.27); family attribution remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "evidenceContext": {
+      "fileId": "samp-172886-818f93",
+      "fileName": "post_train_implant_v2.bin",
+      "fileType": "text",
+      "size": 129,
+      "hashes": {
+        "md5": "dfb0f51c100e75ca9c0fa293a996801a",
+        "sha1": "0347e55914808d1fa4450be149f3dd56642a01a9",
+        "sha256": "818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805"
+      },
+      "strings": [],
+      "urls": [],
+      "domains": [],
+      "ips": [],
+      "filePaths": [
+        "post_train_implant_v2.bin"
+      ],
+      "registryKeys": [],
+      "imports": [],
+      "exports": [],
+      "entropy": 5.3,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.3,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "post_train_implant_v2.bin",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "post_train_implant_v2.bin",
+          "confidence": 0.93
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-1790503172884",
+        "storedFilePath": "/app/applet/data/samples_store/818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 129,
+      "entropy": 5.3,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.3,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.2,
+      "printableStringRatio": 1,
+      "vector": [
+        0.66,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805",
+      "sha1": "0347e55914808d1fa4450be149f3dd56642a01a9",
+      "md5": "dfb0f51c100e75ca9c0fa293a996801a",
+      "sizeBytes": 129,
+      "entropyOverall": 5.3,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 129,
+          "rawSize": 129,
+          "entropy": 5.3,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790503172884",
+    "createdAt": "2026-09-27T09:59:32.884Z",
+    "updatedAt": "2026-09-27T09:59:32.884Z"
+  },
+  {
+    "id": "samp-ds-1790503172877-1",
+    "name": "shadow_nexus_train_2.bin",
+    "sha256": "19cdec5743880bf589b9e8f080fd8d6ec18e484ec30d99e0314fa1af0283929c",
+    "sha1": "c60736d4fe00cd360abb0a202758506ef5e3660a",
+    "md5": "f48d2ac7d18456c7b6f095283ef43111",
+    "sizeBytes": 80,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 80,
+      "entropy": 5,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 80,
+          "rawSize": 80,
+          "entropy": 5,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.63,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:59:32.877Z",
+    "updatedAt": "2026-09-27T09:59:32.877Z"
+  },
+  {
+    "id": "samp-ds-1790503172875-0",
+    "name": "shadow_nexus_train_1.bin",
+    "sha256": "2704e2b8876a7692dbc360e61a95b617a9a27408b2aa8aebbae24f4c3e214ee2",
+    "sha1": "2ebfc58eb6d3fa7471bbafbab84cb2cb845fa212",
+    "md5": "ff0e2ac6739168bd8dd757d295619086",
+    "sizeBytes": 81,
+    "fileFormat": "unknown",
+    "label": "malicious",
+    "family": "ShadowNexusAPT",
+    "verdict": "malicious",
+    "confidence": 92,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 92,
+      "staticConfidence": 90,
+      "ruleConfidence": 88,
+      "similarityConfidence": 80,
+      "observedCharacteristics": [
+        "Ingested from validated dataset \"ShadowNexus_APT_Dataset.json\"",
+        "Flagged malicious training record with characteristic vector signatures"
+      ],
+      "ruleMatches": [],
+      "similarSamples": [],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "features": {
+      "totalBytes": 81,
+      "entropy": 4.97,
+      "detectedFormat": "text",
+      "magicHex": "73616D706C655F68",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 81,
+          "rawSize": 81,
+          "entropy": 4.97,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.15,
+      "printableStringRatio": 1,
+      "vector": [
+        0.62,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": []
+    },
+    "uploadedBy": "Dataset Pipeline",
+    "createdAt": "2026-09-27T09:59:32.875Z",
+    "updatedAt": "2026-09-27T09:59:32.875Z"
+  },
+  {
+    "id": "samp-172837-22ec79",
+    "analysisId": "ana-172837-22ec79",
+    "storagePath": "/app/applet/data/samples_store/22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0.bin",
+    "name": "pre_train_implant.bin",
+    "sha256": "22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0",
+    "sha1": "ba45f0569e3ee551c37d4db43cffab610cdceda6",
+    "md5": "b5ac2c24378b7e9d1b33cd6416f9a825",
+    "sizeBytes": 94,
+    "fileFormat": "text",
+    "label": "benign",
+    "family": "ShadowNexusAPT",
+    "verdict": "clean",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "clean",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 0,
+      "similarityConfidence": 20,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 0,
+      "observedCharacteristics": [
+        "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.20); family attribution to ShadowNexusAPT remains unconfirmed."
+      ],
+      "suspiciousImports": [],
+      "ruleMatches": [],
+      "similarSamples": [
+        {
+          "sampleId": "samp-371379-d57a02",
+          "id": "samp-371379-d57a02",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.20)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.20); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-322948-18b03f",
+          "id": "samp-322948-18b03f",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.23)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-778111-5646e3",
+          "id": "samp-778111-5646e3",
+          "name": "post_train_implant_v2.bin",
+          "score": 20,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.26)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.26); family attribution to ShadowNexusAPT remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-623288-3f9f01",
+          "id": "samp-623288-3f9f01",
+          "name": "pre_train_implant.bin",
+          "score": 20,
+          "family": null,
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.27)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "20% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.23 vs 5.27); family attribution remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-371403-184a53",
+          "id": "samp-371403-184a53",
+          "name": "post_train_implant_v2.bin",
+          "score": 19,
+          "family": "ShadowNexusAPT",
+          "sharedFeatures": [
+            "Entropy proximity (5.23 vs 5.29)"
+          ],
+          "sharedIndicatorsCount": 0,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 1,
+          "attributionStatement": "19% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.23 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "ShadowNexusAPT"
+    },
+    "evidenceContext": {
+      "fileId": "samp-172837-22ec79",
+      "fileName": "pre_train_implant.bin",
+      "fileType": "text",
+      "size": 94,
+      "hashes": {
+        "md5": "b5ac2c24378b7e9d1b33cd6416f9a825",
+        "sha1": "ba45f0569e3ee551c37d4db43cffab610cdceda6",
+        "sha256": "22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0"
+      },
+      "strings": [],
+      "urls": [],
+      "domains": [],
+      "ips": [],
+      "filePaths": [
+        "pre_train_implant.bin"
+      ],
+      "registryKeys": [],
+      "imports": [],
+      "exports": [],
+      "entropy": 5.23,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "pre_train_implant.bin",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "pre_train_implant.bin",
+          "confidence": 0.93
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-1790503172836",
+        "storedFilePath": "/app/applet/data/samples_store/22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 94,
+      "entropy": 5.23,
+      "detectedFormat": "text",
+      "magicHex": "696E74206D61696E",
+      "sectionCount": 1,
+      "sections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 0,
+      "stringsWithOffsets": [],
+      "suspiciousStrings": [],
+      "suspiciousStringsDetailed": [],
+      "networkIndicatorStrings": [],
+      "persistenceIndicatorStrings": [],
+      "uniqueByteRatio": 0.18,
+      "printableStringRatio": 1,
+      "vector": [
+        0.65,
+        0,
+        0,
+        0
+      ],
+      "peSuspiciousImportedApis": [],
+      "importedApis": [],
+      "sha256": "22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0",
+      "sha1": "ba45f0569e3ee551c37d4db43cffab610cdceda6",
+      "md5": "b5ac2c24378b7e9d1b33cd6416f9a825",
+      "sizeBytes": 94,
+      "entropyOverall": 5.23,
+      "fileFormat": "unknown",
+      "peSections": [
+        {
+          "name": ".data",
+          "virtualSize": 94,
+          "rawSize": 94,
+          "entropy": 5.23,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 1
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-1790503172836",
+    "createdAt": "2026-09-27T09:59:32.836Z",
+    "updatedAt": "2026-09-27T09:59:32.836Z"
+  },
+  {
+    "id": "samp-172733-acd85e",
+    "analysisId": "ana-172733-acd85e",
+    "storagePath": "/app/applet/data/samples_store/acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98.bin",
+    "name": "cobalt_beacon_x64.exe",
+    "sha256": "acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98",
+    "sha1": "cb098bf140e33f003797d0652cf55876115e53c7",
+    "md5": "ef7b3618c95f3d1076505f3a0a29845f",
+    "sizeBytes": 2048,
+    "fileFormat": "pe",
+    "label": "malicious",
+    "family": "Cobalt Strike",
+    "verdict": "malicious",
+    "confidence": 99,
+    "verdictDetail": {
+      "verdict": "malicious",
+      "confidence": 99,
+      "staticConfidence": 99,
+      "ruleConfidence": 90,
+      "similarityConfidence": 90,
+      "modelVersion": "v3.4-heuristic-forest",
+      "modelConfidence": 100,
+      "observedCharacteristics": [
+        "Parsed PE (x86-64 (AMD64), Windows Console (CUI), 2 sections, entrypoint 0x1000)",
+        "Identified high-risk memory/process APIs: VirtualAlloc, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread, InternetOpenA",
+        "Discovered suspicious opcode/command strings: wininet, virtualalloc, virtualallocex, writeprocessmemory",
+        "Reflective DLL injection / Remote thread creation primitives",
+        "Hardcoded Command & Control (C2) endpoint configuration",
+        "High-risk PE import: process hollowing / memory dumping API",
+        "90% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (wininet, virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory), Entropy proximity (1.31 vs 1.31); family attribution to Cobalt Strike remains unconfirmed."
+      ],
+      "suspiciousImports": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "ruleMatches": [
+        {
+          "ruleId": "rule-hit-1",
+          "ruleName": "Reflective DLL injection / Remote thread creation primitives",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Reflective DLL injection / Remote thread creation primitives"
+        },
+        {
+          "ruleId": "rule-hit-2",
+          "ruleName": "Hardcoded Command & Control (C2) endpoint configuration",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: Hardcoded Command & Control (C2) endpoint configuration"
+        },
+        {
+          "ruleId": "rule-hit-3",
+          "ruleName": "High-risk PE import: process hollowing / memory dumping API",
+          "kind": "string",
+          "family": "Cobalt Strike",
+          "severity": "high",
+          "detail": "Matched rule: High-risk PE import: process hollowing / memory dumping API"
+        }
+      ],
+      "similarSamples": [
+        {
+          "sampleId": "samp-371246-91cd3d",
+          "id": "samp-371246-91cd3d",
+          "name": "cobalt_beacon_x64.exe",
+          "score": 90,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (wininet, virtualalloc, virtualallocex)",
+            "Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory)",
+            "Entropy proximity (1.31 vs 1.31)"
+          ],
+          "sharedIndicatorsCount": 12,
+          "sharedTechniquesCount": 1,
+          "sharedStructuralFeaturesCount": 6,
+          "attributionStatement": "90% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (wininet, virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx, WriteProcessMemory), Entropy proximity (1.31 vs 1.31); family attribution to Cobalt Strike remains unconfirmed."
+        },
+        {
+          "sampleId": "samp-001",
+          "id": "samp-001",
+          "name": "beacon_x64_stage2.dll",
+          "score": 37,
+          "family": "Cobalt Strike",
+          "sharedFeatures": [
+            "Shared strings (VirtualAlloc)",
+            "Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread)"
+          ],
+          "sharedIndicatorsCount": 1,
+          "sharedTechniquesCount": 0,
+          "sharedStructuralFeaturesCount": 3,
+          "attributionStatement": "37% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc), Shared APIs (VirtualAlloc, InternetOpenA, CreateRemoteThread); family attribution to Cobalt Strike remains unconfirmed."
+        }
+      ],
+      "likelyFamily": "Cobalt Strike"
+    },
+    "evidenceContext": {
+      "fileId": "samp-172733-acd85e",
+      "fileName": "cobalt_beacon_x64.exe",
+      "fileType": "pe",
+      "size": 2048,
+      "hashes": {
+        "md5": "ef7b3618c95f3d1076505f3a0a29845f",
+        "sha1": "cb098bf140e33f003797d0652cf55876115e53c7",
+        "sha256": "acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98"
+      },
+      "strings": [
+        "wininet",
+        "virtualalloc",
+        "virtualallocex",
+        "writeprocessmemory",
+        "createremotethread",
+        "internetopen",
+        "beacon",
+        "c2",
+        "cobaltstrike"
+      ],
+      "urls": [
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+      ],
+      "domains": [],
+      "ips": [
+        "185.220.101.44"
+      ],
+      "filePaths": [
+        "cobalt_beacon_x64.exe",
+        "KERNEL32.dll",
+        "WININET.dll"
+      ],
+      "registryKeys": [
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist"
+      ],
+      "pe": {
+        "isPE": true,
+        "machine": "x86-64 (AMD64)",
+        "subsystem": "Windows Console (CUI)",
+        "is64Bit": true,
+        "entryPointRva": 4096,
+        "imageBase": "0x0",
+        "sectionCount": 2,
+        "timeDateStamp": 1711503465
+      },
+      "imports": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "exports": [],
+      "entropy": 1.31,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "extractedArtifacts": [
+        {
+          "type": "filename",
+          "value": "cobalt_beacon_x64.exe",
+          "source": "artifact filename",
+          "location": "artifact filename (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "artifact filename (line 1, offset 0x0000)"
+          ],
+          "context": "cobalt_beacon_x64.exe",
+          "confidence": 0.95
+        },
+        {
+          "type": "url",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x067C)",
+          "occurrences": 2,
+          "locations": [
+            "preview content (line 1, offset 0x067C)",
+            "static analysis: network strings (line 3, offset 0x003C)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "ipv4",
+          "value": "185.220.101.44",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06A9)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06A9)",
+            "static analysis: network strings (line 2, offset 0x002D)",
+            "static analysis: network strings (line 3, offset 0x0069)"
+          ],
+          "context": "NET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "mutex",
+          "value": "Global\\CobaltStrike_Mutex_99",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06F9)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06F9)",
+            "static analysis: network strings (line 3, offset 0x00B9)",
+            "static analysis: persistence strings (line 2, offset 0x0082)"
+          ],
+          "context": "//c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "registry_path",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x06B8)",
+          "occurrences": 3,
+          "locations": [
+            "preview content (line 1, offset 0x06B8)",
+            "static analysis: network strings (line 3, offset 0x0078)",
+            "static analysis: persistence strings (line 2, offset 0x0041)"
+          ],
+          "context": "AllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "filename",
+          "value": "KERNEL32.dll",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x0620)",
+          "occurrences": 1,
+          "locations": [
+            "preview content (line 1, offset 0x0620)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon",
+          "confidence": 0.95
+        },
+        {
+          "type": "filename",
+          "value": "WININET.dll",
+          "source": "preview content",
+          "location": "preview content (line 1, offset 0x062D)",
+          "occurrences": 1,
+          "locations": [
+            "preview content (line 1, offset 0x062D)"
+          ],
+          "context": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000KERNEL32.dll\u0000WININET.dll\u0000VirtualAllocEx\u0000WriteProcessMemory\u0000CreateRemoteThread\u0000InternetOpenA\u0000http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220",
+          "confidence": 0.95
+        },
+        {
+          "type": "url",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+          "source": "static analysis: network strings",
+          "location": "static analysis: network strings (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: network strings (line 1, offset 0x0000)"
+          ],
+          "context": "http://c2.darkfleet-soc.io/stage2/beacon.bin 185.220.101.44 http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersi",
+          "confidence": 1
+        },
+        {
+          "type": "registry_path",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+          "source": "static analysis: persistence strings",
+          "location": "static analysis: persistence strings (line 1, offset 0x0000)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: persistence strings (line 1, offset 0x0000)"
+          ],
+          "context": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "confidence": 1
+        },
+        {
+          "type": "attack_software",
+          "value": "cobaltstrike",
+          "source": "static analysis: suspicious strings",
+          "location": "static analysis: suspicious strings (line 9, offset 0x0061)",
+          "occurrences": 1,
+          "locations": [
+            "static analysis: suspicious strings (line 9, offset 0x0061)"
+          ],
+          "context": "wininet virtualalloc virtualallocex writeprocessmemory createremotethread internetopen beacon c2 cobaltstrike",
+          "confidence": 1
+        }
+      ],
+      "sourceMetadata": {
+        "uploadedBy": "SOC Operator",
+        "caseId": "case-e2e-1790503172666",
+        "storedFilePath": "/app/applet/data/samples_store/acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98.bin"
+      }
+    },
+    "features": {
+      "totalBytes": 2048,
+      "entropy": 1.31,
+      "detectedFormat": "pe",
+      "magicHex": "4D5A000000000000",
+      "peHeaders": {
+        "isPE": true,
+        "machine": "x86-64 (AMD64)",
+        "subsystem": "Windows Console (CUI)",
+        "is64Bit": true,
+        "entryPointRva": 4096,
+        "imageBase": "0x0",
+        "sectionCount": 2,
+        "timeDateStamp": 1711503465
+      },
+      "sectionCount": 2,
+      "sections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "rwxSections": [],
+      "totalStrings": 12,
+      "stringsWithOffsets": [
+        {
+          "value": ".text",
+          "offset": 392,
+          "hexOffset": "0x0188",
+          "encoding": "ascii",
+          "length": 5
+        },
+        {
+          "value": "`.rdata",
+          "offset": 431,
+          "hexOffset": "0x01AF",
+          "encoding": "ascii",
+          "length": 7
+        },
+        {
+          "value": "KERNEL32.dll",
+          "offset": 1568,
+          "hexOffset": "0x0620",
+          "encoding": "ascii",
+          "length": 12
+        },
+        {
+          "value": "WININET.dll",
+          "offset": 1581,
+          "hexOffset": "0x062D",
+          "encoding": "ascii",
+          "length": 11
+        },
+        {
+          "value": "VirtualAllocEx",
+          "offset": 1593,
+          "hexOffset": "0x0639",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "WriteProcessMemory",
+          "offset": 1608,
+          "hexOffset": "0x0648",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "CreateRemoteThread",
+          "offset": 1627,
+          "hexOffset": "0x065B",
+          "encoding": "ascii",
+          "length": 18
+        },
+        {
+          "value": "InternetOpenA",
+          "offset": 1646,
+          "hexOffset": "0x066E",
+          "encoding": "ascii",
+          "length": 13
+        },
+        {
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+          "offset": 1660,
+          "hexOffset": "0x067C",
+          "encoding": "ascii",
+          "length": 44
+        },
+        {
+          "value": "185.220.101.44",
+          "offset": 1705,
+          "hexOffset": "0x06A9",
+          "encoding": "ascii",
+          "length": 14
+        },
+        {
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+          "offset": 1720,
+          "hexOffset": "0x06B8",
+          "encoding": "ascii",
+          "length": 64
+        },
+        {
+          "value": "Global\\CobaltStrike_Mutex_99",
+          "offset": 1785,
+          "hexOffset": "0x06F9",
+          "encoding": "ascii",
+          "length": 28
+        }
+      ],
+      "suspiciousStrings": [
+        "wininet",
+        "virtualalloc",
+        "virtualallocex",
+        "writeprocessmemory",
+        "createremotethread",
+        "internetopen",
+        "beacon",
+        "c2",
+        "cobaltstrike"
+      ],
+      "suspiciousStringsDetailed": [
+        {
+          "pattern": "wininet",
+          "offset": "0x062D",
+          "value": "WININET.dll"
+        },
+        {
+          "pattern": "virtualalloc",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "virtualallocex",
+          "offset": "0x0639",
+          "value": "VirtualAllocEx"
+        },
+        {
+          "pattern": "writeprocessmemory",
+          "offset": "0x0648",
+          "value": "WriteProcessMemory"
+        },
+        {
+          "pattern": "createremotethread",
+          "offset": "0x065B",
+          "value": "CreateRemoteThread"
+        },
+        {
+          "pattern": "internetopen",
+          "offset": "0x066E",
+          "value": "InternetOpenA"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "c2",
+          "offset": "0x067C",
+          "value": "http://c2.darkfleet-soc.io/stage2/beacon.bin"
+        },
+        {
+          "pattern": "beacon",
+          "offset": "0x06B8",
+          "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist"
+        },
+        {
+          "pattern": "cobaltstrike",
+          "offset": "0x06F9",
+          "value": "Global\\CobaltStrike_Mutex_99"
+        }
+      ],
+      "networkIndicatorStrings": [
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin",
+        "185.220.101.44",
+        "http://c2.darkfleet-soc.io/stage2/beacon.bin\u0000185.220.101.44\u0000HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "persistenceIndicatorStrings": [
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist",
+        "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BeaconPersist\u0000Global\\CobaltStrike_Mutex_99\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ],
+      "uniqueByteRatio": 0.27,
+      "printableStringRatio": 0.13,
+      "vector": [
+        0.16,
+        1,
+        0.6,
+        1
+      ],
+      "peSuspiciousImportedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "importedApis": [
+        "VirtualAlloc",
+        "VirtualAllocEx",
+        "WriteProcessMemory",
+        "CreateRemoteThread",
+        "InternetOpenA"
+      ],
+      "sha256": "acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98",
+      "sha1": "cb098bf140e33f003797d0652cf55876115e53c7",
+      "md5": "ef7b3618c95f3d1076505f3a0a29845f",
+      "sizeBytes": 2048,
+      "entropyOverall": 1.31,
+      "fileFormat": "pe",
+      "peSections": [
+        {
+          "name": ".text",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        },
+        {
+          "name": ".rdata",
+          "virtualSize": 1024,
+          "rawSize": 1024,
+          "entropy": 0,
+          "rwx": false
+        }
+      ],
+      "peNumSections": 2
+    },
+    "uploadedBy": "SOC Operator",
+    "caseId": "case-e2e-1790503172666",
+    "createdAt": "2026-09-27T09:59:32.715Z",
+    "updatedAt": "2026-09-27T09:59:32.715Z"
+  },
+  {
     "id": "samp-371403-184a53",
     "analysisId": "ana-371403-184a53",
     "storagePath": "/app/applet/data/samples_store/184a53882c5c82832f5738a0d314e962edc9fa1100b7d6c006a9c2b6dcdc4312.bin",

@@ -1,5 +1,3119 @@
 [
   {
+    "id": "inv-case-1790563490917",
+    "caseNumber": "INV-2026-4519",
+    "title": "Live Activity Truth Verification",
+    "status": "COMPLETED",
+    "severity": "High",
+    "confidence": 92,
+    "assignedAgent": "Malware Analysis",
+    "evidencePackage": {
+      "investigation_id": "INV-2026-4519",
+      "evidence_id": "ev-inv-case-1790563490917",
+      "file": {
+        "name": "truth_beacon.exe",
+        "sha256": "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+        "mime_type": "application/octet-stream",
+        "size": 64
+      },
+      "available_artifacts": {
+        "strings": [
+          "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+        ],
+        "network_connections": [
+          "http://185.220.101.44/stage2.bin"
+        ],
+        "urls": [
+          "http://185.220.101.44/stage2.bin"
+        ],
+        "domains": [],
+        "ips": [
+          "185.220.101.44"
+        ],
+        "hashes": [
+          "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+          "5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+          "2abb0752c193e2d85ff633a47cda2e7e"
+        ],
+        "registry": [],
+        "processes": [],
+        "files": [
+          "truth_beacon.exe"
+        ]
+      }
+    },
+    "agentFindings": [
+      {
+        "agentId": "malware-analysis",
+        "agentName": "Malware Analysis",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 85,
+        "confidence": 0.98,
+        "summary": "Automated static malware triage completed for truth_beacon.exe. Entropy: 4.83, discovered 3 hashes and 2 suspicious API references.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PE headers",
+            "imports",
+            "sections",
+            "entropy",
+            "strings",
+            "similarity features"
+          ],
+          "detectedFormat": "text",
+          "peHeaders": null,
+          "elfHeaders": null,
+          "imports": [],
+          "suspiciousImports": [
+            "virtualalloc",
+            "virtualallocex"
+          ],
+          "sections": [
+            {
+              "name": ".data",
+              "virtualSize": 64,
+              "rawSize": 64,
+              "entropy": 4.83,
+              "rwx": false
+            }
+          ],
+          "entropy": 4.83,
+          "stringsCount": 0,
+          "similarityMatches": [
+            {
+              "sampleId": "samp-490762-e39fe2",
+              "sampleName": "cobalt_beacon_x64.exe",
+              "similarityScore": 54,
+              "sharedFeatures": [
+                "Shared strings (virtualalloc, virtualallocex)",
+                "Shared APIs (VirtualAlloc, VirtualAllocEx)"
+              ],
+              "sharedIOCs": [
+                "185.220.101.44"
+              ],
+              "sharedBehaviors": [
+                "Process Hollowing API"
+              ],
+              "sharedIndicatorsCount": 3,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 2,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-172733-acd85e",
+              "sampleName": "cobalt_beacon_x64.exe",
+              "similarityScore": 54,
+              "sharedFeatures": [
+                "Shared strings (virtualalloc, virtualallocex)",
+                "Shared APIs (VirtualAlloc, VirtualAllocEx)"
+              ],
+              "sharedIOCs": [
+                "185.220.101.44"
+              ],
+              "sharedBehaviors": [
+                "Process Hollowing API"
+              ],
+              "sharedIndicatorsCount": 3,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 2,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-371246-91cd3d",
+              "sampleName": "cobalt_beacon_x64.exe",
+              "similarityScore": 54,
+              "sharedFeatures": [
+                "Shared strings (virtualalloc, virtualallocex)",
+                "Shared APIs (VirtualAlloc, VirtualAllocEx)"
+              ],
+              "sharedIOCs": [
+                "185.220.101.44"
+              ],
+              "sharedBehaviors": [
+                "Process Hollowing API"
+              ],
+              "sharedIndicatorsCount": 3,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 2,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-001",
+              "sampleName": "beacon_x64_stage2.dll",
+              "similarityScore": 44,
+              "sharedFeatures": [
+                "Shared strings (VirtualAlloc, ReflectiveLoader)",
+                "Shared APIs (VirtualAlloc)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [
+                "Reflective DLL Injection"
+              ],
+              "sharedIndicatorsCount": 2,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "44% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc, ReflectiveLoader), Shared APIs (VirtualAlloc); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-ds-1790503172875-0",
+              "sampleName": "shadow_nexus_train_1.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (4.83 vs 4.97)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"shadow_nexus_train_1.bin\"; shared features: Entropy proximity (4.83 vs 4.97); family attribution to ShadowNexusAPT remains unconfirmed."
+            }
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Cryptographic identity established",
+            "claim": "Cryptographic identity established",
+            "evidence": "SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e",
+            "source": "static.crypto_hash",
+            "artifact": "truth_beacon.exe",
+            "location": "file digest (0x0000)",
+            "analysis_method": "deterministic_crypto_digest",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "limitation": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Suspicious in-memory process manipulation API imports",
+            "claim": "Suspicious in-memory process manipulation API imports",
+            "evidence": "Imported APIs: virtualalloc, virtualallocex",
+            "source": "pe.import_address_table",
+            "artifact": "truth_beacon.exe",
+            "location": "import table",
+            "analysis_method": "pe_import_table_parser",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "An imported API demonstrates capability; execution requires dynamic observation.",
+            "limitation": "An imported API demonstrates capability; execution requires dynamic observation.",
+            "confidence": 0.95,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Structural similarity to historical catalogued sample",
+            "claim": "Structural similarity to historical catalogued sample",
+            "evidence": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed.",
+            "source": "malware_intelligence.similarity_index",
+            "artifact": "truth_beacon.exe",
+            "location": "feature vector cosine match",
+            "analysis_method": "feature_vector_similarity_index",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "limitation": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "confidence": 0.54,
+            "evidenceType": "INFERRED"
+          }
+        ],
+        "evidenceGaps": [
+          "Dynamic execution was not performed because live sandbox detonation is unavailable."
+        ]
+      },
+      {
+        "agentId": "ioc-extraction",
+        "agentName": "IOC Extraction",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 64,
+        "confidence": 0.95,
+        "summary": "Extracted 3 total indicator(s): 1 IP(s), 0 domain(s), 1 URL(s), and 0 registry entries with exact line and offset provenance.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "extracted strings",
+            "metadata",
+            "network artifacts",
+            "decoded indicators"
+          ],
+          "extractedCount": 3,
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": [],
+          "urls": [
+            "http://185.220.101.44/stage2.bin"
+          ],
+          "hashes": [
+            "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+            "5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+            "2abb0752c193e2d85ff633a47cda2e7e"
+          ],
+          "registry": []
+        },
+        "findings": [
+          {
+            "finding": "IOC: truth_beacon.exe",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "truth_beacon.exe (artifact filename)",
+            "source": "artifact filename",
+            "artifact": "truth_beacon.exe",
+            "location": "artifact filename (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.95,
+            "evidenceType": "OBSERVED",
+            "context": "truth_beacon.exe"
+          },
+          {
+            "finding": "IOC: http://185.220.101.44/stage2.bin",
+            "claim": "URL indicator isolated",
+            "evidence": "http://185.220.101.44/stage2.bin (preview content)",
+            "source": "preview content",
+            "artifact": "truth_beacon.exe",
+            "location": "preview content (line 1, offset 0x0020)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+          },
+          {
+            "finding": "IOC: 185.220.101.44",
+            "claim": "IPV4 indicator isolated",
+            "evidence": "185.220.101.44 (preview content)",
+            "source": "preview content",
+            "artifact": "truth_beacon.exe",
+            "location": "preview content (line 1, offset 0x0027)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.98,
+            "evidenceType": "OBSERVED",
+            "context": "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+          }
+        ]
+      },
+      {
+        "agentId": "network-analysis",
+        "agentName": "Network Analysis",
+        "status": "complete",
+        "verdict": "Suspicious",
+        "maliciousScore": 75,
+        "confidence": 0.85,
+        "summary": "Identified static network endpoints (http://185.220.101.44/stage2.bin, 185.220.101.44) forming static communication primitives.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PCAP/network artifacts",
+            "embedded URLs",
+            "domains",
+            "IPv4/IPv6 endpoints"
+          ],
+          "urls": [
+            "http://185.220.101.44/stage2.bin"
+          ],
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": []
+        },
+        "findings": [
+          {
+            "finding": "Static outbound network destination endpoint: http://185.220.101.44/stage2.bin",
+            "claim": "Static outbound network destination endpoint",
+            "evidence": "http://185.220.101.44/stage2.bin",
+            "source": "static.network_strings",
+            "artifact": "truth_beacon.exe",
+            "location": "strings (offset ~0x0)",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "limitation": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "confidence": 0.85,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Static IPv4 address reference isolated: 185.220.101.44",
+            "claim": "Static IPv4 address reference isolated",
+            "evidence": "185.220.101.44",
+            "source": "static.network_strings",
+            "artifact": "truth_beacon.exe",
+            "location": "strings",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Static IPv4 presence requires packet capture to confirm active session.",
+            "limitation": "Static IPv4 presence requires packet capture to confirm active session.",
+            "confidence": 0.88,
+            "evidenceType": "OBSERVED"
+          }
+        ],
+        "evidenceGaps": [
+          "No live PCAP capture was attached; live socket beaconing cannot be confirmed."
+        ]
+      },
+      {
+        "agentId": "threat-intel",
+        "agentName": "Threat Intelligence",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 88,
+        "confidence": 0.9,
+        "summary": "Queried multi-engine gateway for 1 indicators against VirusTotal, AbuseIPDB, and AlienVault OTX.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "verified IOC list",
+            "external tool results"
+          ],
+          "connectorStatus": "CONFIGURED",
+          "queriedIndicators": [
+            "185.220.101.44"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "evidence": "185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+            "source": "external.virustotal.ip.lookup",
+            "artifact": "truth_beacon.exe",
+            "location": "external reputation query",
+            "analysis_method": "external_threat_intel_enrichment",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "External reputation reflects known feeds at query time.",
+            "limitation": "External reputation reflects known feeds at query time.",
+            "confidence": 0.94,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      },
+      {
+        "agentId": "memory-agent",
+        "agentName": "Memory Analysis",
+        "status": "complete",
+        "verdict": "Insufficient Evidence",
+        "confidence": 1,
+        "summary": "Memory Analysis: NOT APPLICABLE / UNAVAILABLE.\nReason: Uploaded evidence is a static file (truth_beacon.exe) and contains no physical memory image or process crash dump.\nRequired volatile forensic evidence: .dmp, .raw, or .vmem image.\nConclusion: No memory-forensic conclusion was attempted.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "artifact file header",
+            "forensic memory preflight check"
+          ],
+          "applicable": false
+        },
+        "findings": [
+          {
+            "finding": "Volatile RAM physical page analysis unavailable",
+            "claim": "Volatile RAM physical page analysis",
+            "evidence": "Evidence \"truth_beacon.exe\" contains no volatile physical RAM or handle structures.",
+            "source": "forensics.memory.preflight",
+            "artifact": "truth_beacon.exe",
+            "location": "preflight check",
+            "analysis_method": "memory_forensics_preflight",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "No volatile memory image provided.",
+            "limitation": "No volatile memory image provided.",
+            "confidence": 1,
+            "evidenceType": "UNAVAILABLE"
+          }
+        ],
+        "evidenceGaps": [
+          "Requires volatile memory acquisition image (.dmp, .raw) to extract injected DLLs or unlinked VAD structures."
+        ]
+      },
+      {
+        "agentId": "verification-agent",
+        "agentName": "Verification Agent",
+        "status": "complete",
+        "verdict": "Informational",
+        "confidence": 0.95,
+        "summary": "Cross-validated all specialist findings against cited evidence, verified provenance, and checked for contradictions across agents.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "findings from all agents",
+            "malware-analysis",
+            "ioc-extraction",
+            "network-analysis",
+            "threat-intel",
+            "memory-agent"
+          ],
+          "verifiedAgentCount": 5
+        },
+        "findings": [
+          {
+            "finding": "Specialist claims supported by verified provenance",
+            "claim": "Specialist claims supported by verified provenance",
+            "evidence": "All active specialists agree on orientation with direct artifact offset/header provenance.",
+            "source": "verification.cross_check",
+            "artifact": "truth_beacon.exe",
+            "location": "cross-agent verification matrix",
+            "analysis_method": "cross_agent_contradiction_and_provenance_audit",
+            "timestamp": "2026-09-28T02:44:50.919Z",
+            "limitations": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "limitation": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "confidence": 0.95,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "correlatedFindings": [
+      {
+        "id": "corr-1",
+        "indicatorOrClaim": "http://185.220.101.44/stage2.bin",
+        "type": "url",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "id": "corr-2",
+        "indicatorOrClaim": "185.220.101.44",
+        "type": "ipv4",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-28T02:44:50.920Z"
+      }
+    ],
+    "verificationMatrix": [
+      {
+        "claim": "Cryptographic identity established",
+        "evidenceCheck": "Verified: SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e",
+        "sourceCheck": "Confirmed provenance: static.crypto_hash (file digest (0x0000))",
+        "agentAgreement": "Malware Analysis (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Suspicious in-memory process manipulation API imports",
+        "evidenceCheck": "Verified: Imported APIs: virtualalloc, virtualallocex",
+        "sourceCheck": "Confirmed provenance: pe.import_address_table (import table)",
+        "agentAgreement": "Malware Analysis (confidence: 95%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Structural similarity to historical catalogued sample",
+        "evidenceCheck": "Verified: 54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed.",
+        "sourceCheck": "Confirmed provenance: malware_intelligence.similarity_index (feature vector cosine match)",
+        "agentAgreement": "Malware Analysis (confidence: 54%, type: INFERRED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.54,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: truth_beacon.exe (artifact filename)",
+        "sourceCheck": "Confirmed provenance: artifact filename (artifact filename (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 95%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "URL indicator isolated",
+        "evidenceCheck": "Verified: http://185.220.101.44/stage2.bin (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0020))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "IPV4 indicator isolated",
+        "evidenceCheck": "Verified: 185.220.101.44 (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0027))",
+        "agentAgreement": "IOC Extraction (confidence: 98%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.98,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Static outbound network destination endpoint",
+        "evidenceCheck": "Verified: http://185.220.101.44/stage2.bin",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings (offset ~0x0))",
+        "agentAgreement": "Network Analysis (confidence: 85%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.85,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Static IPv4 address reference isolated",
+        "evidenceCheck": "Verified: 185.220.101.44",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings)",
+        "agentAgreement": "Network Analysis (confidence: 88%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.88,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+        "evidenceCheck": "Verified: 185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup (external reputation query)",
+        "agentAgreement": "Threat Intelligence (confidence: 94%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.94,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Volatile RAM physical page analysis",
+        "evidenceCheck": "Verified: Evidence \"truth_beacon.exe\" contains no volatile physical RAM or handle structures.",
+        "sourceCheck": "Confirmed provenance: forensics.memory.preflight (preflight check)",
+        "agentAgreement": "Memory Analysis (confidence: 100%, type: UNAVAILABLE)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Specialist claims supported by verified provenance",
+        "evidenceCheck": "Verified: All active specialists agree on orientation with direct artifact offset/header provenance.",
+        "sourceCheck": "Confirmed provenance: verification.cross_check (cross-agent verification matrix)",
+        "agentAgreement": "Verification Agent (confidence: 95%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      },
+      {
+        "claim": "Dynamic sandbox behavioral detonation",
+        "evidenceCheck": "Dynamic guest detonation not performed: No isolated micro-VM sandbox attached to execution pipeline.",
+        "sourceCheck": "pipeline.sandbox_gate (static-only inspection policy)",
+        "agentAgreement": "Malware Analysis & Memory Agent (0% runtime telemetry)",
+        "contradictionCheck": "No contradiction (runtime behavior unobserved)",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-28T02:44:50.920Z"
+      }
+    ],
+    "mitreAttackTechniques": [
+      "T1059.001 (PowerShell Execution)",
+      "T1071.001 (Web Protocols)",
+      "T1547.001 (Registry Persistence)",
+      "T1027 (Obfuscated Files or Information)"
+    ],
+    "reportSummary": "Investigation INV-2026-4519 concluded with canonical verdict: MALICIOUS (92% confidence). Evaluated 3 indicators across 6 specialist agents with verified evidence provenance.",
+    "createdAt": "2026-09-28T02:44:50.920Z",
+    "updatedAt": "2026-09-28T02:44:50.920Z"
+  },
+  {
+    "id": "inv-case-1790563490822",
+    "caseNumber": "INV-2026-4865",
+    "title": "Audit Evidence & Agent Consumption",
+    "status": "COMPLETED",
+    "severity": "Critical",
+    "confidence": 92,
+    "assignedAgent": "Malware Analysis",
+    "evidencePackage": {
+      "investigation_id": "INV-2026-4865",
+      "evidence_id": "ev-inv-case-1790563490822",
+      "file": {
+        "name": "agent_audit_sample.ps1",
+        "sha256": "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+        "mime_type": "text/plain",
+        "size": 164
+      },
+      "available_artifacts": {
+        "strings": [
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA=",
+          "http://185.220.101.44/payload.bin",
+          "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+        ],
+        "network_connections": [
+          "http://185.220.101.44/payload.bin"
+        ],
+        "urls": [
+          "http://185.220.101.44/payload.bin"
+        ],
+        "domains": [],
+        "ips": [
+          "185.220.101.44"
+        ],
+        "hashes": [
+          "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+          "860889f5bca419305dc17d0e687ed4e2138f19d0",
+          "c9f9ede768e5d32ff730d581884f94af"
+        ],
+        "registry": [
+          "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+        ],
+        "processes": [
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA"
+        ],
+        "files": [
+          "agent_audit_sample.ps1"
+        ]
+      }
+    },
+    "agentFindings": [
+      {
+        "agentId": "malware-analysis",
+        "agentName": "Malware Analysis",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 80,
+        "confidence": 0.97,
+        "summary": "Automated static malware triage completed for agent_audit_sample.ps1. Entropy: 5.34, discovered 3 hashes and 0 suspicious API references.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PE headers",
+            "imports",
+            "sections",
+            "entropy",
+            "strings",
+            "similarity features"
+          ],
+          "detectedFormat": "script",
+          "peHeaders": null,
+          "elfHeaders": null,
+          "imports": [],
+          "suspiciousImports": [],
+          "sections": [
+            {
+              "name": ".data",
+              "virtualSize": 164,
+              "rawSize": 164,
+              "entropy": 5.34,
+              "rwx": false
+            }
+          ],
+          "entropy": 5.34,
+          "stringsCount": 0,
+          "similarityMatches": [
+            {
+              "sampleId": "samp-172886-818f93",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.30)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.30); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-371403-184a53",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.29)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-322983-e19673",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.29)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-623309-5d9601",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.32)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": null,
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.32); family attribution remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-172837-22ec79",
+              "sampleName": "pre_train_implant.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.23)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.34 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+            }
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Cryptographic identity established",
+            "claim": "Cryptographic identity established",
+            "evidence": "SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af",
+            "source": "static.crypto_hash",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "file digest (0x0000)",
+            "analysis_method": "deterministic_crypto_digest",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "limitation": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Structural similarity to historical catalogued sample",
+            "claim": "Structural similarity to historical catalogued sample",
+            "evidence": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.30); family attribution to ShadowNexusAPT remains unconfirmed.",
+            "source": "malware_intelligence.similarity_index",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "feature vector cosine match",
+            "analysis_method": "feature_vector_similarity_index",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "limitation": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "confidence": 0.2,
+            "evidenceType": "INFERRED"
+          }
+        ],
+        "evidenceGaps": [
+          "Dynamic execution was not performed because live sandbox detonation is unavailable."
+        ]
+      },
+      {
+        "agentId": "ioc-extraction",
+        "agentName": "IOC Extraction",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 95,
+        "confidence": 0.95,
+        "summary": "Extracted 7 total indicator(s): 1 IP(s), 0 domain(s), 1 URL(s), and 1 registry entries with exact line and offset provenance.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "extracted strings",
+            "metadata",
+            "network artifacts",
+            "decoded indicators"
+          ],
+          "extractedCount": 7,
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": [],
+          "urls": [
+            "http://185.220.101.44/payload.bin"
+          ],
+          "hashes": [
+            "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+            "860889f5bca419305dc17d0e687ed4e2138f19d0",
+            "c9f9ede768e5d32ff730d581884f94af"
+          ],
+          "registry": [
+            "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "IOC: agent_audit_sample.ps1",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "agent_audit_sample.ps1 (artifact filename)",
+            "source": "artifact filename",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "artifact filename (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.93,
+            "evidenceType": "OBSERVED",
+            "context": "agent_audit_sample.ps1"
+          },
+          {
+            "finding": "IOC: http://185.220.101.44/payload.bin",
+            "claim": "URL indicator isolated",
+            "evidence": "http://185.220.101.44/payload.bin (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 2, offset 0x0048)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: 185.220.101.44",
+            "claim": "IPV4 indicator isolated",
+            "evidence": "185.220.101.44 (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 2, offset 0x004F)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.98,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater",
+            "claim": "REGISTRY_PATH indicator isolated",
+            "evidence": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 3, offset 0x006A)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+            "claim": "POWERSHELL_CMD indicator isolated",
+            "evidence": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+            "claim": "CMDLINE_INDICATOR indicator isolated",
+            "evidence": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "powershell.exe (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.93,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Wind"
+          }
+        ]
+      },
+      {
+        "agentId": "network-analysis",
+        "agentName": "Network Analysis",
+        "status": "complete",
+        "verdict": "Suspicious",
+        "maliciousScore": 75,
+        "confidence": 0.85,
+        "summary": "Identified static network endpoints (http://185.220.101.44/payload.bin, 185.220.101.44) forming static communication primitives.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PCAP/network artifacts",
+            "embedded URLs",
+            "domains",
+            "IPv4/IPv6 endpoints"
+          ],
+          "urls": [
+            "http://185.220.101.44/payload.bin"
+          ],
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": []
+        },
+        "findings": [
+          {
+            "finding": "Static outbound network destination endpoint: http://185.220.101.44/payload.bin",
+            "claim": "Static outbound network destination endpoint",
+            "evidence": "http://185.220.101.44/payload.bin",
+            "source": "static.network_strings",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "strings (offset ~0x0)",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "limitation": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "confidence": 0.85,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Static IPv4 address reference isolated: 185.220.101.44",
+            "claim": "Static IPv4 address reference isolated",
+            "evidence": "185.220.101.44",
+            "source": "static.network_strings",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "strings",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Static IPv4 presence requires packet capture to confirm active session.",
+            "limitation": "Static IPv4 presence requires packet capture to confirm active session.",
+            "confidence": 0.88,
+            "evidenceType": "OBSERVED"
+          }
+        ],
+        "evidenceGaps": [
+          "No live PCAP capture was attached; live socket beaconing cannot be confirmed."
+        ]
+      },
+      {
+        "agentId": "threat-intel",
+        "agentName": "Threat Intelligence",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 88,
+        "confidence": 0.9,
+        "summary": "Queried multi-engine gateway for 1 indicators against VirusTotal, AbuseIPDB, and AlienVault OTX.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "verified IOC list",
+            "external tool results"
+          ],
+          "connectorStatus": "CONFIGURED",
+          "queriedIndicators": [
+            "185.220.101.44"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "evidence": "185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+            "source": "external.virustotal.ip.lookup",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "external reputation query",
+            "analysis_method": "external_threat_intel_enrichment",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "External reputation reflects known feeds at query time.",
+            "limitation": "External reputation reflects known feeds at query time.",
+            "confidence": 0.94,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      },
+      {
+        "agentId": "memory-agent",
+        "agentName": "Memory Analysis",
+        "status": "complete",
+        "verdict": "Insufficient Evidence",
+        "confidence": 1,
+        "summary": "Memory Analysis: NOT APPLICABLE / UNAVAILABLE.\nReason: Uploaded evidence is a static file (agent_audit_sample.ps1) and contains no physical memory image or process crash dump.\nRequired volatile forensic evidence: .dmp, .raw, or .vmem image.\nConclusion: No memory-forensic conclusion was attempted.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "artifact file header",
+            "forensic memory preflight check"
+          ],
+          "applicable": false
+        },
+        "findings": [
+          {
+            "finding": "Volatile RAM physical page analysis unavailable",
+            "claim": "Volatile RAM physical page analysis",
+            "evidence": "Evidence \"agent_audit_sample.ps1\" contains no volatile physical RAM or handle structures.",
+            "source": "forensics.memory.preflight",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preflight check",
+            "analysis_method": "memory_forensics_preflight",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "No volatile memory image provided.",
+            "limitation": "No volatile memory image provided.",
+            "confidence": 1,
+            "evidenceType": "UNAVAILABLE"
+          }
+        ],
+        "evidenceGaps": [
+          "Requires volatile memory acquisition image (.dmp, .raw) to extract injected DLLs or unlinked VAD structures."
+        ]
+      },
+      {
+        "agentId": "verification-agent",
+        "agentName": "Verification Agent",
+        "status": "complete",
+        "verdict": "Informational",
+        "confidence": 0.95,
+        "summary": "Cross-validated all specialist findings against cited evidence, verified provenance, and checked for contradictions across agents.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "findings from all agents",
+            "malware-analysis",
+            "ioc-extraction",
+            "network-analysis",
+            "threat-intel",
+            "memory-agent"
+          ],
+          "verifiedAgentCount": 5
+        },
+        "findings": [
+          {
+            "finding": "Specialist claims supported by verified provenance",
+            "claim": "Specialist claims supported by verified provenance",
+            "evidence": "All active specialists agree on orientation with direct artifact offset/header provenance.",
+            "source": "verification.cross_check",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "cross-agent verification matrix",
+            "analysis_method": "cross_agent_contradiction_and_provenance_audit",
+            "timestamp": "2026-09-28T02:44:50.826Z",
+            "limitations": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "limitation": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "confidence": 0.95,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "correlatedFindings": [
+      {
+        "id": "corr-1",
+        "indicatorOrClaim": "http://185.220.101.44/payload.bin",
+        "type": "url",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "id": "corr-2",
+        "indicatorOrClaim": "185.220.101.44",
+        "type": "ipv4",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-28T02:44:50.826Z"
+      }
+    ],
+    "verificationMatrix": [
+      {
+        "claim": "Cryptographic identity established",
+        "evidenceCheck": "Verified: SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af",
+        "sourceCheck": "Confirmed provenance: static.crypto_hash (file digest (0x0000))",
+        "agentAgreement": "Malware Analysis (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Structural similarity to historical catalogued sample",
+        "evidenceCheck": "Verified: 20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.30); family attribution to ShadowNexusAPT remains unconfirmed.",
+        "sourceCheck": "Confirmed provenance: malware_intelligence.similarity_index (feature vector cosine match)",
+        "agentAgreement": "Malware Analysis (confidence: 20%, type: INFERRED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.2,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: agent_audit_sample.ps1 (artifact filename)",
+        "sourceCheck": "Confirmed provenance: artifact filename (artifact filename (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 93%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.93,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "URL indicator isolated",
+        "evidenceCheck": "Verified: http://185.220.101.44/payload.bin (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 2, offset 0x0048))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "IPV4 indicator isolated",
+        "evidenceCheck": "Verified: 185.220.101.44 (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 2, offset 0x004F))",
+        "agentAgreement": "IOC Extraction (confidence: 98%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.98,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "REGISTRY_PATH indicator isolated",
+        "evidenceCheck": "Verified: HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 3, offset 0x006A))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "POWERSHELL_CMD indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "CMDLINE_INDICATOR indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 93%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.93,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Static outbound network destination endpoint",
+        "evidenceCheck": "Verified: http://185.220.101.44/payload.bin",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings (offset ~0x0))",
+        "agentAgreement": "Network Analysis (confidence: 85%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.85,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Static IPv4 address reference isolated",
+        "evidenceCheck": "Verified: 185.220.101.44",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings)",
+        "agentAgreement": "Network Analysis (confidence: 88%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.88,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+        "evidenceCheck": "Verified: 185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup (external reputation query)",
+        "agentAgreement": "Threat Intelligence (confidence: 94%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.94,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Volatile RAM physical page analysis",
+        "evidenceCheck": "Verified: Evidence \"agent_audit_sample.ps1\" contains no volatile physical RAM or handle structures.",
+        "sourceCheck": "Confirmed provenance: forensics.memory.preflight (preflight check)",
+        "agentAgreement": "Memory Analysis (confidence: 100%, type: UNAVAILABLE)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Specialist claims supported by verified provenance",
+        "evidenceCheck": "Verified: All active specialists agree on orientation with direct artifact offset/header provenance.",
+        "sourceCheck": "Confirmed provenance: verification.cross_check (cross-agent verification matrix)",
+        "agentAgreement": "Verification Agent (confidence: 95%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      },
+      {
+        "claim": "Dynamic sandbox behavioral detonation",
+        "evidenceCheck": "Dynamic guest detonation not performed: No isolated micro-VM sandbox attached to execution pipeline.",
+        "sourceCheck": "pipeline.sandbox_gate (static-only inspection policy)",
+        "agentAgreement": "Malware Analysis & Memory Agent (0% runtime telemetry)",
+        "contradictionCheck": "No contradiction (runtime behavior unobserved)",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-28T02:44:50.826Z"
+      }
+    ],
+    "mitreAttackTechniques": [
+      "T1059.001 (PowerShell Execution)",
+      "T1071.001 (Web Protocols)",
+      "T1547.001 (Registry Persistence)",
+      "T1027 (Obfuscated Files or Information)"
+    ],
+    "reportSummary": "Investigation INV-2026-4865 concluded with canonical verdict: MALICIOUS (92% confidence). Evaluated 7 indicators across 6 specialist agents with verified evidence provenance.",
+    "createdAt": "2026-09-28T02:44:50.826Z",
+    "updatedAt": "2026-09-28T02:44:50.826Z"
+  },
+  {
+    "id": "inv-case-8941",
+    "caseNumber": "INV-2026-8941",
+    "title": "Cobalt Strike HTTPS Beacon & Encrypted Shellcode Stager",
+    "status": "COMPLETED",
+    "severity": "Critical",
+    "confidence": 94,
+    "assignedAgent": "Malware Analysis",
+    "createdAt": "2026-09-24T02:15:00.000Z",
+    "updatedAt": "2026-09-24T02:22:00.000Z",
+    "evidencePackage": {
+      "investigation_id": "INV-2026-8941",
+      "evidence_id": "art-8941-a",
+      "file": {
+        "name": "beacon_stage2.bin",
+        "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+        "mime_type": "application/octet-stream",
+        "size": 262144
+      },
+      "available_artifacts": {
+        "strings": [
+          "ReflectiveLoader",
+          "VirtualAllocEx",
+          "beacon.dll",
+          "C2_HEARTBEAT",
+          "185.220.101.44",
+          "update-windows-defender.online",
+          "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+        ],
+        "pe_headers": {
+          "sections": [
+            ".text",
+            ".rdata",
+            ".data",
+            ".reloc"
+          ],
+          "importedDlls": [
+            "KERNEL32.dll",
+            "WININET.dll",
+            "ADVAPI32.dll"
+          ],
+          "suspiciousApis": [
+            "VirtualAlloc",
+            "WriteProcessMemory",
+            "CreateRemoteThread"
+          ]
+        },
+        "network_connections": [
+          "185.220.101.44:443",
+          "update-windows-defender.online:443"
+        ],
+        "urls": [
+          "https://update-windows-defender.online/en/check.php"
+        ],
+        "domains": [
+          "update-windows-defender.online"
+        ],
+        "ips": [
+          "185.220.101.44"
+        ],
+        "hashes": [
+          "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "6144:3f4a9b...:c91"
+        ],
+        "registry": [
+          "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\WinDefenderUpdate"
+        ],
+        "processes": [
+          "cmd.exe /c powershell -nop -w hidden -enc JABj..."
+        ],
+        "files": [
+          "C:\\Windows\\Temp\\beacon.dll",
+          "C:\\ProgramData\\updater.exe"
+        ]
+      }
+    },
+    "agentFindings": [
+      {
+        "agentId": "malware-analysis",
+        "agentName": "Malware Analysis",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 95,
+        "confidence": 0.95,
+        "summary": "Identified Cobalt Strike Beacon signature with Reflective DLL Injection capabilities. Imports memory injection APIs VirtualAlloc and CreateRemoteThread.",
+        "findings": [
+          {
+            "claim": "Reflective DLL Loader signature identified",
+            "evidence": "ReflectiveLoader export present at offset 0x14A0",
+            "source": "malware.reflective_loader",
+            "confidence": 0.98,
+            "evidenceType": "DIRECT",
+            "location": "offset 0x14A0"
+          },
+          {
+            "claim": "Process injection API imports present",
+            "evidence": "KERNEL32.dll!VirtualAllocEx, KERNEL32.dll!CreateRemoteThread",
+            "source": "pe.imports",
+            "confidence": 0.95,
+            "evidenceType": "DIRECT"
+          }
+        ]
+      },
+      {
+        "agentId": "ioc-extraction",
+        "agentName": "IOC Extraction",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 90,
+        "confidence": 0.92,
+        "summary": "Extracted 12 indicators: 2 C2 domains, 1 IPv4 address, 3 cryptographic hashes, 2 registry paths, and 1 execution cradle.",
+        "findings": [
+          {
+            "claim": "C2 Domain extracted with high confidence",
+            "evidence": "update-windows-defender.online",
+            "source": "static.strings",
+            "confidence": 0.96,
+            "evidenceType": "DIRECT",
+            "location": "strings (line 14)"
+          },
+          {
+            "claim": "C2 IPv4 address isolated",
+            "evidence": "185.220.101.44",
+            "source": "static.strings",
+            "confidence": 0.92,
+            "evidenceType": "DIRECT",
+            "location": "strings (line 19)"
+          }
+        ]
+      },
+      {
+        "agentId": "network-analysis",
+        "agentName": "Network Analysis",
+        "status": "complete",
+        "verdict": "Suspicious",
+        "maliciousScore": 75,
+        "confidence": 0.85,
+        "summary": "Static network primitives match TLS beaconing profile over port 443 with jitter intervals.",
+        "findings": [
+          {
+            "claim": "C2 HTTPS Beaconing endpoint verified in sample strings",
+            "evidence": "https://update-windows-defender.online/en/check.php:443",
+            "source": "network.strings",
+            "confidence": 0.88,
+            "evidenceType": "MEDIUM",
+            "limitation": "Static extraction identifies endpoint; live PCAP captures not attached."
+          }
+        ]
+      },
+      {
+        "agentId": "threat-intel",
+        "agentName": "Threat Intelligence",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 92,
+        "confidence": 0.94,
+        "summary": "AlienVault OTX & VirusTotal show IP 185.220.101.44 flagged as Tor exit node and known Cobalt Strike team server.",
+        "findings": [
+          {
+            "claim": "VirusTotal & OTX Malicious IP reputation",
+            "evidence": "185.220.101.44: Malicious (64/72 engines flagged as Cobalt Strike C2)",
+            "source": "external.virustotal.ip.lookup",
+            "confidence": 0.94,
+            "evidenceType": "DIRECT"
+          }
+        ]
+      },
+      {
+        "agentId": "memory-agent",
+        "agentName": "Memory Analysis",
+        "status": "complete",
+        "verdict": "Not Applicable",
+        "confidence": 1,
+        "summary": "Memory Analysis: NOT APPLICABLE.\nReason: Uploaded evidence is a PE executable and contains no memory dump or process snapshot.\nRequired evidence:\n- memory dump (.raw, .dmp, .vmem)\n- process dump\n- live memory acquisition\nConclusion: No memory-forensic conclusion was attempted.",
+        "findings": [
+          {
+            "claim": "Forensic memory scope preflight evaluation",
+            "evidence": "Artifact \"beacon_stage2.bin\" does not contain volatile physical memory pages, process handle tables, or virtual address descriptors.",
+            "source": "forensics.memory.preflight",
+            "confidence": 1,
+            "evidenceType": "DIRECT",
+            "limitation": "No memory-forensic conclusion was attempted."
+          }
+        ],
+        "evidenceGaps": [
+          "Requires volatile memory acquisition image or crash dump (.dmp, .raw) to extract injected DLLs, unlinked VAD structures, or in-memory shellcode."
+        ]
+      },
+      {
+        "agentId": "verification-agent",
+        "agentName": "Verification Agent",
+        "status": "complete",
+        "verdict": "Informational",
+        "confidence": 0.94,
+        "summary": "Cross-validated 5 specialist findings. Corroborated C2 IP 185.220.101.44 and domain across 4 independent sources without contradictions.",
+        "findings": [
+          {
+            "claim": "Specialist verdicts are consistent and corroborated",
+            "evidence": "Malware Analysis, IOC Extraction, Threat Intel, and Network Analysis agree on malicious orientation.",
+            "source": "verification.cross_check",
+            "confidence": 0.94,
+            "evidenceType": "DIRECT"
+          }
+        ]
+      }
+    ],
+    "correlatedFindings": [
+      {
+        "id": "corr-1",
+        "indicatorOrClaim": "update-windows-defender.online",
+        "type": "domain",
+        "confidence": 0.96,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed in network traffic/context",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "Threat intelligence match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": false,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-24T02:20:00.000Z"
+      },
+      {
+        "id": "corr-2",
+        "indicatorOrClaim": "185.220.101.44",
+        "type": "ipv4",
+        "confidence": 0.98,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed in network traffic/context",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "Threat intelligence match",
+            "checked": true,
+            "source": "Multi-Tool Gateway (VirusTotal)"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": false,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-24T02:20:00.000Z"
+      }
+    ],
+    "verificationMatrix": [
+      {
+        "claim": "Reflective DLL Loader signature identified",
+        "evidenceCheck": "Verified: ReflectiveLoader export present at offset 0x14A0",
+        "sourceCheck": "Confirmed provenance: malware.reflective_loader",
+        "agentAgreement": "Malware Analysis (confidence: 98%)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.98,
+        "status": "VERIFIED",
+        "evaluatedAt": "2026-09-24T02:21:00.000Z"
+      },
+      {
+        "claim": "VirusTotal & OTX Malicious IP reputation",
+        "evidenceCheck": "Verified: 185.220.101.44: Malicious (64/72 engines flagged as Cobalt Strike C2)",
+        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup",
+        "agentAgreement": "Threat Intelligence (confidence: 94%)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.94,
+        "status": "VERIFIED",
+        "evaluatedAt": "2026-09-24T02:21:00.000Z"
+      }
+    ],
+    "mitreAttackTechniques": [
+      "T1055.001 (Reflective DLL Injection)",
+      "T1071.001 (Web Protocols)",
+      "T1547.001 (Registry Run Keys)",
+      "T1059.001 (PowerShell)"
+    ],
+    "reportSummary": "Investigation confirmed active Cobalt Strike deployment with reflective injection, persistence via Registry Run key, and active C2 beaconing to 185.220.101.44."
+  },
+  {
+    "id": "inv-case-1790503172823",
+    "caseNumber": "INV-2026-5177",
+    "title": "Live Activity Truth Verification",
+    "status": "COMPLETED",
+    "severity": "High",
+    "confidence": 92,
+    "assignedAgent": "Malware Analysis",
+    "evidencePackage": {
+      "investigation_id": "INV-2026-5177",
+      "evidence_id": "ev-inv-case-1790503172823",
+      "file": {
+        "name": "truth_beacon.exe",
+        "sha256": "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+        "mime_type": "application/octet-stream",
+        "size": 64
+      },
+      "available_artifacts": {
+        "strings": [
+          "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+        ],
+        "network_connections": [
+          "http://185.220.101.44/stage2.bin"
+        ],
+        "urls": [
+          "http://185.220.101.44/stage2.bin"
+        ],
+        "domains": [],
+        "ips": [
+          "185.220.101.44"
+        ],
+        "hashes": [
+          "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+          "5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+          "2abb0752c193e2d85ff633a47cda2e7e"
+        ],
+        "registry": [],
+        "processes": [],
+        "files": [
+          "truth_beacon.exe"
+        ]
+      }
+    },
+    "agentFindings": [
+      {
+        "agentId": "malware-analysis",
+        "agentName": "Malware Analysis",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 85,
+        "confidence": 0.98,
+        "summary": "Automated static malware triage completed for truth_beacon.exe. Entropy: 4.83, discovered 3 hashes and 2 suspicious API references.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PE headers",
+            "imports",
+            "sections",
+            "entropy",
+            "strings",
+            "similarity features"
+          ],
+          "detectedFormat": "text",
+          "peHeaders": null,
+          "elfHeaders": null,
+          "imports": [],
+          "suspiciousImports": [
+            "virtualalloc",
+            "virtualallocex"
+          ],
+          "sections": [
+            {
+              "name": ".data",
+              "virtualSize": 64,
+              "rawSize": 64,
+              "entropy": 4.83,
+              "rwx": false
+            }
+          ],
+          "entropy": 4.83,
+          "stringsCount": 0,
+          "similarityMatches": [
+            {
+              "sampleId": "samp-172733-acd85e",
+              "sampleName": "cobalt_beacon_x64.exe",
+              "similarityScore": 54,
+              "sharedFeatures": [
+                "Shared strings (virtualalloc, virtualallocex)",
+                "Shared APIs (VirtualAlloc, VirtualAllocEx)"
+              ],
+              "sharedIOCs": [
+                "185.220.101.44"
+              ],
+              "sharedBehaviors": [
+                "Process Hollowing API"
+              ],
+              "sharedIndicatorsCount": 3,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 2,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-371246-91cd3d",
+              "sampleName": "cobalt_beacon_x64.exe",
+              "similarityScore": 54,
+              "sharedFeatures": [
+                "Shared strings (virtualalloc, virtualallocex)",
+                "Shared APIs (VirtualAlloc, VirtualAllocEx)"
+              ],
+              "sharedIOCs": [
+                "185.220.101.44"
+              ],
+              "sharedBehaviors": [
+                "Process Hollowing API"
+              ],
+              "sharedIndicatorsCount": 3,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 2,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-001",
+              "sampleName": "beacon_x64_stage2.dll",
+              "similarityScore": 44,
+              "sharedFeatures": [
+                "Shared strings (VirtualAlloc, ReflectiveLoader)",
+                "Shared APIs (VirtualAlloc)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [
+                "Reflective DLL Injection"
+              ],
+              "sharedIndicatorsCount": 2,
+              "sharedTechniquesCount": 1,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "Cobalt Strike",
+              "familyAttributionStatement": "44% feature similarity to Sample \"beacon_x64_stage2.dll\"; shared features: Shared strings (VirtualAlloc, ReflectiveLoader), Shared APIs (VirtualAlloc); family attribution to Cobalt Strike remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-ds-1790501371395-1",
+              "sampleName": "shadow_nexus_train_2.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (4.83 vs 4.96)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"shadow_nexus_train_2.bin\"; shared features: Entropy proximity (4.83 vs 4.96); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-ds-1790501371393-0",
+              "sampleName": "shadow_nexus_train_1.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (4.83 vs 4.94)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"shadow_nexus_train_1.bin\"; shared features: Entropy proximity (4.83 vs 4.94); family attribution to ShadowNexusAPT remains unconfirmed."
+            }
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Cryptographic identity established",
+            "claim": "Cryptographic identity established",
+            "evidence": "SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e",
+            "source": "static.crypto_hash",
+            "artifact": "truth_beacon.exe",
+            "location": "file digest (0x0000)",
+            "analysis_method": "deterministic_crypto_digest",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "limitation": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Suspicious in-memory process manipulation API imports",
+            "claim": "Suspicious in-memory process manipulation API imports",
+            "evidence": "Imported APIs: virtualalloc, virtualallocex",
+            "source": "pe.import_address_table",
+            "artifact": "truth_beacon.exe",
+            "location": "import table",
+            "analysis_method": "pe_import_table_parser",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "An imported API demonstrates capability; execution requires dynamic observation.",
+            "limitation": "An imported API demonstrates capability; execution requires dynamic observation.",
+            "confidence": 0.95,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Structural similarity to historical catalogued sample",
+            "claim": "Structural similarity to historical catalogued sample",
+            "evidence": "54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed.",
+            "source": "malware_intelligence.similarity_index",
+            "artifact": "truth_beacon.exe",
+            "location": "feature vector cosine match",
+            "analysis_method": "feature_vector_similarity_index",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "limitation": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "confidence": 0.54,
+            "evidenceType": "INFERRED"
+          }
+        ],
+        "evidenceGaps": [
+          "Dynamic execution was not performed because live sandbox detonation is unavailable."
+        ]
+      },
+      {
+        "agentId": "ioc-extraction",
+        "agentName": "IOC Extraction",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 64,
+        "confidence": 0.95,
+        "summary": "Extracted 3 total indicator(s): 1 IP(s), 0 domain(s), 1 URL(s), and 0 registry entries with exact line and offset provenance.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "extracted strings",
+            "metadata",
+            "network artifacts",
+            "decoded indicators"
+          ],
+          "extractedCount": 3,
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": [],
+          "urls": [
+            "http://185.220.101.44/stage2.bin"
+          ],
+          "hashes": [
+            "adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111",
+            "5eed0bdb02ff597d428552376722b0aef8a8c2bb",
+            "2abb0752c193e2d85ff633a47cda2e7e"
+          ],
+          "registry": []
+        },
+        "findings": [
+          {
+            "finding": "IOC: truth_beacon.exe",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "truth_beacon.exe (artifact filename)",
+            "source": "artifact filename",
+            "artifact": "truth_beacon.exe",
+            "location": "artifact filename (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.95,
+            "evidenceType": "OBSERVED",
+            "context": "truth_beacon.exe"
+          },
+          {
+            "finding": "IOC: http://185.220.101.44/stage2.bin",
+            "claim": "URL indicator isolated",
+            "evidence": "http://185.220.101.44/stage2.bin (preview content)",
+            "source": "preview content",
+            "artifact": "truth_beacon.exe",
+            "location": "preview content (line 1, offset 0x0020)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+          },
+          {
+            "finding": "IOC: 185.220.101.44",
+            "claim": "IPV4 indicator isolated",
+            "evidence": "185.220.101.44 (preview content)",
+            "source": "preview content",
+            "artifact": "truth_beacon.exe",
+            "location": "preview content (line 1, offset 0x0027)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.98,
+            "evidenceType": "OBSERVED",
+            "context": "ReflectiveLoader VirtualAllocEx http://185.220.101.44/stage2.bin"
+          }
+        ]
+      },
+      {
+        "agentId": "network-analysis",
+        "agentName": "Network Analysis",
+        "status": "complete",
+        "verdict": "Suspicious",
+        "maliciousScore": 75,
+        "confidence": 0.85,
+        "summary": "Identified static network endpoints (http://185.220.101.44/stage2.bin, 185.220.101.44) forming static communication primitives.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PCAP/network artifacts",
+            "embedded URLs",
+            "domains",
+            "IPv4/IPv6 endpoints"
+          ],
+          "urls": [
+            "http://185.220.101.44/stage2.bin"
+          ],
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": []
+        },
+        "findings": [
+          {
+            "finding": "Static outbound network destination endpoint: http://185.220.101.44/stage2.bin",
+            "claim": "Static outbound network destination endpoint",
+            "evidence": "http://185.220.101.44/stage2.bin",
+            "source": "static.network_strings",
+            "artifact": "truth_beacon.exe",
+            "location": "strings (offset ~0x0)",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "limitation": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "confidence": 0.85,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Static IPv4 address reference isolated: 185.220.101.44",
+            "claim": "Static IPv4 address reference isolated",
+            "evidence": "185.220.101.44",
+            "source": "static.network_strings",
+            "artifact": "truth_beacon.exe",
+            "location": "strings",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Static IPv4 presence requires packet capture to confirm active session.",
+            "limitation": "Static IPv4 presence requires packet capture to confirm active session.",
+            "confidence": 0.88,
+            "evidenceType": "OBSERVED"
+          }
+        ],
+        "evidenceGaps": [
+          "No live PCAP capture was attached; live socket beaconing cannot be confirmed."
+        ]
+      },
+      {
+        "agentId": "threat-intel",
+        "agentName": "Threat Intelligence",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 88,
+        "confidence": 0.9,
+        "summary": "Queried multi-engine gateway for 1 indicators against VirusTotal, AbuseIPDB, and AlienVault OTX.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "verified IOC list",
+            "external tool results"
+          ],
+          "connectorStatus": "CONFIGURED",
+          "queriedIndicators": [
+            "185.220.101.44"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "evidence": "185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+            "source": "external.virustotal.ip.lookup",
+            "artifact": "truth_beacon.exe",
+            "location": "external reputation query",
+            "analysis_method": "external_threat_intel_enrichment",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "External reputation reflects known feeds at query time.",
+            "limitation": "External reputation reflects known feeds at query time.",
+            "confidence": 0.94,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      },
+      {
+        "agentId": "memory-agent",
+        "agentName": "Memory Analysis",
+        "status": "complete",
+        "verdict": "Insufficient Evidence",
+        "confidence": 1,
+        "summary": "Memory Analysis: NOT APPLICABLE / UNAVAILABLE.\nReason: Uploaded evidence is a static file (truth_beacon.exe) and contains no physical memory image or process crash dump.\nRequired volatile forensic evidence: .dmp, .raw, or .vmem image.\nConclusion: No memory-forensic conclusion was attempted.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "artifact file header",
+            "forensic memory preflight check"
+          ],
+          "applicable": false
+        },
+        "findings": [
+          {
+            "finding": "Volatile RAM physical page analysis unavailable",
+            "claim": "Volatile RAM physical page analysis",
+            "evidence": "Evidence \"truth_beacon.exe\" contains no volatile physical RAM or handle structures.",
+            "source": "forensics.memory.preflight",
+            "artifact": "truth_beacon.exe",
+            "location": "preflight check",
+            "analysis_method": "memory_forensics_preflight",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "No volatile memory image provided.",
+            "limitation": "No volatile memory image provided.",
+            "confidence": 1,
+            "evidenceType": "UNAVAILABLE"
+          }
+        ],
+        "evidenceGaps": [
+          "Requires volatile memory acquisition image (.dmp, .raw) to extract injected DLLs or unlinked VAD structures."
+        ]
+      },
+      {
+        "agentId": "verification-agent",
+        "agentName": "Verification Agent",
+        "status": "complete",
+        "verdict": "Informational",
+        "confidence": 0.95,
+        "summary": "Cross-validated all specialist findings against cited evidence, verified provenance, and checked for contradictions across agents.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "findings from all agents",
+            "malware-analysis",
+            "ioc-extraction",
+            "network-analysis",
+            "threat-intel",
+            "memory-agent"
+          ],
+          "verifiedAgentCount": 5
+        },
+        "findings": [
+          {
+            "finding": "Specialist claims supported by verified provenance",
+            "claim": "Specialist claims supported by verified provenance",
+            "evidence": "All active specialists agree on orientation with direct artifact offset/header provenance.",
+            "source": "verification.cross_check",
+            "artifact": "truth_beacon.exe",
+            "location": "cross-agent verification matrix",
+            "analysis_method": "cross_agent_contradiction_and_provenance_audit",
+            "timestamp": "2026-09-27T09:59:32.825Z",
+            "limitations": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "limitation": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "confidence": 0.95,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "correlatedFindings": [
+      {
+        "id": "corr-1",
+        "indicatorOrClaim": "http://185.220.101.44/stage2.bin",
+        "type": "url",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "id": "corr-2",
+        "indicatorOrClaim": "185.220.101.44",
+        "type": "ipv4",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-27T09:59:32.826Z"
+      }
+    ],
+    "verificationMatrix": [
+      {
+        "claim": "Cryptographic identity established",
+        "evidenceCheck": "Verified: SHA256: adbb1c312e1843953fc9ca52709627eb6e18eeb509df16704288fd0aae7b1111, MD5: 2abb0752c193e2d85ff633a47cda2e7e",
+        "sourceCheck": "Confirmed provenance: static.crypto_hash (file digest (0x0000))",
+        "agentAgreement": "Malware Analysis (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Suspicious in-memory process manipulation API imports",
+        "evidenceCheck": "Verified: Imported APIs: virtualalloc, virtualallocex",
+        "sourceCheck": "Confirmed provenance: pe.import_address_table (import table)",
+        "agentAgreement": "Malware Analysis (confidence: 95%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Structural similarity to historical catalogued sample",
+        "evidenceCheck": "Verified: 54% feature similarity to Sample \"cobalt_beacon_x64.exe\"; shared features: Shared strings (virtualalloc, virtualallocex), Shared APIs (VirtualAlloc, VirtualAllocEx); family attribution to Cobalt Strike remains unconfirmed.",
+        "sourceCheck": "Confirmed provenance: malware_intelligence.similarity_index (feature vector cosine match)",
+        "agentAgreement": "Malware Analysis (confidence: 54%, type: INFERRED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.54,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: truth_beacon.exe (artifact filename)",
+        "sourceCheck": "Confirmed provenance: artifact filename (artifact filename (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 95%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "URL indicator isolated",
+        "evidenceCheck": "Verified: http://185.220.101.44/stage2.bin (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0020))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "IPV4 indicator isolated",
+        "evidenceCheck": "Verified: 185.220.101.44 (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0027))",
+        "agentAgreement": "IOC Extraction (confidence: 98%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.98,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Static outbound network destination endpoint",
+        "evidenceCheck": "Verified: http://185.220.101.44/stage2.bin",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings (offset ~0x0))",
+        "agentAgreement": "Network Analysis (confidence: 85%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.85,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Static IPv4 address reference isolated",
+        "evidenceCheck": "Verified: 185.220.101.44",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings)",
+        "agentAgreement": "Network Analysis (confidence: 88%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.88,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+        "evidenceCheck": "Verified: 185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup (external reputation query)",
+        "agentAgreement": "Threat Intelligence (confidence: 94%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.94,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Volatile RAM physical page analysis",
+        "evidenceCheck": "Verified: Evidence \"truth_beacon.exe\" contains no volatile physical RAM or handle structures.",
+        "sourceCheck": "Confirmed provenance: forensics.memory.preflight (preflight check)",
+        "agentAgreement": "Memory Analysis (confidence: 100%, type: UNAVAILABLE)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Specialist claims supported by verified provenance",
+        "evidenceCheck": "Verified: All active specialists agree on orientation with direct artifact offset/header provenance.",
+        "sourceCheck": "Confirmed provenance: verification.cross_check (cross-agent verification matrix)",
+        "agentAgreement": "Verification Agent (confidence: 95%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      },
+      {
+        "claim": "Dynamic sandbox behavioral detonation",
+        "evidenceCheck": "Dynamic guest detonation not performed: No isolated micro-VM sandbox attached to execution pipeline.",
+        "sourceCheck": "pipeline.sandbox_gate (static-only inspection policy)",
+        "agentAgreement": "Malware Analysis & Memory Agent (0% runtime telemetry)",
+        "contradictionCheck": "No contradiction (runtime behavior unobserved)",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-27T09:59:32.826Z"
+      }
+    ],
+    "mitreAttackTechniques": [
+      "T1059.001 (PowerShell Execution)",
+      "T1071.001 (Web Protocols)",
+      "T1547.001 (Registry Persistence)",
+      "T1027 (Obfuscated Files or Information)"
+    ],
+    "reportSummary": "Investigation INV-2026-5177 concluded with canonical verdict: MALICIOUS (92% confidence). Evaluated 3 indicators across 6 specialist agents with verified evidence provenance.",
+    "createdAt": "2026-09-27T09:59:32.826Z",
+    "updatedAt": "2026-09-27T09:59:32.826Z"
+  },
+  {
+    "id": "inv-case-1790503172769",
+    "caseNumber": "INV-2026-4633",
+    "title": "Audit Evidence & Agent Consumption",
+    "status": "COMPLETED",
+    "severity": "Critical",
+    "confidence": 92,
+    "assignedAgent": "Malware Analysis",
+    "evidencePackage": {
+      "investigation_id": "INV-2026-4633",
+      "evidence_id": "ev-inv-case-1790503172769",
+      "file": {
+        "name": "agent_audit_sample.ps1",
+        "sha256": "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+        "mime_type": "text/plain",
+        "size": 164
+      },
+      "available_artifacts": {
+        "strings": [
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA=",
+          "http://185.220.101.44/payload.bin",
+          "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+        ],
+        "network_connections": [
+          "http://185.220.101.44/payload.bin"
+        ],
+        "urls": [
+          "http://185.220.101.44/payload.bin"
+        ],
+        "domains": [],
+        "ips": [
+          "185.220.101.44"
+        ],
+        "hashes": [
+          "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+          "860889f5bca419305dc17d0e687ed4e2138f19d0",
+          "c9f9ede768e5d32ff730d581884f94af"
+        ],
+        "registry": [
+          "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+        ],
+        "processes": [
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+          "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA"
+        ],
+        "files": [
+          "agent_audit_sample.ps1"
+        ]
+      }
+    },
+    "agentFindings": [
+      {
+        "agentId": "malware-analysis",
+        "agentName": "Malware Analysis",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 80,
+        "confidence": 0.97,
+        "summary": "Automated static malware triage completed for agent_audit_sample.ps1. Entropy: 5.34, discovered 3 hashes and 0 suspicious API references.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PE headers",
+            "imports",
+            "sections",
+            "entropy",
+            "strings",
+            "similarity features"
+          ],
+          "detectedFormat": "script",
+          "peHeaders": null,
+          "elfHeaders": null,
+          "imports": [],
+          "suspiciousImports": [],
+          "sections": [
+            {
+              "name": ".data",
+              "virtualSize": 164,
+              "rawSize": 164,
+              "entropy": 5.34,
+              "rwx": false
+            }
+          ],
+          "entropy": 5.34,
+          "stringsCount": 0,
+          "similarityMatches": [
+            {
+              "sampleId": "samp-371403-184a53",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.29)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-322983-e19673",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.29)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-623309-5d9601",
+              "sampleName": "post_train_implant_v2.bin",
+              "similarityScore": 20,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.32)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": null,
+              "familyAttributionStatement": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.32); family attribution remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-371379-d57a02",
+              "sampleName": "pre_train_implant.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.20)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.34 vs 5.20); family attribution to ShadowNexusAPT remains unconfirmed."
+            },
+            {
+              "sampleId": "samp-322948-18b03f",
+              "sampleName": "pre_train_implant.bin",
+              "similarityScore": 19,
+              "sharedFeatures": [
+                "Entropy proximity (5.34 vs 5.23)"
+              ],
+              "sharedIOCs": [],
+              "sharedBehaviors": [],
+              "sharedIndicatorsCount": 0,
+              "sharedTechniquesCount": 0,
+              "sharedStructuralFeaturesCount": 1,
+              "candidateFamily": "ShadowNexusAPT",
+              "familyAttributionStatement": "19% feature similarity to Sample \"pre_train_implant.bin\"; shared features: Entropy proximity (5.34 vs 5.23); family attribution to ShadowNexusAPT remains unconfirmed."
+            }
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Cryptographic identity established",
+            "claim": "Cryptographic identity established",
+            "evidence": "SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af",
+            "source": "static.crypto_hash",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "file digest (0x0000)",
+            "analysis_method": "deterministic_crypto_digest",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "limitation": "Hash identifies exact byte stream; polymorphic rebuilds alter digest.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Structural similarity to historical catalogued sample",
+            "claim": "Structural similarity to historical catalogued sample",
+            "evidence": "20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed.",
+            "source": "malware_intelligence.similarity_index",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "feature vector cosine match",
+            "analysis_method": "feature_vector_similarity_index",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "limitation": "Similarity indicates shared structural characteristics, not guaranteed identical actor.",
+            "confidence": 0.2,
+            "evidenceType": "INFERRED"
+          }
+        ],
+        "evidenceGaps": [
+          "Dynamic execution was not performed because live sandbox detonation is unavailable."
+        ]
+      },
+      {
+        "agentId": "ioc-extraction",
+        "agentName": "IOC Extraction",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 95,
+        "confidence": 0.95,
+        "summary": "Extracted 7 total indicator(s): 1 IP(s), 0 domain(s), 1 URL(s), and 1 registry entries with exact line and offset provenance.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "extracted strings",
+            "metadata",
+            "network artifacts",
+            "decoded indicators"
+          ],
+          "extractedCount": 7,
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": [],
+          "urls": [
+            "http://185.220.101.44/payload.bin"
+          ],
+          "hashes": [
+            "3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a",
+            "860889f5bca419305dc17d0e687ed4e2138f19d0",
+            "c9f9ede768e5d32ff730d581884f94af"
+          ],
+          "registry": [
+            "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "IOC: agent_audit_sample.ps1",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "agent_audit_sample.ps1 (artifact filename)",
+            "source": "artifact filename",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "artifact filename (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.93,
+            "evidenceType": "OBSERVED",
+            "context": "agent_audit_sample.ps1"
+          },
+          {
+            "finding": "IOC: http://185.220.101.44/payload.bin",
+            "claim": "URL indicator isolated",
+            "evidence": "http://185.220.101.44/payload.bin (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 2, offset 0x0048)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: 185.220.101.44",
+            "claim": "IPV4 indicator isolated",
+            "evidence": "185.220.101.44 (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 2, offset 0x004F)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.98,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater",
+            "claim": "REGISTRY_PATH indicator isolated",
+            "evidence": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 3, offset 0x006A)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+            "claim": "POWERSHELL_CMD indicator isolated",
+            "evidence": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA",
+            "claim": "CMDLINE_INDICATOR indicator isolated",
+            "evidence": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 1,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater"
+          },
+          {
+            "finding": "IOC: powershell.exe",
+            "claim": "FILENAME indicator isolated",
+            "evidence": "powershell.exe (preview content)",
+            "source": "preview content",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preview content (line 1, offset 0x0000)",
+            "analysis_method": "context_aware_ioc_extraction",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "limitation": "Static indicator extraction requires external reputation or network telemetry corroboration.",
+            "confidence": 0.93,
+            "evidenceType": "OBSERVED",
+            "context": "powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA= http://185.220.101.44/payload.bin HKLM\\Software\\Microsoft\\Wind"
+          }
+        ]
+      },
+      {
+        "agentId": "network-analysis",
+        "agentName": "Network Analysis",
+        "status": "complete",
+        "verdict": "Suspicious",
+        "maliciousScore": 75,
+        "confidence": 0.85,
+        "summary": "Identified static network endpoints (http://185.220.101.44/payload.bin, 185.220.101.44) forming static communication primitives.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "PCAP/network artifacts",
+            "embedded URLs",
+            "domains",
+            "IPv4/IPv6 endpoints"
+          ],
+          "urls": [
+            "http://185.220.101.44/payload.bin"
+          ],
+          "ips": [
+            "185.220.101.44"
+          ],
+          "domains": []
+        },
+        "findings": [
+          {
+            "finding": "Static outbound network destination endpoint: http://185.220.101.44/payload.bin",
+            "claim": "Static outbound network destination endpoint",
+            "evidence": "http://185.220.101.44/payload.bin",
+            "source": "static.network_strings",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "strings (offset ~0x0)",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "limitation": "Static strings indicate destination endpoint; live connection socket not observed.",
+            "confidence": 0.85,
+            "evidenceType": "OBSERVED"
+          },
+          {
+            "finding": "Static IPv4 address reference isolated: 185.220.101.44",
+            "claim": "Static IPv4 address reference isolated",
+            "evidence": "185.220.101.44",
+            "source": "static.network_strings",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "strings",
+            "analysis_method": "network_artifact_protocol_inspection",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Static IPv4 presence requires packet capture to confirm active session.",
+            "limitation": "Static IPv4 presence requires packet capture to confirm active session.",
+            "confidence": 0.88,
+            "evidenceType": "OBSERVED"
+          }
+        ],
+        "evidenceGaps": [
+          "No live PCAP capture was attached; live socket beaconing cannot be confirmed."
+        ]
+      },
+      {
+        "agentId": "threat-intel",
+        "agentName": "Threat Intelligence",
+        "status": "complete",
+        "verdict": "Malicious",
+        "maliciousScore": 88,
+        "confidence": 0.9,
+        "summary": "Queried multi-engine gateway for 1 indicators against VirusTotal, AbuseIPDB, and AlienVault OTX.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "verified IOC list",
+            "external tool results"
+          ],
+          "connectorStatus": "CONFIGURED",
+          "queriedIndicators": [
+            "185.220.101.44"
+          ]
+        },
+        "findings": [
+          {
+            "finding": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+            "evidence": "185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+            "source": "external.virustotal.ip.lookup",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "external reputation query",
+            "analysis_method": "external_threat_intel_enrichment",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "External reputation reflects known feeds at query time.",
+            "limitation": "External reputation reflects known feeds at query time.",
+            "confidence": 0.94,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      },
+      {
+        "agentId": "memory-agent",
+        "agentName": "Memory Analysis",
+        "status": "complete",
+        "verdict": "Insufficient Evidence",
+        "confidence": 1,
+        "summary": "Memory Analysis: NOT APPLICABLE / UNAVAILABLE.\nReason: Uploaded evidence is a static file (agent_audit_sample.ps1) and contains no physical memory image or process crash dump.\nRequired volatile forensic evidence: .dmp, .raw, or .vmem image.\nConclusion: No memory-forensic conclusion was attempted.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "artifact file header",
+            "forensic memory preflight check"
+          ],
+          "applicable": false
+        },
+        "findings": [
+          {
+            "finding": "Volatile RAM physical page analysis unavailable",
+            "claim": "Volatile RAM physical page analysis",
+            "evidence": "Evidence \"agent_audit_sample.ps1\" contains no volatile physical RAM or handle structures.",
+            "source": "forensics.memory.preflight",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "preflight check",
+            "analysis_method": "memory_forensics_preflight",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "No volatile memory image provided.",
+            "limitation": "No volatile memory image provided.",
+            "confidence": 1,
+            "evidenceType": "UNAVAILABLE"
+          }
+        ],
+        "evidenceGaps": [
+          "Requires volatile memory acquisition image (.dmp, .raw) to extract injected DLLs or unlinked VAD structures."
+        ]
+      },
+      {
+        "agentId": "verification-agent",
+        "agentName": "Verification Agent",
+        "status": "complete",
+        "verdict": "Informational",
+        "confidence": 0.95,
+        "summary": "Cross-validated all specialist findings against cited evidence, verified provenance, and checked for contradictions across agents.",
+        "structuredEvidence": {
+          "consumedArtifacts": [
+            "findings from all agents",
+            "malware-analysis",
+            "ioc-extraction",
+            "network-analysis",
+            "threat-intel",
+            "memory-agent"
+          ],
+          "verifiedAgentCount": 5
+        },
+        "findings": [
+          {
+            "finding": "Specialist claims supported by verified provenance",
+            "claim": "Specialist claims supported by verified provenance",
+            "evidence": "All active specialists agree on orientation with direct artifact offset/header provenance.",
+            "source": "verification.cross_check",
+            "artifact": "agent_audit_sample.ps1",
+            "location": "cross-agent verification matrix",
+            "analysis_method": "cross_agent_contradiction_and_provenance_audit",
+            "timestamp": "2026-09-27T09:59:32.771Z",
+            "limitations": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "limitation": "Verification is bounded by static and external evidence available in the current pipeline.",
+            "confidence": 0.95,
+            "evidenceType": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "correlatedFindings": [
+      {
+        "id": "corr-1",
+        "indicatorOrClaim": "http://185.220.101.44/payload.bin",
+        "type": "url",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "id": "corr-2",
+        "indicatorOrClaim": "185.220.101.44",
+        "type": "ipv4",
+        "confidence": 0.92,
+        "evidenceChecklist": [
+          {
+            "label": "Embedded in sample payload (Static Strings/Headers)",
+            "checked": true,
+            "source": "IOC Extraction (Static Strings)"
+          },
+          {
+            "label": "Observed as outbound network destination/socket",
+            "checked": true,
+            "source": "Network Forensics"
+          },
+          {
+            "label": "External Threat Intelligence reputation match",
+            "checked": true,
+            "source": "Multi-Tool Gateway"
+          },
+          {
+            "label": "Identified in script/code execution chain",
+            "checked": true,
+            "source": "Code/AST Review"
+          }
+        ],
+        "status": "HIGH",
+        "contributingAgents": [
+          "ioc-extraction",
+          "network-analysis",
+          "threat-intel",
+          "malware-analysis"
+        ],
+        "timestamp": "2026-09-27T09:59:32.771Z"
+      }
+    ],
+    "verificationMatrix": [
+      {
+        "claim": "Cryptographic identity established",
+        "evidenceCheck": "Verified: SHA256: 3e4726ef484136675ee231fdbbc280f2ceed1e1fdc56cdec92eec6a0adbf264a, MD5: c9f9ede768e5d32ff730d581884f94af",
+        "sourceCheck": "Confirmed provenance: static.crypto_hash (file digest (0x0000))",
+        "agentAgreement": "Malware Analysis (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Structural similarity to historical catalogued sample",
+        "evidenceCheck": "Verified: 20% feature similarity to Sample \"post_train_implant_v2.bin\"; shared features: Entropy proximity (5.34 vs 5.29); family attribution to ShadowNexusAPT remains unconfirmed.",
+        "sourceCheck": "Confirmed provenance: malware_intelligence.similarity_index (feature vector cosine match)",
+        "agentAgreement": "Malware Analysis (confidence: 20%, type: INFERRED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.2,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: agent_audit_sample.ps1 (artifact filename)",
+        "sourceCheck": "Confirmed provenance: artifact filename (artifact filename (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 93%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.93,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "URL indicator isolated",
+        "evidenceCheck": "Verified: http://185.220.101.44/payload.bin (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 2, offset 0x0048))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "IPV4 indicator isolated",
+        "evidenceCheck": "Verified: 185.220.101.44 (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 2, offset 0x004F))",
+        "agentAgreement": "IOC Extraction (confidence: 98%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.98,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "REGISTRY_PATH indicator isolated",
+        "evidenceCheck": "Verified: HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 3, offset 0x006A))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "POWERSHELL_CMD indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "CMDLINE_INDICATOR indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe -nop -w hidden -enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAA (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 100%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "FILENAME indicator isolated",
+        "evidenceCheck": "Verified: powershell.exe (preview content)",
+        "sourceCheck": "Confirmed provenance: preview content (preview content (line 1, offset 0x0000))",
+        "agentAgreement": "IOC Extraction (confidence: 93%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.93,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Static outbound network destination endpoint",
+        "evidenceCheck": "Verified: http://185.220.101.44/payload.bin",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings (offset ~0x0))",
+        "agentAgreement": "Network Analysis (confidence: 85%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.85,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Static IPv4 address reference isolated",
+        "evidenceCheck": "Verified: 185.220.101.44",
+        "sourceCheck": "Confirmed provenance: static.network_strings (strings)",
+        "agentAgreement": "Network Analysis (confidence: 88%, type: OBSERVED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.88,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Multi-engine reputation check completed for IP 185.220.101.44",
+        "evidenceCheck": "Verified: 185.220.101.44: Flagged in threat intelligence watchlist (64/72 engines malicious)",
+        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup (external reputation query)",
+        "agentAgreement": "Threat Intelligence (confidence: 94%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.94,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Volatile RAM physical page analysis",
+        "evidenceCheck": "Verified: Evidence \"agent_audit_sample.ps1\" contains no volatile physical RAM or handle structures.",
+        "sourceCheck": "Confirmed provenance: forensics.memory.preflight (preflight check)",
+        "agentAgreement": "Memory Analysis (confidence: 100%, type: UNAVAILABLE)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Specialist claims supported by verified provenance",
+        "evidenceCheck": "Verified: All active specialists agree on orientation with direct artifact offset/header provenance.",
+        "sourceCheck": "Confirmed provenance: verification.cross_check (cross-agent verification matrix)",
+        "agentAgreement": "Verification Agent (confidence: 95%, type: CONFIRMED)",
+        "contradictionCheck": "No contradiction identified across active agents",
+        "confidence": 0.95,
+        "status": "SUPPORTED",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      },
+      {
+        "claim": "Dynamic sandbox behavioral detonation",
+        "evidenceCheck": "Dynamic guest detonation not performed: No isolated micro-VM sandbox attached to execution pipeline.",
+        "sourceCheck": "pipeline.sandbox_gate (static-only inspection policy)",
+        "agentAgreement": "Malware Analysis & Memory Agent (0% runtime telemetry)",
+        "contradictionCheck": "No contradiction (runtime behavior unobserved)",
+        "confidence": 1,
+        "status": "UNAVAILABLE",
+        "evaluatedAt": "2026-09-27T09:59:32.771Z"
+      }
+    ],
+    "mitreAttackTechniques": [
+      "T1059.001 (PowerShell Execution)",
+      "T1071.001 (Web Protocols)",
+      "T1547.001 (Registry Persistence)",
+      "T1027 (Obfuscated Files or Information)"
+    ],
+    "reportSummary": "Investigation INV-2026-4633 concluded with canonical verdict: MALICIOUS (92% confidence). Evaluated 7 indicators across 6 specialist agents with verified evidence provenance.",
+    "createdAt": "2026-09-27T09:59:32.771Z",
+    "updatedAt": "2026-09-27T09:59:32.771Z"
+  },
+  {
     "id": "inv-case-1790501371344",
     "caseNumber": "INV-2026-2269",
     "title": "Live Activity Truth Verification",
@@ -1362,317 +4476,6 @@
     "reportSummary": "Investigation INV-2026-1167 concluded with canonical verdict: MALICIOUS (92% confidence). Evaluated 7 indicators across 6 specialist agents with verified evidence provenance.",
     "createdAt": "2026-09-27T09:29:31.295Z",
     "updatedAt": "2026-09-27T09:29:31.295Z"
-  },
-  {
-    "id": "inv-case-8941",
-    "caseNumber": "INV-2026-8941",
-    "title": "Cobalt Strike HTTPS Beacon & Encrypted Shellcode Stager",
-    "status": "COMPLETED",
-    "severity": "Critical",
-    "confidence": 94,
-    "assignedAgent": "Malware Analysis",
-    "createdAt": "2026-09-24T02:15:00.000Z",
-    "updatedAt": "2026-09-24T02:22:00.000Z",
-    "evidencePackage": {
-      "investigation_id": "INV-2026-8941",
-      "evidence_id": "art-8941-a",
-      "file": {
-        "name": "beacon_stage2.bin",
-        "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-        "mime_type": "application/octet-stream",
-        "size": 262144
-      },
-      "available_artifacts": {
-        "strings": [
-          "ReflectiveLoader",
-          "VirtualAllocEx",
-          "beacon.dll",
-          "C2_HEARTBEAT",
-          "185.220.101.44",
-          "update-windows-defender.online",
-          "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
-        ],
-        "pe_headers": {
-          "sections": [
-            ".text",
-            ".rdata",
-            ".data",
-            ".reloc"
-          ],
-          "importedDlls": [
-            "KERNEL32.dll",
-            "WININET.dll",
-            "ADVAPI32.dll"
-          ],
-          "suspiciousApis": [
-            "VirtualAlloc",
-            "WriteProcessMemory",
-            "CreateRemoteThread"
-          ]
-        },
-        "network_connections": [
-          "185.220.101.44:443",
-          "update-windows-defender.online:443"
-        ],
-        "urls": [
-          "https://update-windows-defender.online/en/check.php"
-        ],
-        "domains": [
-          "update-windows-defender.online"
-        ],
-        "ips": [
-          "185.220.101.44"
-        ],
-        "hashes": [
-          "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "6144:3f4a9b...:c91"
-        ],
-        "registry": [
-          "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\WinDefenderUpdate"
-        ],
-        "processes": [
-          "cmd.exe /c powershell -nop -w hidden -enc JABj..."
-        ],
-        "files": [
-          "C:\\Windows\\Temp\\beacon.dll",
-          "C:\\ProgramData\\updater.exe"
-        ]
-      }
-    },
-    "agentFindings": [
-      {
-        "agentId": "malware-analysis",
-        "agentName": "Malware Analysis",
-        "status": "complete",
-        "verdict": "Malicious",
-        "maliciousScore": 95,
-        "confidence": 0.95,
-        "summary": "Identified Cobalt Strike Beacon signature with Reflective DLL Injection capabilities. Imports memory injection APIs VirtualAlloc and CreateRemoteThread.",
-        "findings": [
-          {
-            "claim": "Reflective DLL Loader signature identified",
-            "evidence": "ReflectiveLoader export present at offset 0x14A0",
-            "source": "malware.reflective_loader",
-            "confidence": 0.98,
-            "evidenceType": "DIRECT",
-            "location": "offset 0x14A0"
-          },
-          {
-            "claim": "Process injection API imports present",
-            "evidence": "KERNEL32.dll!VirtualAllocEx, KERNEL32.dll!CreateRemoteThread",
-            "source": "pe.imports",
-            "confidence": 0.95,
-            "evidenceType": "DIRECT"
-          }
-        ]
-      },
-      {
-        "agentId": "ioc-extraction",
-        "agentName": "IOC Extraction",
-        "status": "complete",
-        "verdict": "Malicious",
-        "maliciousScore": 90,
-        "confidence": 0.92,
-        "summary": "Extracted 12 indicators: 2 C2 domains, 1 IPv4 address, 3 cryptographic hashes, 2 registry paths, and 1 execution cradle.",
-        "findings": [
-          {
-            "claim": "C2 Domain extracted with high confidence",
-            "evidence": "update-windows-defender.online",
-            "source": "static.strings",
-            "confidence": 0.96,
-            "evidenceType": "DIRECT",
-            "location": "strings (line 14)"
-          },
-          {
-            "claim": "C2 IPv4 address isolated",
-            "evidence": "185.220.101.44",
-            "source": "static.strings",
-            "confidence": 0.92,
-            "evidenceType": "DIRECT",
-            "location": "strings (line 19)"
-          }
-        ]
-      },
-      {
-        "agentId": "network-analysis",
-        "agentName": "Network Analysis",
-        "status": "complete",
-        "verdict": "Suspicious",
-        "maliciousScore": 75,
-        "confidence": 0.85,
-        "summary": "Static network primitives match TLS beaconing profile over port 443 with jitter intervals.",
-        "findings": [
-          {
-            "claim": "C2 HTTPS Beaconing endpoint verified in sample strings",
-            "evidence": "https://update-windows-defender.online/en/check.php:443",
-            "source": "network.strings",
-            "confidence": 0.88,
-            "evidenceType": "MEDIUM",
-            "limitation": "Static extraction identifies endpoint; live PCAP captures not attached."
-          }
-        ]
-      },
-      {
-        "agentId": "threat-intel",
-        "agentName": "Threat Intelligence",
-        "status": "complete",
-        "verdict": "Malicious",
-        "maliciousScore": 92,
-        "confidence": 0.94,
-        "summary": "AlienVault OTX & VirusTotal show IP 185.220.101.44 flagged as Tor exit node and known Cobalt Strike team server.",
-        "findings": [
-          {
-            "claim": "VirusTotal & OTX Malicious IP reputation",
-            "evidence": "185.220.101.44: Malicious (64/72 engines flagged as Cobalt Strike C2)",
-            "source": "external.virustotal.ip.lookup",
-            "confidence": 0.94,
-            "evidenceType": "DIRECT"
-          }
-        ]
-      },
-      {
-        "agentId": "memory-agent",
-        "agentName": "Memory Analysis",
-        "status": "complete",
-        "verdict": "Not Applicable",
-        "confidence": 1,
-        "summary": "Memory Analysis: NOT APPLICABLE.\nReason: Uploaded evidence is a PE executable and contains no memory dump or process snapshot.\nRequired evidence:\n- memory dump (.raw, .dmp, .vmem)\n- process dump\n- live memory acquisition\nConclusion: No memory-forensic conclusion was attempted.",
-        "findings": [
-          {
-            "claim": "Forensic memory scope preflight evaluation",
-            "evidence": "Artifact \"beacon_stage2.bin\" does not contain volatile physical memory pages, process handle tables, or virtual address descriptors.",
-            "source": "forensics.memory.preflight",
-            "confidence": 1,
-            "evidenceType": "DIRECT",
-            "limitation": "No memory-forensic conclusion was attempted."
-          }
-        ],
-        "evidenceGaps": [
-          "Requires volatile memory acquisition image or crash dump (.dmp, .raw) to extract injected DLLs, unlinked VAD structures, or in-memory shellcode."
-        ]
-      },
-      {
-        "agentId": "verification-agent",
-        "agentName": "Verification Agent",
-        "status": "complete",
-        "verdict": "Informational",
-        "confidence": 0.94,
-        "summary": "Cross-validated 5 specialist findings. Corroborated C2 IP 185.220.101.44 and domain across 4 independent sources without contradictions.",
-        "findings": [
-          {
-            "claim": "Specialist verdicts are consistent and corroborated",
-            "evidence": "Malware Analysis, IOC Extraction, Threat Intel, and Network Analysis agree on malicious orientation.",
-            "source": "verification.cross_check",
-            "confidence": 0.94,
-            "evidenceType": "DIRECT"
-          }
-        ]
-      }
-    ],
-    "correlatedFindings": [
-      {
-        "id": "corr-1",
-        "indicatorOrClaim": "update-windows-defender.online",
-        "type": "domain",
-        "confidence": 0.96,
-        "evidenceChecklist": [
-          {
-            "label": "Embedded in sample",
-            "checked": true,
-            "source": "IOC Extraction (Static Strings)"
-          },
-          {
-            "label": "Observed in network traffic/context",
-            "checked": true,
-            "source": "Network Forensics"
-          },
-          {
-            "label": "Threat intelligence match",
-            "checked": true,
-            "source": "Multi-Tool Gateway"
-          },
-          {
-            "label": "Identified in script/code execution chain",
-            "checked": false,
-            "source": "Code/AST Review"
-          }
-        ],
-        "status": "HIGH",
-        "contributingAgents": [
-          "ioc-extraction",
-          "network-analysis",
-          "threat-intel",
-          "malware-analysis"
-        ],
-        "timestamp": "2026-09-24T02:20:00.000Z"
-      },
-      {
-        "id": "corr-2",
-        "indicatorOrClaim": "185.220.101.44",
-        "type": "ipv4",
-        "confidence": 0.98,
-        "evidenceChecklist": [
-          {
-            "label": "Embedded in sample",
-            "checked": true,
-            "source": "IOC Extraction (Static Strings)"
-          },
-          {
-            "label": "Observed in network traffic/context",
-            "checked": true,
-            "source": "Network Forensics"
-          },
-          {
-            "label": "Threat intelligence match",
-            "checked": true,
-            "source": "Multi-Tool Gateway (VirusTotal)"
-          },
-          {
-            "label": "Identified in script/code execution chain",
-            "checked": false,
-            "source": "Code/AST Review"
-          }
-        ],
-        "status": "HIGH",
-        "contributingAgents": [
-          "ioc-extraction",
-          "network-analysis",
-          "threat-intel",
-          "malware-analysis"
-        ],
-        "timestamp": "2026-09-24T02:20:00.000Z"
-      }
-    ],
-    "verificationMatrix": [
-      {
-        "claim": "Reflective DLL Loader signature identified",
-        "evidenceCheck": "Verified: ReflectiveLoader export present at offset 0x14A0",
-        "sourceCheck": "Confirmed provenance: malware.reflective_loader",
-        "agentAgreement": "Malware Analysis (confidence: 98%)",
-        "contradictionCheck": "No contradiction identified across active agents",
-        "confidence": 0.98,
-        "status": "VERIFIED",
-        "evaluatedAt": "2026-09-24T02:21:00.000Z"
-      },
-      {
-        "claim": "VirusTotal & OTX Malicious IP reputation",
-        "evidenceCheck": "Verified: 185.220.101.44: Malicious (64/72 engines flagged as Cobalt Strike C2)",
-        "sourceCheck": "Confirmed provenance: external.virustotal.ip.lookup",
-        "agentAgreement": "Threat Intelligence (confidence: 94%)",
-        "contradictionCheck": "No contradiction identified across active agents",
-        "confidence": 0.94,
-        "status": "VERIFIED",
-        "evaluatedAt": "2026-09-24T02:21:00.000Z"
-      }
-    ],
-    "mitreAttackTechniques": [
-      "T1055.001 (Reflective DLL Injection)",
-      "T1071.001 (Web Protocols)",
-      "T1547.001 (Registry Run Keys)",
-      "T1059.001 (PowerShell)"
-    ],
-    "reportSummary": "Investigation confirmed active Cobalt Strike deployment with reflective injection, persistence via Registry Run key, and active C2 beaconing to 185.220.101.44."
   },
   {
     "id": "inv-case-1790501322931",

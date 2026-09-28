@@ -7,7 +7,7 @@
     "family": "Cobalt Strike",
     "severity": "critical",
     "agentId": "malware-analysis",
-    "createdAt": "2026-09-27T09:29:31.059Z"
+    "createdAt": "2026-09-28T02:44:50.436Z"
   },
   {
     "id": "rule-lockbit-note",
@@ -17,7 +17,7 @@
     "family": "LockBit 3.0",
     "severity": "critical",
     "agentId": "malware-analysis",
-    "createdAt": "2026-09-27T09:29:31.059Z"
+    "createdAt": "2026-09-28T02:44:50.436Z"
   },
   {
     "id": "rule-ioc-powershell-enc",
@@ -27,6 +27,6 @@
     "family": null,
     "severity": "high",
     "agentId": "ioc-extraction",
-    "createdAt": "2026-09-27T09:29:31.059Z"
+    "createdAt": "2026-09-28T02:44:50.436Z"
   }
 ]

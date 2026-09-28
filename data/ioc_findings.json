@@ -1,6 +1,41 @@
 [
   {
     "type": "hash",
+    "value": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
+    "threatScore": 94,
+    "firstSeen": "2026-03-12",
+    "source": "Malware Analysis"
+  },
+  {
+    "type": "ip",
+    "value": "185.220.101.5",
+    "threatScore": 82,
+    "firstSeen": "2026-03-14",
+    "source": "AlienVault OTX"
+  },
+  {
+    "type": "domain",
+    "value": "c2.darkfleet-soc.io",
+    "threatScore": 98,
+    "firstSeen": "2026-03-15",
+    "source": "IOC Extraction"
+  },
+  {
+    "type": "url",
+    "value": "https://c2.darkfleet-soc.io/beacon/stage2",
+    "threatScore": 95,
+    "firstSeen": "2026-03-15",
+    "source": "Network Analysis"
+  },
+  {
+    "type": "ip",
+    "value": "194.26.29.112",
+    "threatScore": 100,
+    "firstSeen": "2026-03-18",
+    "source": "AbuseIPDB"
+  },
+  {
+    "type": "hash",
     "value": "cobaltstrike",
     "threatScore": 90,
     "firstSeen": "2026-09-27",
@@ -68,41 +103,6 @@
     "threatScore": 90,
     "firstSeen": "2026-09-27",
     "source": "Sample: cobalt_beacon_x64.exe"
-  },
-  {
-    "type": "hash",
-    "value": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
-    "threatScore": 94,
-    "firstSeen": "2026-03-12",
-    "source": "Malware Analysis"
-  },
-  {
-    "type": "ip",
-    "value": "185.220.101.5",
-    "threatScore": 82,
-    "firstSeen": "2026-03-14",
-    "source": "AlienVault OTX"
-  },
-  {
-    "type": "domain",
-    "value": "c2.darkfleet-soc.io",
-    "threatScore": 98,
-    "firstSeen": "2026-03-15",
-    "source": "IOC Extraction"
-  },
-  {
-    "type": "url",
-    "value": "https://c2.darkfleet-soc.io/beacon/stage2",
-    "threatScore": 95,
-    "firstSeen": "2026-03-15",
-    "source": "Network Analysis"
-  },
-  {
-    "type": "ip",
-    "value": "194.26.29.112",
-    "threatScore": 100,
-    "firstSeen": "2026-03-18",
-    "source": "AbuseIPDB"
   },
   {
     "type": "hash",

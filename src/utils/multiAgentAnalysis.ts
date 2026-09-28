@@ -10,12 +10,16 @@ import {
   VerificationItem,
   InvestigationAuditLog,
   InvestigationReport,
+  StandardizedAgentFinding,
+  EvidenceReference,
+  AgentConsensusSummary,
+  FinalVerdictDetail,
 } from '../types';
 import { extractIOCs, summarizeIOCsByType, categorizeExtractedIOCs } from './iocExtraction';
 import { analyzeCode } from './codeAnalysis';
 import { applyCustomRules } from './customRules';
 import { secureFetchWithRecovery } from './apiClient';
-import { buildArtifactEvidenceProfile, evidenceContext } from './artifactEvidence';
+import { buildArtifactEvidenceProfile, buildEvidenceContext, evidenceContext } from './artifactEvidence';
 
 /**
  * Fixed investigative sequence every uploaded artifact travels through.
@@ -86,6 +90,16 @@ interface FindingContent {
   canonicalVerdict?: CanonicalVerdict;
   maliciousScore?: number;
   summary: string;
+  title?: string;
+  description?: string;
+  severity?: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  confidence?: number;
+  evidence?: EvidenceReference[];
+  indicators?: string[];
+  techniques?: string[];
+  source?: string;
+  findingStatus?: 'confirmed' | 'probable' | 'suspicious' | 'unknown';
+  standardizedFindings?: StandardizedAgentFinding[];
   findings?: EvidenceFinding[];
   evidenceGaps?: string[];
   evidenceCoverage?: number;
@@ -110,19 +124,38 @@ export function ensureCompleteEvidenceFinding(
   defaultLimitation = 'Static finding requires corroboration with runtime or network telemetry.',
 ): EvidenceFinding {
   const limitText = f.limitations || f.limitation || defaultLimitation;
+  const conf = typeof f.confidence === 'number' ? Number(f.confidence.toFixed(2)) : 0.75;
+  const evText = f.evidence || f.claim || 'No raw snippet recorded';
+  const methodText = f.analysis_method || defaultMethod;
+  const claimText = f.claim || f.finding || 'Forensic observation recorded';
+  const extConfirm = f.externalEnrichment
+    ? `${f.externalEnrichment.tool}: ${f.externalEnrichment.detail} (${f.externalEnrichment.status})`
+    : 'Pending external threat-intel or sandbox confirmation';
+  const severity: 'critical' | 'high' | 'medium' | 'low' | 'info' =
+    f.severity ||
+    (conf >= 0.9 ? 'critical' : conf >= 0.75 ? 'high' : conf >= 0.55 ? 'medium' : conf >= 0.35 ? 'low' : 'info');
+
   return {
     ...f,
-    claim: f.claim || f.finding || 'Forensic observation recorded',
-    finding: f.finding || f.claim || 'Forensic observation recorded',
+    claim: claimText,
+    finding: f.finding || claimText,
     source: f.source || defaultMethod,
     artifact: f.artifact || artifactName || 'unknown_artifact',
     location: f.location || defaultLocation,
-    evidence: f.evidence || f.claim || 'No raw snippet recorded',
-    confidence: typeof f.confidence === 'number' ? Number(f.confidence.toFixed(2)) : 0.75,
-    analysis_method: f.analysis_method || defaultMethod,
+    evidence: evText,
+    confidence: conf,
+    analysis_method: methodText,
     timestamp: f.timestamp || new Date().toISOString(),
     limitation: limitText,
     limitations: limitText,
+    severity,
+    reason: f.reason || `${claimText} derived via ${methodText} (${Math.round(conf * 100)}% confidence).`,
+    whyDetected: f.whyDetected || {
+      evidence: evText,
+      extractionMethod: `${methodText} @ ${f.location || defaultLocation}`,
+      agentReasoning: `${claimText} — ${limitText}`,
+      externalConfirmation: extConfirm,
+    },
   };
 }
 
@@ -552,12 +585,21 @@ function findingFromNetworkAnalysis(artifact: EvidenceArtifact): FindingContent 
     };
   }
 
-  if (artifact.type === 'file' || artifact.type === 'code') {
+  if (artifact.type === 'file' || artifact.type === 'code' || artifact.type === 'log') {
     return {
       verdict: 'Informational',
-      summary: sample
-        ? 'Static scan found no network-related strings (URLs, socket APIs, DNS calls) embedded in this sample.'
-        : 'No network capture or static-analysis result available for this artifact — nothing to inspect at the traffic layer.',
+      summary: 'No network artifact found — static scan found no embedded IPs, domains, URLs, DNS indicators, C2 strings, or network-related APIs in this sample.',
+      findings: [
+        {
+          claim: 'No network artifact found',
+          finding: 'No network artifact found',
+          evidence: `Inspected embedded strings, imports, and indicator tables for "${artifact.name}" — 0 embedded IPs, domains, URLs, DNS records, or C2 strings found.`,
+          source: 'network.static_inspector',
+          confidence: 0.95,
+          evidenceType: 'DIRECT',
+          limitation: 'Static inspection only; runtime socket connections cannot be observed without PCAP or sandbox execution.',
+        },
+      ],
     };
   }
 
@@ -1314,10 +1356,81 @@ export function generateFinding(agentId: string, artifact: EvidenceArtifact): Fi
           ),
         ];
 
+  const evContext = buildEvidenceContext(artifact);
+  const evidenceRefs: EvidenceReference[] = finalFindings.map((f, idx) => ({
+    id: `${agentId}-ev-${idx + 1}`,
+    artifact: f.artifact || artifact.name,
+    source: f.source || defaultMethod,
+    location: f.location || `${artifact.name}:0x0000`,
+    evidence: f.evidence,
+    extractionMethod: f.whyDetected?.extractionMethod || f.analysis_method || defaultMethod,
+    agentReasoning: f.whyDetected?.agentReasoning || f.reason || f.claim,
+    externalConfirmation: f.whyDetected?.externalConfirmation,
+    confidence: f.confidence,
+  }));
+
+  const avgConf =
+    finalFindings.length > 0
+      ? Number((finalFindings.reduce((acc, f) => acc + f.confidence, 0) / finalFindings.length).toFixed(2))
+      : 0.75;
+  const topSeverity: 'critical' | 'high' | 'medium' | 'low' | 'info' =
+    raw.verdict === 'Malicious'
+      ? 'critical'
+      : raw.verdict === 'Suspicious'
+        ? 'high'
+        : raw.verdict === 'Informational'
+          ? 'info'
+          : 'low';
+  const findingStatus: 'confirmed' | 'probable' | 'suspicious' | 'unknown' =
+    raw.verdict === 'Malicious'
+      ? 'confirmed'
+      : raw.verdict === 'Suspicious'
+        ? 'suspicious'
+        : raw.verdict === 'Safe'
+          ? 'probable'
+          : 'unknown';
+
+  const standardizedFindings: StandardizedAgentFinding[] = finalFindings.map((f, idx) => ({
+    id: `${agentId}-finding-${idx + 1}`,
+    agentId,
+    title: f.finding || f.claim,
+    description: f.evidence,
+    severity: f.severity || topSeverity,
+    confidence: f.confidence,
+    evidence: [evidenceRefs[idx]],
+    indicators: evContext.extractedArtifacts.slice(0, 8).map((a) => a.normalizedValue || a.value),
+    techniques: (evContext.sourceMetadata?.attackTechniques as string[]) || [],
+    source: f.source || defaultMethod,
+    status:
+      f.evidenceType === 'CONFIRMED' || f.evidenceType === 'DIRECT'
+        ? 'confirmed'
+        : f.evidenceType === 'HIGH'
+          ? 'probable'
+          : f.evidenceType === 'UNAVAILABLE'
+            ? 'unknown'
+            : 'suspicious',
+    limitations: [f.limitations || f.limitation || 'Static analysis only; runtime verification pending.'],
+    reason: f.reason,
+  }));
+
   return {
     ...raw,
+    title: finalFindings[0]?.finding || finalFindings[0]?.claim || `${agentId} analysis`,
+    description: raw.summary,
+    severity: topSeverity,
+    confidence: avgConf,
+    evidence: evidenceRefs,
+    indicators: evContext.extractedArtifacts.map((a) => a.normalizedValue || a.value),
+    techniques: (evContext.sourceMetadata?.attackTechniques as string[]) || [],
+    source: defaultMethod,
+    findingStatus,
+    standardizedFindings,
     findings: finalFindings,
-    structuredEvidence,
+    structuredEvidence: {
+      ...structuredEvidence,
+      evidenceContextFileId: evContext.fileId,
+      evidenceContextSha256: evContext.hashes.sha256,
+    },
   };
 }
 
@@ -1479,19 +1592,149 @@ export function correlateFindingsAcrossAgents(
     if (peMatched) contributing.push('malware-analysis');
     if (memFinding && memFinding.verdict === 'Suspicious') contributing.push('memory-agent');
 
+    const supportingEvidence = checks.filter((c) => c.checked).map((c) => `${c.source}: ${c.label}`);
+    const contradictingEvidence = checks.filter((c) => !c.checked).map((c) => `Not observed in ${c.source}`);
+    const externalConfirmations = tiMatched
+      ? [`Threat Intel corroborated indicator ${iocVal}`]
+      : ['No external threat-intel confirmation recorded'];
+
     correlations.push({
       id: `corr-${idx + 1}`,
       indicatorOrClaim: ioc.value,
+      finding: `Correlated ${ioc.type.toUpperCase()} indicator "${iocVal}" across ${contributing.length} specialist agent(s)`,
       type: ioc.type,
       confidence: Number((checkedCount / checks.length).toFixed(2)),
       evidenceChecklist: checks,
       status: confidenceLevel,
       contributingAgents: contributing,
+      supportingAgents: contributing,
+      supportingEvidence,
+      contradictingEvidence,
+      externalConfirmations,
       timestamp: new Date().toISOString(),
     });
   });
 
   return correlations;
+}
+
+/**
+ * Phase 7 — Don't force agents to agree:
+ * Preserves each specialist's independent assessment and flags REVIEW REQUIRED when agents disagree.
+ */
+export function buildAgentConsensus(findings: AgentFinding[]): AgentConsensusSummary {
+  const mapAgentVerdict = (agentId: string): 'MALICIOUS' | 'SUSPICIOUS' | 'BENIGN' | 'UNKNOWN' | 'UNAVAILABLE' => {
+    const f = findings.find((x) => x.agentId === agentId);
+    if (!f || f.status !== 'complete') return 'UNKNOWN';
+    if (f.verdict === 'Malicious' || f.canonicalVerdict === 'malicious') return 'MALICIOUS';
+    if (f.verdict === 'Suspicious' || f.canonicalVerdict === 'suspicious') return 'SUSPICIOUS';
+    if (f.verdict === 'Safe' || f.canonicalVerdict === 'benign') return 'BENIGN';
+    if (f.verdict === 'Unavailable' || f.canonicalVerdict === 'analysis_unavailable') return 'UNAVAILABLE';
+    return 'UNKNOWN';
+  };
+
+  const malwareAnalysis = mapAgentVerdict('malware-analysis');
+  const iocExtraction = mapAgentVerdict('ioc-extraction');
+  const threatIntelligence = mapAgentVerdict('threat-intel');
+  const networkAnalysis = mapAgentVerdict('network-analysis');
+
+  const activeVerdicts = [malwareAnalysis, iocExtraction, threatIntelligence, networkAnalysis].filter(
+    (v) => v !== 'UNKNOWN' && v !== 'UNAVAILABLE',
+  );
+  const hasMalicious = activeVerdicts.includes('MALICIOUS');
+  const hasSuspicious = activeVerdicts.includes('SUSPICIOUS');
+  const hasBenign = activeVerdicts.includes('BENIGN');
+  const hasUnknownIntel = threatIntelligence === 'UNKNOWN' || threatIntelligence === 'UNAVAILABLE';
+
+  const disagreements: string[] = [];
+  if (hasMalicious && hasBenign) {
+    disagreements.push('Direct conflict between MALICIOUS and BENIGN specialist assessments.');
+  }
+  if ((hasMalicious || hasSuspicious) && hasUnknownIntel) {
+    disagreements.push('Static/IOC specialists flagged suspicious/malicious indicators while external Threat Intelligence is UNKNOWN/UNAVAILABLE.');
+  }
+  if (malwareAnalysis !== iocExtraction && malwareAnalysis !== 'UNKNOWN' && iocExtraction !== 'UNKNOWN') {
+    disagreements.push(`Malware Analysis (${malwareAnalysis}) and IOC Extraction (${iocExtraction}) reached different severity levels.`);
+  }
+
+  const requiresReview = disagreements.length > 0;
+  const verification: AgentConsensusSummary['verification'] =
+    hasMalicious && hasBenign
+      ? 'CONTRADICTED'
+      : requiresReview
+        ? 'REVIEW REQUIRED'
+        : hasMalicious
+          ? 'CONFIRMED'
+          : hasSuspicious
+            ? 'SUPPORTED'
+            : activeVerdicts.length === 0
+              ? 'INSUFFICIENT EVIDENCE'
+              : 'SUPPORTED';
+
+  return {
+    malwareAnalysis,
+    iocExtraction,
+    threatIntelligence,
+    networkAnalysis,
+    verification,
+    requiresReview,
+    disagreements,
+  };
+}
+
+/**
+ * Phase 9 — Improve the final verdict:
+ * Produces Verdict, Confidence, Primary evidence, Supporting agents, Contradictions, and Limitations.
+ */
+export function buildFinalVerdictDetail(artifact: EvidenceArtifact, findings: AgentFinding[]): FinalVerdictDetail {
+  const consensus = buildAgentConsensus(findings);
+  const aggregate = computeAggregateVerdict(findings);
+  const completed = findings.filter((f) => f.status === 'complete');
+
+  const primaryEvidence = completed
+    .flatMap((f) => (f.findings || []).map((ef) => ({ agent: f.agentName, claim: ef.claim, evidence: ef.evidence, conf: ef.confidence, type: ef.evidenceType })))
+    .filter((item) => item.type !== 'UNAVAILABLE')
+    .sort((a, b) => b.conf - a.conf)
+    .slice(0, 5)
+    .map((item) => `${item.claim}: ${item.evidence}`);
+
+  const supportingAgents = completed
+    .filter((f) => f.verdict === 'Malicious' || f.verdict === 'Suspicious' || (f.findings && f.findings.length > 0))
+    .map((f) => f.agentName);
+
+  const contradictions = [...consensus.disagreements];
+  if (!contradictions.length) {
+    contradictions.push('No dynamic execution evidence available.');
+  }
+
+  const limitations = Array.from(
+    new Set([
+      'Dynamic sandbox unavailable.',
+      ...completed.flatMap((f) => f.evidenceGaps || []),
+      ...completed.flatMap((f) => f.limitations || []),
+    ]),
+  ).slice(0, 5);
+
+  const verdict: FinalVerdictDetail['verdict'] =
+    consensus.verification === 'CONTRADICTED'
+      ? 'REVIEW REQUIRED'
+      : aggregate.verdict === 'Malicious'
+        ? 'MALICIOUS'
+        : aggregate.verdict === 'Suspicious'
+          ? 'SUSPICIOUS'
+          : aggregate.verdict === 'Safe'
+            ? 'BENIGN'
+            : 'UNKNOWN';
+
+  return {
+    verdict,
+    confidence: aggregate.maliciousScore || 50,
+    primaryEvidence: primaryEvidence.length > 0 ? primaryEvidence : ['Static file inspection completed'],
+    supportingAgents,
+    contradictions,
+    limitations,
+    consensus,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -1567,7 +1810,7 @@ export function buildVerificationMatrix(
       }
 
       // Determine strict Verification status:
-      // SUPPORTED | CONTRADICTED | INSUFFICIENT EVIDENCE | UNAVAILABLE
+      // SUPPORTED | PARTIALLY SUPPORTED | CONTRADICTED | INSUFFICIENT EVIDENCE | UNAVAILABLE
       let status: VerificationItem['status'] = 'SUPPORTED';
       let checkDetail = `Verified: ${ef.evidence.slice(0, 110)}`;
 
@@ -1583,6 +1826,9 @@ export function buildVerificationMatrix(
           : !belongsToArtifact
             ? 'Evidence cannot be definitively linked to uploaded artifact content'
             : 'Unverifiable provenance source';
+      } else if (ef.evidenceType === 'INFERRED' || ef.evidenceType === 'LOW') {
+        status = 'PARTIALLY SUPPORTED';
+        checkDetail = `Partially supported (heuristic/inferred without runtime or external confirmation): ${ef.evidence.slice(0, 100)}`;
       }
 
       items.push({

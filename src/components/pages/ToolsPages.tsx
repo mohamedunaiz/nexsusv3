@@ -323,10 +323,29 @@ const ToolCard: React.FC<{
         ))}
       </div>
 
+      <div className="rounded-lg border border-purple-500/15 bg-black/25 p-2 font-mono text-[9.5px] text-purple-200/75 space-y-1">
+        <div className="truncate">
+          <span className="text-purple-400">API URL:</span> {tool.baseUrl || tool.defaultBaseUrl}
+        </div>
+        <div>
+          <span className="text-purple-400">Supported IOCs:</span>{" "}
+          {(tool.supportedIocTypes || ["sha256", "ipv4", "domain", "url"]).map((t) => t.toUpperCase()).join(", ")}
+        </div>
+        <div className="flex items-center justify-between">
+          <span>
+            <span className="text-purple-400">Rate limit:</span>{" "}
+            {tool.rateLimit || `${tool.planLimits?.[tool.planTier || "free"]?.requestsPerMinute ?? 10} req/min`}
+          </span>
+          <span>
+            <span className="text-purple-400">Timeout:</span> {tool.timeoutMs ?? 5000}ms
+          </span>
+        </div>
+      </div>
+
       {tool.connected && (
         <div className="grid grid-cols-2 gap-2 rounded-lg border border-purple-500/15 bg-purple-950/10 p-2 font-mono text-[10px] text-purple-200/60">
           <div>
-            Plan: <span className="text-purple-100 uppercase">{tool.planTier}</span> ({tool.planLimits[tool.planTier].requestsPerMinute}/min)
+            Plan: <span className="text-purple-100 uppercase">{tool.planTier || "free"}</span> ({tool.planLimits?.[tool.planTier || "free"]?.requestsPerMinute ?? 10}/min)
           </div>
           <div>
             Latency: <span className="text-purple-100">{tool.health.latencyMs != null ? `${tool.health.latencyMs}ms` : "—"}</span>

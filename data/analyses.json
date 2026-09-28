@@ -1,5 +1,313 @@
 [
   {
+    "id": "ana-490974-ac2eee",
+    "sampleId": "samp-490974-ac2eee",
+    "sha256": "ac2eeec0de6d597a989edf80ed33f844f6524f0d0d4c001dd593950e339f756d",
+    "fileName": "post_train_implant_v2.bin",
+    "detectedFormat": "text",
+    "entropy": 5.31,
+    "peHeaders": null,
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 129,
+        "rawSize": 129,
+        "entropy": 5.31,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 1,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.8-adaptive-dataset",
+    "analyzedAt": "2026-09-28T02:44:50.972Z"
+  },
+  {
+    "id": "ana-ds-1790563490957-1",
+    "sampleId": "samp-ds-1790563490957-1",
+    "sha256": "8dbc301530fdce1e9c618caeffbba40103cec0d1d1715b13bf1d078213850818",
+    "fileName": "shadow_nexus_train_2.bin",
+    "detectedFormat": "text",
+    "entropy": 4.99,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 80,
+        "rawSize": 80,
+        "entropy": 4.99,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 0,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-28T02:44:50.957Z"
+  },
+  {
+    "id": "ana-ds-1790563490953-0",
+    "sampleId": "samp-ds-1790563490953-0",
+    "sha256": "b72ff99e6c3e8ca40520398bb8a09a45ef40a8492e968b4cc66b77576c418ef4",
+    "fileName": "shadow_nexus_train_1.bin",
+    "detectedFormat": "text",
+    "entropy": 4.96,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 81,
+        "rawSize": 81,
+        "entropy": 4.96,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 0,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-28T02:44:50.953Z"
+  },
+  {
+    "id": "ana-490937-7f4b7c",
+    "sampleId": "samp-490937-7f4b7c",
+    "sha256": "7f4b7c86f59258b23132362e258b645ea33ef29c562550a8ff683162c3b22887",
+    "fileName": "pre_train_implant.bin",
+    "detectedFormat": "text",
+    "entropy": 5.23,
+    "peHeaders": null,
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 94,
+        "rawSize": 94,
+        "entropy": 5.23,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 1,
+    "verdict": "clean",
+    "confidence": 99,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-28T02:44:50.935Z"
+  },
+  {
+    "id": "ana-490762-e39fe2",
+    "sampleId": "samp-490762-e39fe2",
+    "sha256": "e39fe2d66574c1ac2ae8e8c44f9cd05fa62fd8fa982c6422daea88f53733f6e9",
+    "fileName": "cobalt_beacon_x64.exe",
+    "detectedFormat": "pe",
+    "entropy": 1.31,
+    "peHeaders": {
+      "isPE": true,
+      "machine": "x86-64 (AMD64)",
+      "subsystem": "Windows Console (CUI)",
+      "is64Bit": true,
+      "entryPointRva": 4096,
+      "imageBase": "0x0",
+      "sectionCount": 2,
+      "timeDateStamp": 1711508062
+    },
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".text",
+        "virtualSize": 1024,
+        "rawSize": 1024,
+        "entropy": 0,
+        "rwx": false
+      },
+      {
+        "name": ".rdata",
+        "virtualSize": 1024,
+        "rawSize": 1024,
+        "entropy": 0,
+        "rwx": false
+      }
+    ],
+    "imports": [
+      "VirtualAlloc",
+      "VirtualAllocEx",
+      "WriteProcessMemory",
+      "CreateRemoteThread",
+      "InternetOpenA"
+    ],
+    "suspiciousImports": [
+      "VirtualAlloc",
+      "VirtualAllocEx",
+      "WriteProcessMemory",
+      "CreateRemoteThread",
+      "InternetOpenA"
+    ],
+    "iocCount": 10,
+    "verdict": "malicious",
+    "confidence": 99,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-28T02:44:50.738Z"
+  },
+  {
+    "id": "ana-172886-818f93",
+    "sampleId": "samp-172886-818f93",
+    "sha256": "818f93f3749ee25fc55aeaa547ab6369665d9e29f230bcd1a94f266dceae8805",
+    "fileName": "post_train_implant_v2.bin",
+    "detectedFormat": "text",
+    "entropy": 5.3,
+    "peHeaders": null,
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 129,
+        "rawSize": 129,
+        "entropy": 5.3,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 1,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.7-adaptive-dataset",
+    "analyzedAt": "2026-09-27T09:59:32.884Z"
+  },
+  {
+    "id": "ana-ds-1790503172877-1",
+    "sampleId": "samp-ds-1790503172877-1",
+    "sha256": "19cdec5743880bf589b9e8f080fd8d6ec18e484ec30d99e0314fa1af0283929c",
+    "fileName": "shadow_nexus_train_2.bin",
+    "detectedFormat": "text",
+    "entropy": 5,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 80,
+        "rawSize": 80,
+        "entropy": 5,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 0,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-27T09:59:32.877Z"
+  },
+  {
+    "id": "ana-ds-1790503172875-0",
+    "sampleId": "samp-ds-1790503172875-0",
+    "sha256": "2704e2b8876a7692dbc360e61a95b617a9a27408b2aa8aebbae24f4c3e214ee2",
+    "fileName": "shadow_nexus_train_1.bin",
+    "detectedFormat": "text",
+    "entropy": 4.97,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 81,
+        "rawSize": 81,
+        "entropy": 4.97,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 0,
+    "verdict": "malicious",
+    "confidence": 92,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-27T09:59:32.875Z"
+  },
+  {
+    "id": "ana-172837-22ec79",
+    "sampleId": "samp-172837-22ec79",
+    "sha256": "22ec7945ec87d544352381db25a2db4176d9321a66d37ae6211fcf3b08886aa0",
+    "fileName": "pre_train_implant.bin",
+    "detectedFormat": "text",
+    "entropy": 5.23,
+    "peHeaders": null,
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".data",
+        "virtualSize": 94,
+        "rawSize": 94,
+        "entropy": 5.23,
+        "rwx": false
+      }
+    ],
+    "imports": [],
+    "suspiciousImports": [],
+    "iocCount": 1,
+    "verdict": "clean",
+    "confidence": 99,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-27T09:59:32.836Z"
+  },
+  {
+    "id": "ana-172733-acd85e",
+    "sampleId": "samp-172733-acd85e",
+    "sha256": "acd85e8e966626ed49d7d25aa2a68a7703d79d1297cfb427f6e44689359b7b98",
+    "fileName": "cobalt_beacon_x64.exe",
+    "detectedFormat": "pe",
+    "entropy": 1.31,
+    "peHeaders": {
+      "isPE": true,
+      "machine": "x86-64 (AMD64)",
+      "subsystem": "Windows Console (CUI)",
+      "is64Bit": true,
+      "entryPointRva": 4096,
+      "imageBase": "0x0",
+      "sectionCount": 2,
+      "timeDateStamp": 1711503465
+    },
+    "elfHeaders": null,
+    "sections": [
+      {
+        "name": ".text",
+        "virtualSize": 1024,
+        "rawSize": 1024,
+        "entropy": 0,
+        "rwx": false
+      },
+      {
+        "name": ".rdata",
+        "virtualSize": 1024,
+        "rawSize": 1024,
+        "entropy": 0,
+        "rwx": false
+      }
+    ],
+    "imports": [
+      "VirtualAlloc",
+      "VirtualAllocEx",
+      "WriteProcessMemory",
+      "CreateRemoteThread",
+      "InternetOpenA"
+    ],
+    "suspiciousImports": [
+      "VirtualAlloc",
+      "VirtualAllocEx",
+      "WriteProcessMemory",
+      "CreateRemoteThread",
+      "InternetOpenA"
+    ],
+    "iocCount": 10,
+    "verdict": "malicious",
+    "confidence": 99,
+    "modelVersion": "v3.4-heuristic-forest",
+    "analyzedAt": "2026-09-27T09:59:32.715Z"
+  },
+  {
     "id": "ana-371403-184a53",
     "sampleId": "samp-371403-184a53",
     "sha256": "184a53882c5c82832f5738a0d314e962edc9fa1100b7d6c006a9c2b6dcdc4312",

@@ -13,6 +13,7 @@ import {
   extractFeaturesFromContent,
   classifySample,
   registerLearnedSamples,
+  computeSystemEvaluationMetrics,
 } from './src/utils/malwareEvaluation.ts';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -70,6 +71,10 @@ const INITIAL_TOOLS = [
       free: { requestsPerMinute: 4, note: 'Public API key: 4 req/min, 500 req/day.' },
       premium: { requestsPerMinute: 240, note: 'Enterprise key: high throughput.' },
     },
+    supportedIocTypes: ['sha256', 'sha1', 'md5', 'ipv4', 'ipv6', 'domain', 'url'],
+    rateLimit: '4 req/min (free) · 240 req/min (premium)',
+    timeoutMs: 5000,
+    planTier: 'free' as const,
   },
   {
     id: 'otx',
@@ -96,6 +101,10 @@ const INITIAL_TOOLS = [
       free: { requestsPerMinute: 10, note: 'Standard OTX account.' },
       premium: { requestsPerMinute: 60, note: 'Enterprise allowance.' },
     },
+    supportedIocTypes: ['ipv4', 'ipv6', 'domain', 'fqdn', 'sha256'],
+    rateLimit: '10 req/min',
+    timeoutMs: 5000,
+    planTier: 'free' as const,
   },
   {
     id: 'shodan',
@@ -122,6 +131,10 @@ const INITIAL_TOOLS = [
       free: { requestsPerMinute: 10, note: 'Developer query credits.' },
       premium: { requestsPerMinute: 120, note: 'Corporate plan.' },
     },
+    supportedIocTypes: ['ipv4', 'ipv6', 'port', 'asn'],
+    rateLimit: '10 req/min',
+    timeoutMs: 6000,
+    planTier: 'free' as const,
   },
   {
     id: 'abuseipdb',
@@ -148,6 +161,70 @@ const INITIAL_TOOLS = [
       free: { requestsPerMinute: 15, note: 'Free key: 1,000 checks/day.' },
       premium: { requestsPerMinute: 60, note: 'Verified webmaster / commercial tier.' },
     },
+    supportedIocTypes: ['ipv4', 'ipv6'],
+    rateLimit: '15 req/min',
+    timeoutMs: 4500,
+    planTier: 'free' as const,
+  },
+  {
+    id: 'urlscan',
+    name: 'URLScan',
+    vendor: 'urlscan.io',
+    category: 'URL & Phishing Analysis',
+    description: 'Automated website and URL inspection — DOM analysis, HTTP transactions, TLS certificates, and brand impersonation detection.',
+    docsUrl: 'https://urlscan.io/docs/api/',
+    defaultBaseUrl: 'https://urlscan.io/api/v1',
+    allowedHosts: ['urlscan.io'],
+    authType: 'api_key_header',
+    authConfigured: true,
+    connected: true,
+    enabled: true,
+    allowedAgents: ['threat-intel', 'network-analysis', 'ioc-extraction'],
+    enabledCapabilities: ['url.lookup', 'domain.lookup'],
+    health: { status: 'HEALTHY' as const, latencyMs: 58, lastChecked: new Date().toISOString() },
+    capabilities: [
+      { id: 'url.lookup', label: 'URL Scan & Verdict', description: 'Inspect HTTP transactions, redirects, and phishing reputation' },
+      { id: 'domain.lookup', label: 'Domain Search', description: 'Historical scans and certificates for a domain' },
+    ],
+    planLimits: {
+      free: { requestsPerMinute: 10, note: 'Public/unlisted scans: 10 req/min.' },
+      premium: { requestsPerMinute: 120, note: 'Private commercial scans.' },
+    },
+    supportedIocTypes: ['url', 'domain', 'fqdn', 'ipv4'],
+    rateLimit: '10 req/min',
+    timeoutMs: 5000,
+    planTier: 'free' as const,
+  },
+  {
+    id: 'custom-tool',
+    name: 'Custom Tool',
+    vendor: 'Internal SOC / Custom REST',
+    category: 'Custom Threat Connector',
+    description: 'Configurable REST threat-intelligence or internal SIEM/TIP connector for organization-specific IOC enrichment.',
+    docsUrl: 'https://www.first.org/tlp/',
+    defaultBaseUrl: 'https://tip.internal.soc/api/v1',
+    allowedHosts: ['tip.internal.soc'],
+    authType: 'api_key_header',
+    authConfigured: false,
+    connected: false,
+    enabled: false,
+    allowedAgents: ['threat-intel', 'ioc-extraction', 'malware-analysis'],
+    enabledCapabilities: ['hash.lookup', 'ip.lookup', 'domain.lookup', 'url.lookup'],
+    health: { status: 'DISCONNECTED' as const, latencyMs: null, lastChecked: null },
+    capabilities: [
+      { id: 'hash.lookup', label: 'Custom Hash Lookup', description: 'Query internal TIP for SHA256/MD5 sightings' },
+      { id: 'ip.lookup', label: 'Custom IP Lookup', description: 'Query internal firewall/SIEM logs for IP sightings' },
+      { id: 'domain.lookup', label: 'Custom Domain Lookup', description: 'Query internal DNS sinkhole & passive DNS' },
+      { id: 'url.lookup', label: 'Custom URL Lookup', description: 'Query internal web proxy telemetry' },
+    ],
+    planLimits: {
+      free: { requestsPerMinute: 30, note: 'Standard internal gateway.' },
+      premium: { requestsPerMinute: 300, note: 'High-throughput internal cluster.' },
+    },
+    supportedIocTypes: ['sha256', 'sha1', 'md5', 'ipv4', 'ipv6', 'domain', 'url'],
+    rateLimit: '30 req/min',
+    timeoutMs: 5000,
+    planTier: 'free' as const,
   },
 ];
 
@@ -626,9 +703,16 @@ app.get('/api/sandbox/status', (_req: Request, res: Response) => {
 // Tools Routes
 // ---------------------------------------------------------------------------
 app.get('/api/tools', (_req: Request, res: Response) => {
+  const sanitizedTools = inMemoryTools.map(({ apiKey: _secret, ...rest }: any) => ({
+    ...rest,
+    planTier: rest.planTier || 'free',
+    supportedIocTypes: rest.supportedIocTypes || ['sha256', 'ipv4', 'domain', 'url'],
+    rateLimit: rest.rateLimit || `${rest.planLimits?.[rest.planTier || 'free']?.requestsPerMinute || 10} req/min`,
+    timeoutMs: rest.timeoutMs || 5000,
+  }));
   res.json({
     success: true,
-    tools: inMemoryTools,
+    tools: sanitizedTools,
     logs: inMemoryLogs,
   });
 });
@@ -1268,9 +1352,47 @@ app.post('/api/malware-intel/samples/upload', upload.single('file'), (req: Reque
         score: m.similarityScore,
         family: m.candidateFamily,
         sharedFeatures: m.sharedFeatures,
+        sharedIndicatorsCount: m.sharedIndicatorsCount,
+        sharedTechniquesCount: m.sharedTechniquesCount,
+        sharedStructuralFeaturesCount: m.sharedStructuralFeaturesCount,
         attributionStatement: m.familyAttributionStatement,
       })),
       likelyFamily: resolvedFamily,
+    },
+    evidenceContext: {
+      fileId: sampleId,
+      fileName,
+      fileType: features.detectedFormat,
+      size: contentBuffer.length,
+      hashes: { md5, sha1, sha256 },
+      strings: features.suspiciousStrings,
+      urls: extracted.filter((i) => ['url', 'embedded_url'].includes(i.type)).map((i) => i.normalizedValue || i.value),
+      domains: extracted.filter((i) => ['domain', 'fqdn'].includes(i.type)).map((i) => i.normalizedValue || i.value),
+      ips: extracted.filter((i) => ['ipv4', 'ipv6'].includes(i.type)).map((i) => i.normalizedValue || i.value),
+      filePaths: extracted.filter((i) => ['windows_path', 'linux_path', 'filename'].includes(i.type)).map((i) => i.normalizedValue || i.value),
+      registryKeys: extracted.filter((i) => ['registry_path', 'registry_key'].includes(i.type)).map((i) => i.normalizedValue || i.value),
+      pe: features.peHeaders || undefined,
+      elf: features.elfHeaders || undefined,
+      imports: features.importedApis,
+      exports: [],
+      entropy: features.entropy,
+      sections: features.sections,
+      extractedArtifacts: extracted.map((ioc) => ({
+        type: ioc.type,
+        value: ioc.value,
+        normalizedValue: ioc.normalizedValue,
+        source: ioc.source,
+        location: ioc.location || `offset ${ioc.offset || '0x0000'}`,
+        occurrences: ioc.occurrences || 1,
+        locations: ioc.locations || [ioc.location || ioc.source],
+        context: ioc.context,
+        confidence: ioc.confidence,
+      })),
+      sourceMetadata: {
+        uploadedBy: 'SOC Operator',
+        caseId,
+        storedFilePath,
+      },
     },
     features: {
       ...features,
@@ -2845,21 +2967,21 @@ app.post('/api/investigations', (req: Request, res: Response) => {
 
   inMemoryInvestigations.unshift(investigation);
 
-  // Record real backend truth events for the investigation lifecycle (Requirement 7)
+  // Record real backend truth events for the investigation lifecycle (Requirement 7 & Phase 10)
   const now = Date.now();
   const events = [
-    { event_id: `evt-${now}-1`, investigation_id: caseId, agent_id: 'system', agent_name: 'Evidence Intake', type: 'UPLOAD_STARTED', status: 'RECEIVED', message: `UPLOAD_STARTED: Evidence "${fileName}" (${size} bytes) received and persisted.`, timestamp: new Date(now - 11000).toISOString() },
-    { event_id: `evt-${now}-2`, investigation_id: caseId, agent_id: 'system', agent_name: 'Fingerprint Engine', type: 'HASH_COMPLETED', status: 'VALIDATING', message: `HASH_COMPLETED: SHA256: ${sha256}, MD5: ${md5}, SHA1: ${sha1}`, timestamp: new Date(now - 10000).toISOString() },
-    { event_id: `evt-${now}-3`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Static Analyzer', type: 'STATIC_ANALYSIS_STARTED', status: 'ANALYZING', message: `STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for "${fileName}".`, timestamp: new Date(now - 9000).toISOString() },
-    { event_id: `evt-${now}-4`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Static Analyzer', type: 'STATIC_ANALYSIS_COMPLETED', status: 'ANALYZING', message: `STATIC_ANALYSIS_COMPLETED: Format=${sampleFeatures.detectedFormat}, Entropy=${sampleFeatures.entropy}, Sections=${sampleFeatures.sectionCount}, Strings=${sampleFeatures.totalStrings}.`, timestamp: new Date(now - 8000).toISOString() },
-    { event_id: `evt-${now}-5`, investigation_id: caseId, agent_id: 'ioc-extraction', agent_name: 'IOC Extraction', type: 'IOC_DISCOVERED', status: 'ANALYZING', message: `IOC_DISCOVERED: Extracted ${rawExtractedIOCs.length} unique indicators with line and byte-offset provenance.`, timestamp: new Date(now - 7000).toISOString() },
-    { event_id: `evt-${now}-6`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Malware Analysis', type: 'MALWARE_ANALYSIS_STARTED', status: 'ANALYZING', message: 'MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.', timestamp: new Date(now - 6000).toISOString() },
-    { event_id: `evt-${now}-7`, investigation_id: caseId, agent_id: 'threat-intel', agent_name: 'Threat Intelligence', type: 'TOOL_QUERY_STARTED', status: 'ANALYZING', message: `TOOL_QUERY_STARTED: Dispatching ${extractedIps.length + extractedDomains.length + extractedUrls.length} indicators to external tool gateway.`, timestamp: new Date(now - 5000).toISOString() },
-    { event_id: `evt-${now}-8`, investigation_id: caseId, agent_id: 'threat-intel', agent_name: 'Threat Intelligence', type: 'TOOL_QUERY_COMPLETED', status: 'ANALYZING', message: 'TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.', timestamp: new Date(now - 4000).toISOString() },
-    { event_id: `evt-${now}-9`, investigation_id: caseId, agent_id: 'specialists', agent_name: 'Specialist Agents', type: 'AGENT_COMPLETED', status: 'ANALYZING', message: `AGENT_COMPLETED: Specialist fleet produced ${agentFindings.length} structured, evidence-backed agent findings.`, timestamp: new Date(now - 3000).toISOString() },
-    { event_id: `evt-${now}-10`, investigation_id: caseId, agent_id: 'verification-agent', agent_name: 'Verification Agent', type: 'VERIFICATION_STARTED', status: 'VERIFYING', message: 'VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.', timestamp: new Date(now - 2000).toISOString() },
-    { event_id: `evt-${now}-11`, investigation_id: caseId, agent_id: 'verification-agent', agent_name: 'Verification Agent', type: 'VERIFICATION_COMPLETED', status: 'VERIFYING', message: `VERIFICATION_COMPLETED: Generated verification matrix with ${verificationMatrix.length} audited items.`, timestamp: new Date(now - 1000).toISOString() },
-    { event_id: `evt-${now}-12`, investigation_id: caseId, agent_id: 'report-generator', agent_name: 'Report Generator', type: 'REPORT_GENERATED', status: 'COMPLETED', message: `REPORT_GENERATED: Investigation Report ${caseNumber} compiled with canonical verdict ${canonicalVerdict.toUpperCase()}.`, timestamp: new Date(now).toISOString() },
+    { event_id: `evt-${now}-1`, investigation_id: caseId, agent_id: 'system', agent_name: 'Evidence Intake', type: 'UPLOAD_STARTED', canonicalEvent: 'file.received', status: 'RECEIVED', message: `UPLOAD_STARTED: Evidence "${fileName}" (${size} bytes) received and persisted.`, timestamp: new Date(now - 11000).toISOString() },
+    { event_id: `evt-${now}-2`, investigation_id: caseId, agent_id: 'system', agent_name: 'Fingerprint Engine', type: 'HASH_COMPLETED', canonicalEvent: 'hash.calculated', status: 'VALIDATING', message: `HASH_COMPLETED: SHA256: ${sha256}, MD5: ${md5}, SHA1: ${sha1}`, timestamp: new Date(now - 10000).toISOString() },
+    { event_id: `evt-${now}-3`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Static Analyzer', type: 'STATIC_ANALYSIS_STARTED', canonicalEvent: 'extraction.started', status: 'ANALYZING', message: `STATIC_ANALYSIS_STARTED: Extracting strings, PE/ELF headers, imports, sections, and Shannon entropy for "${fileName}".`, timestamp: new Date(now - 9000).toISOString() },
+    { event_id: `evt-${now}-4`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Static Analyzer', type: 'STATIC_ANALYSIS_COMPLETED', canonicalEvent: 'file.identified', status: 'ANALYZING', message: `STATIC_ANALYSIS_COMPLETED: Format=${sampleFeatures.detectedFormat}, Entropy=${sampleFeatures.entropy}, Sections=${sampleFeatures.sectionCount}, Strings=${sampleFeatures.totalStrings}.`, timestamp: new Date(now - 8000).toISOString() },
+    { event_id: `evt-${now}-5`, investigation_id: caseId, agent_id: 'ioc-extraction', agent_name: 'IOC Extraction', type: 'IOC_DISCOVERED', canonicalEvent: 'ioc.discovered', status: 'ANALYZING', message: `IOC_DISCOVERED: Extracted ${rawExtractedIOCs.length} unique indicators with line and byte-offset provenance.`, timestamp: new Date(now - 7000).toISOString() },
+    { event_id: `evt-${now}-6`, investigation_id: caseId, agent_id: 'malware-analysis', agent_name: 'Malware Analysis', type: 'MALWARE_ANALYSIS_STARTED', canonicalEvent: 'agent.started', status: 'ANALYZING', message: 'MALWARE_ANALYSIS_STARTED: Evaluating opcode heuristics, YARA rules, similarity vectors, and learned dataset models.', timestamp: new Date(now - 6000).toISOString() },
+    { event_id: `evt-${now}-7`, investigation_id: caseId, agent_id: 'threat-intel', agent_name: 'Threat Intelligence', type: 'TOOL_QUERY_STARTED', canonicalEvent: 'tool.started', status: 'ANALYZING', message: `TOOL_QUERY_STARTED: Dispatching ${extractedIps.length + extractedDomains.length + extractedUrls.length} indicators to external tool gateway.`, timestamp: new Date(now - 5000).toISOString() },
+    { event_id: `evt-${now}-8`, investigation_id: caseId, agent_id: 'threat-intel', agent_name: 'Threat Intelligence', type: 'TOOL_QUERY_COMPLETED', canonicalEvent: 'tool.completed', status: 'ANALYZING', message: 'TOOL_QUERY_COMPLETED: External tool lookups normalized and stored in evidence repository.', timestamp: new Date(now - 4000).toISOString() },
+    { event_id: `evt-${now}-9`, investigation_id: caseId, agent_id: 'specialists', agent_name: 'Specialist Agents', type: 'AGENT_COMPLETED', canonicalEvent: 'agent.finding', status: 'ANALYZING', message: `AGENT_COMPLETED: Specialist fleet produced ${agentFindings.length} structured, evidence-backed agent findings.`, timestamp: new Date(now - 3000).toISOString() },
+    { event_id: `evt-${now}-10`, investigation_id: caseId, agent_id: 'verification-agent', agent_name: 'Verification Agent', type: 'VERIFICATION_STARTED', canonicalEvent: 'verification.started', status: 'VERIFYING', message: 'VERIFICATION_STARTED: Auditing specialist claims against artifact evidence and checking for contradictions.', timestamp: new Date(now - 2000).toISOString() },
+    { event_id: `evt-${now}-11`, investigation_id: caseId, agent_id: 'verification-agent', agent_name: 'Verification Agent', type: 'VERIFICATION_COMPLETED', canonicalEvent: 'verification.completed', status: 'VERIFYING', message: `VERIFICATION_COMPLETED: Generated verification matrix with ${verificationMatrix.length} audited items.`, timestamp: new Date(now - 1000).toISOString() },
+    { event_id: `evt-${now}-12`, investigation_id: caseId, agent_id: 'report-generator', agent_name: 'Report Generator', type: 'REPORT_GENERATED', canonicalEvent: 'verdict.generated', status: 'COMPLETED', message: `REPORT_GENERATED: Investigation Report ${caseNumber} compiled with canonical verdict ${canonicalVerdict.toUpperCase()}.`, timestamp: new Date(now).toISOString() },
   ];
   inMemoryEvents.set(caseId, events);
   saveStateToDisk();
@@ -2880,6 +3002,7 @@ app.get('/api/investigations/live-activity', (_req: Request, res: Response) => {
     agentName: e.agent_name || (e.agent_id === 'system' ? 'SYSTEM' : e.agent_id),
     agentType: e.agent_id === 'threat-intel' ? 'threat-intel' : e.agent_id === 'verification-agent' ? 'archon' : 'malware-analysis',
     action: e.message,
+    canonicalEvent: e.canonicalEvent || e.type,
     type: e.type === 'FINDING_RECORDED' ? 'warning' : 'info',
     stage: e.status,
   }));
@@ -2890,6 +3013,11 @@ app.get('/api/investigations/live-activity', (_req: Request, res: Response) => {
 app.get('/api/malware-intel/evaluate', (_req: Request, res: Response) => {
   const metrics = evaluateMalwareDetector();
   res.json({ success: true, metrics });
+});
+
+app.get('/api/malware-intel/system-metrics', (_req: Request, res: Response) => {
+  const systemMetrics = computeSystemEvaluationMetrics();
+  res.json({ success: true, systemMetrics });
 });
 
 app.post('/api/malware-intel/evaluate', (req: Request, res: Response) => {

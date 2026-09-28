@@ -5,7 +5,23 @@ import { AddressInfo } from 'net';
 import { Server } from 'http';
 import { app, getPersistedSamples, getPersistedAnalyses, getPersistedFindings, getPersistedEvidence } from '../server';
 import { analyzeUploadedBytes } from '../src/utils/binaryAnalysis';
-import { generateFinding } from '../src/utils/multiAgentAnalysis';
+import {
+  generateFinding,
+  correlateFindingsAcrossAgents,
+  buildAgentConsensus,
+  buildVerificationMatrix,
+  buildFinalVerdictDetail,
+} from '../src/utils/multiAgentAnalysis';
+import { buildEvidenceContext } from '../src/utils/artifactEvidence';
+import {
+  extractIOCs,
+  extractIPs,
+  extractDomains,
+  extractURLs,
+  extractRegistryKeys,
+  extractMutexes,
+  formatNumberedIOCList,
+} from '../src/utils/iocExtraction';
 import { EvidenceArtifact } from '../src/types';
 
 let server: Server;
@@ -436,5 +452,106 @@ describe('End-to-End Malware Investigation Pipeline Audit (Requirements 1-9)', (
         c.includes('Learned dataset match')
       )
     ).toBe(true);
+  });
+
+  it('10. Validates Phases 1-15: EvidenceContext, IOC deduplication & numbered list, StandardizedAgentFinding, provenance drill-down, consensus, and system metrics', async () => {
+    const repeatedIocText = [
+      'C2 Domain: c2.darkfleet.io',
+      'C2 Domain: c2.darkfleet.io',
+      'C2 Domain: c2.darkfleet.io',
+      'Beacon IP: 185.220.101.44',
+      'Beacon IP: 185.220.101.44',
+      'URL: https://c2.darkfleet.io/stage2.bin',
+      'Registry: HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater',
+      'Mutex: Global\\DarkFleet_Mutex_v3',
+    ].join('\n');
+
+    // Phase 2: Dedicated extractors, deduplication with occurrences & locations, and numbered UI list
+    const allIocs = extractIOCs({ fileName: 'stage2_loader.exe', previewContent: repeatedIocText });
+    const domainIoc = allIocs.find((i) => (i.normalizedValue || i.value) === 'c2.darkfleet.io');
+    expect(domainIoc).toBeDefined();
+    expect(domainIoc?.occurrences).toBeGreaterThanOrEqual(3);
+    expect(domainIoc?.locations?.length).toBeGreaterThanOrEqual(1);
+
+    expect(extractIPs(repeatedIocText).length).toBeGreaterThanOrEqual(1);
+    expect(extractDomains(repeatedIocText).length).toBeGreaterThanOrEqual(1);
+    expect(extractURLs(repeatedIocText).length).toBeGreaterThanOrEqual(1);
+    expect(extractRegistryKeys(repeatedIocText).length).toBeGreaterThanOrEqual(1);
+    expect(extractMutexes(repeatedIocText).length).toBeGreaterThanOrEqual(1);
+
+    const numbered = formatNumberedIOCList(allIocs);
+    expect(numbered.length).toBe(allIocs.length);
+    expect(numbered[0]).toMatch(/^01\s+/);
+
+    // Phase 1: Normalized EvidenceContext object
+    const artifact: EvidenceArtifact = {
+      id: 'art-phase-test',
+      name: 'stage2_loader.exe',
+      type: 'file',
+      uploadedAt: new Date().toISOString(),
+      uploadedBy: 'SOC Operator',
+      status: 'Analyzing',
+      tags: ['test'],
+      previewContent: repeatedIocText,
+      analysisContent: repeatedIocText,
+    };
+    const evCtx = buildEvidenceContext(artifact);
+    expect(evCtx.fileId).toBe('art-phase-test');
+    expect(evCtx.hashes.sha256).toHaveLength(64);
+    expect(evCtx.domains).toContain('c2.darkfleet.io');
+    expect(evCtx.ips).toContain('185.220.101.44');
+    expect(evCtx.extractedArtifacts.length).toBeGreaterThanOrEqual(5);
+
+    // Phase 3, 4, 5: Standardized agent output & 'Why was this detected?' provenance
+    const malOut = generateFinding('malware-analysis', artifact);
+    expect(malOut.standardizedFindings).toBeDefined();
+    expect(malOut.standardizedFindings!.length).toBeGreaterThan(0);
+    expect(malOut.findings![0].whyDetected).toBeDefined();
+    expect(malOut.findings![0].whyDetected?.extractionMethod).toBeTruthy();
+
+    // Network Analysis on a clean file without network indicators reports 'No network artifact found' rather than N/A
+    const cleanFileArt: EvidenceArtifact = {
+      id: 'art-clean-no-net',
+      name: 'readme_notes.txt',
+      type: 'file',
+      uploadedAt: new Date().toISOString(),
+      uploadedBy: 'SOC Operator',
+      status: 'Analyzing',
+      tags: [],
+      previewContent: 'Plain offline calculation utility notes.',
+    };
+    const netCleanOut = generateFinding('network-analysis', cleanFileArt);
+    expect(netCleanOut.summary).toContain('No network artifact found');
+
+    // Phase 6, 7, 8, 9: Correlation, Agent Consensus (don't force agreement), Verification, Final Verdict
+    const findingsList = [
+      { agentId: 'malware-analysis', agentName: 'Malware Analysis', status: 'complete' as const, stepProgress: 100, ...malOut },
+      { agentId: 'ioc-extraction', agentName: 'IOC Extraction', status: 'complete' as const, stepProgress: 100, ...generateFinding('ioc-extraction', artifact) },
+      { agentId: 'threat-intel', agentName: 'Threat Intelligence', status: 'complete' as const, stepProgress: 100, ...generateFinding('threat-intel', artifact) },
+      { agentId: 'network-analysis', agentName: 'Network Analysis', status: 'complete' as const, stepProgress: 100, ...generateFinding('network-analysis', artifact) },
+    ];
+    const correlated = correlateFindingsAcrossAgents(artifact, findingsList);
+    expect(correlated.length).toBeGreaterThan(0);
+    expect(correlated[0].supportingAgents?.length).toBeGreaterThan(0);
+
+    const consensus = buildAgentConsensus(findingsList);
+    expect(consensus.requiresReview).toBe(true);
+    expect(consensus.verification).toBe('REVIEW REQUIRED');
+
+    const matrix = buildVerificationMatrix(artifact, findingsList, correlated);
+    expect(matrix.some((m) => m.status === 'SUPPORTED' || m.status === 'PARTIALLY SUPPORTED')).toBe(true);
+
+    const finalVerdict = buildFinalVerdictDetail(artifact, findingsList);
+    expect(finalVerdict.primaryEvidence.length).toBeGreaterThan(0);
+    expect(finalVerdict.supportingAgents.length).toBeGreaterThan(0);
+    expect(finalVerdict.limitations).toContain('Dynamic sandbox unavailable.');
+
+    // Phase 15: System evaluation metrics endpoint
+    const sysMetricsRes = await fetch(`${baseUrl}/api/malware-intel/system-metrics`);
+    expect(sysMetricsRes.status).toBe(200);
+    const sysMetricsBody = await sysMetricsRes.json();
+    expect(sysMetricsBody.success).toBe(true);
+    expect(sysMetricsBody.systemMetrics.detectionAccuracy).toBeGreaterThanOrEqual(90);
+    expect(sysMetricsBody.systemMetrics.iocRecall).toBe(100);
   });
 });

@@ -80,8 +80,8 @@ function defangForScanning(text: string): string {
     .replace(/\[@\]|\(@\)/gi, '@');
 }
 
-function contextAround(text: string, value: string): { lineNumber: number; offset: string; context: string } {
-  const idx = text.indexOf(value);
+function contextAround(text: string, value: string, exactIndex?: number): { lineNumber: number; offset: string; context: string } {
+  const idx = typeof exactIndex === 'number' && exactIndex >= 0 ? exactIndex : text.indexOf(value);
   if (idx === -1) return { lineNumber: 1, offset: '0x0000', context: '' };
   const before = text.slice(Math.max(0, idx - 120), idx);
   const after = text.slice(idx + value.length, idx + value.length + 120);
@@ -565,6 +565,7 @@ function extractFromText(text: string, source: string, recursionDepth = 0): Extr
   const normalizedScanText = defangForScanning(text);
   if (normalizedScanText !== text) scanTexts.push(normalizedScanText);
 
+  const seenPassLocations = new Set<string>();
   for (const scanText of scanTexts) {
     for (const det of DETECTORS) {
       det.re.lastIndex = 0;
@@ -572,9 +573,13 @@ function extractFromText(text: string, source: string, recursionDepth = 0): Extr
       while ((match = det.re.exec(scanText)) !== null) {
         const rawValue = match[0];
         const normalizedValue = normalizeDefangedValue(rawValue);
-        const { lineNumber, offset, context } = contextAround(scanText, rawValue);
+        const { lineNumber, offset, context } = contextAround(scanText, rawValue, match.index);
 
         if (det.validate && !det.validate(normalizedValue || rawValue, context)) continue;
+
+        const passLocKey = `${det.type}:${(normalizedValue || rawValue).toLowerCase()}:line${lineNumber}:${offset}`;
+        if (seenPassLocations.has(passLocKey)) continue;
+        seenPassLocations.add(passLocKey);
 
         // Context-aware role & confidence inference
         const roleInfo = inferRoleAndEvidence(context, det.type);
@@ -809,3 +814,90 @@ export function summarizeIOCsByRole(iocs: ExtractedIOC[]): Record<string, number
   }
   return counts;
 }
+
+// ---------------------------------------------------------------------------
+// Phase 2: Dedicated Category Extractors & Numbered UI Formatter
+// ---------------------------------------------------------------------------
+
+export function extractHashes(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['sha256', 'sha1', 'md5', 'sha512', 'ssdeep', 'tlsh', 'file_hash'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractIPs(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) => ['ipv4', 'ipv6'].includes(i.type))
+    .map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractDomains(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) => ['domain', 'fqdn', 'embedded_domain'].includes(i.type))
+    .map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractURLs(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) => ['url', 'embedded_url'].includes(i.type))
+    .map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractEmails(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) => i.type === 'email')
+    .map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractFilePaths(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['windows_path', 'linux_path', 'filename', 'pdb_path'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractRegistryKeys(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['registry_path', 'registry_key'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractMutexes(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['mutex', 'named_pipe'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractC2Indicators(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['c2_indicator', 'c2_address', 'campaign_id', 'config_indicator'].includes(i.type) || i.role === 'c2',
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractCertificates(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['cert_fingerprint', 'cert_info', 'ja3', 'ja3s'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractUserAgents(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) => i.type === 'user_agent')
+    .map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+export function extractEncodedStrings(text: string, source = 'strings'): ExtractedIOC[] {
+  return extractIOCs({ previewContent: text }).filter((i) =>
+    ['encoded_string', 'powershell_cmd', 'cmdline_indicator'].includes(i.type),
+  ).map((i) => ({ ...i, source: i.source === 'preview content' ? source : i.source }));
+}
+
+/**
+ * Formats all discovered IOCs as an indexed list:
+ * "01 SHA256   9f86d0..."
+ * "02 DOMAIN   c2.darkfleet.io"
+ */
+export function formatNumberedIOCList(iocs: ExtractedIOC[]): string[] {
+  return iocs.map((ioc, idx) => {
+    const num = String(idx + 1).padStart(2, '0');
+    const typeLabel = ioc.type.toUpperCase().padEnd(10, ' ');
+    const val = ioc.normalizedValue || ioc.value;
+    const occ = (ioc.occurrences || 1) > 1 ? ` [Occurrences: ${ioc.occurrences}]` : '';
+    return `${num} ${typeLabel} ${val}${occ}`;
+  });
+}
+

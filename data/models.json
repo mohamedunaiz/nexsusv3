@@ -1,11 +1,11 @@
 [
   {
-    "version": "v3.6-adaptive-dataset",
+    "version": "v3.8-adaptive-dataset",
     "status": "DEPLOYED",
     "accuracy": 100,
     "f1Score": 1,
-    "samplesTrained": 19,
-    "deployedAt": "2026-09-27"
+    "samplesTrained": 29,
+    "deployedAt": "2026-09-28"
   },
   {
     "version": "v3.4-heuristic-forest",
@@ -22,6 +22,22 @@
     "f1Score": 0.938,
     "samplesTrained": 180,
     "deployedAt": "2026-02-18"
+  },
+  {
+    "version": "v3.7-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 24,
+    "deployedAt": "2026-09-27"
+  },
+  {
+    "version": "v3.6-adaptive-dataset",
+    "status": "DEPLOYED",
+    "accuracy": 100,
+    "f1Score": 1,
+    "samplesTrained": 19,
+    "deployedAt": "2026-09-27"
   },
   {
     "version": "v3.5-adaptive-dataset",

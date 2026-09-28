@@ -1,4 +1,6 @@
-import { EvidenceArtifact, MalwareStaticFeatures } from '../types';
+import { EvidenceArtifact, EvidenceContext, MalwareStaticFeatures } from '../types';
+import { extractIOCs } from './iocExtraction';
+import { computeSha256Hex } from './binaryAnalysis';
 
 export interface ArtifactEvidenceProfile {
   text: string;
@@ -171,3 +173,153 @@ export function evidenceContext(profile: ArtifactEvidenceProfile): string {
   if (profile.hasNetworkPrimitive) return profile.hasExecutableContext ? 'network primitive present without a corroborating behavior chain' : 'network-related text without executable context';
   return 'no correlated network or execution behavior identified';
 }
+
+/**
+ * Phase 1 — Step 1: Create one normalized EvidenceContext object that all agents consume.
+ */
+export function buildEvidenceContext(artifact: EvidenceArtifact): EvidenceContext {
+  if (artifact.evidenceContext) {
+    return artifact.evidenceContext;
+  }
+
+  const sample = artifact.malwareIntelSample;
+  const features: any = sample?.features || {};
+  const rawText = [
+    artifact.analysisContent || artifact.previewContent || '',
+    artifact.description || '',
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  const profile = buildArtifactEvidenceProfile(artifact);
+  const iocs = extractIOCs({
+    fileName: artifact.name,
+    previewContent: rawText,
+    staticStrings: sample?.features
+      ? {
+          suspicious: sample.features.suspiciousStrings,
+          network: sample.features.networkIndicatorStrings,
+          persistence: sample.features.persistenceIndicatorStrings,
+        }
+      : undefined,
+  });
+
+  const sha256 =
+    artifact.sha256 ||
+    sample?.sha256 ||
+    iocs.find((i) => i.type === 'sha256')?.value ||
+    computeSha256Hex(rawText || artifact.name);
+  const md5 = sample?.md5 || iocs.find((i) => i.type === 'md5')?.value;
+  const sha1 = sample?.sha1 || iocs.find((i) => i.type === 'sha1')?.value;
+
+  const stringsList = Array.from(
+    new Set([
+      ...(features.suspiciousStrings || []),
+      ...(features.networkIndicatorStrings || []),
+      ...(features.persistenceIndicatorStrings || []),
+      ...(rawText
+        ? rawText
+            .split(/\r?\n/)
+            .map((l) => l.trim())
+            .filter((l) => l.length >= 4)
+            .slice(0, 100)
+        : []),
+    ]),
+  );
+
+  const urls = iocs.filter((i) => ['url', 'embedded_url'].includes(i.type)).map((i) => i.normalizedValue || i.value);
+  const domains = iocs.filter((i) => ['domain', 'fqdn', 'embedded_domain'].includes(i.type)).map((i) => i.normalizedValue || i.value);
+  const ips = iocs.filter((i) => ['ipv4', 'ipv6'].includes(i.type)).map((i) => i.normalizedValue || i.value);
+  const filePaths = iocs
+    .filter((i) => ['windows_path', 'linux_path', 'filename', 'pdb_path'].includes(i.type))
+    .map((i) => i.normalizedValue || i.value);
+  const registryKeys = iocs
+    .filter((i) => ['registry_path', 'registry_key'].includes(i.type))
+    .map((i) => i.normalizedValue || i.value);
+
+  const imports = Array.from(
+    new Set([
+      ...(features.peSuspiciousImportedApis || []),
+      ...(features.importedApis || []),
+      ...profile.suspiciousApis.map((a) => a.api),
+    ]),
+  );
+
+  const sections = (features.sections || features.peSections || []).map((s: any) => ({
+    name: s.name || '.text',
+    virtualSize: s.virtualSize ?? s.size ?? 0,
+    virtualAddress: s.virtualAddress ?? 0,
+    rawSize: s.rawSize ?? s.size ?? 0,
+    rawAddress: s.rawAddress ?? 0,
+    entropy: s.entropy ?? profile.entropy,
+    rwx: Boolean(s.rwx || (features.rwxSections || []).includes(s.name)),
+    characteristics: s.characteristics ?? 0,
+  }));
+
+  return {
+    fileId: artifact.id,
+    fileName: artifact.name,
+    fileType: sample?.fileFormat || artifact.type,
+    size: sample?.sizeBytes || (artifact.size ? parseInt(artifact.size, 10) || rawText.length : rawText.length),
+    hashes: {
+      md5,
+      sha1,
+      sha256,
+    },
+    strings: stringsList,
+    urls,
+    domains,
+    ips,
+    filePaths,
+    registryKeys,
+    pe: profile.isPE
+      ? {
+          isPE: true,
+          machine: features.peHeaders?.machine || profile.architecture,
+          subsystem: features.peHeaders?.subsystem || profile.subsystem,
+          is64Bit: Boolean(features.peHeaders?.is64Bit ?? profile.architecture.includes('64')),
+          entryPointRva: features.peHeaders?.entryPointRva ?? 0x1000,
+          imageBase: features.peHeaders?.imageBase ?? '0x140000000',
+          sectionCount: sections.length || 1,
+          timeDateStamp: features.peHeaders?.timeDateStamp ?? 0,
+          importedDlls: features.peImportedDlls || [],
+          suspiciousApis: imports,
+          rwxSections: profile.rwxSections,
+        }
+      : undefined,
+    elf: profile.isELF
+      ? {
+          isELF: true,
+          class: '64-bit',
+          endianness: 'little',
+          machine: features.elfHeaders?.machine || 'x86-64',
+          type: features.elfHeaders?.type || 'EXEC',
+        }
+      : undefined,
+    imports,
+    exports: features.exports || (rawText.toLowerCase().includes('reflectiveloader') ? ['ReflectiveLoader'] : []),
+    entropy: profile.entropy,
+    sections,
+    extractedArtifacts: iocs.map((ioc) => ({
+      type: ioc.type,
+      value: ioc.value,
+      normalizedValue: ioc.normalizedValue,
+      source: ioc.source,
+      location: ioc.location || `offset ${ioc.offset || '0x0000'}`,
+      occurrences: ioc.occurrences || 1,
+      locations: ioc.locations || [ioc.location || ioc.source],
+      context: ioc.context,
+      confidence: ioc.confidence,
+    })),
+    sourceMetadata: {
+      uploadedAt: artifact.uploadedAt,
+      uploadedBy: artifact.uploadedBy,
+      mimeType: artifact.mimeType || 'application/octet-stream',
+      caseId: artifact.caseId,
+      attackTechniques: profile.attackTechniques,
+      packerIndicators: profile.packerIndicators,
+      digitalSignatureFound: profile.digitalSignatureFound,
+    },
+  };
+}
+

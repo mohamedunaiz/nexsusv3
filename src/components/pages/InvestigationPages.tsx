@@ -21,7 +21,13 @@ import {
 import { CaseItem, ActivityItem, StreamEvent, SpecialistAgent, EvidenceArtifact } from "../../types";
 import { PageShell, Panel, StatTile, Pill, severityTone } from "./PageShell";
 import { AgentCard } from "../command-center/AgentCard";
-import { correlateFindingsAcrossAgents, buildVerificationMatrix } from "../../utils/multiAgentAnalysis";
+import {
+  correlateFindingsAcrossAgents,
+  buildVerificationMatrix,
+  buildAgentConsensus,
+  buildFinalVerdictDetail,
+} from "../../utils/multiAgentAnalysis";
+import { extractIOCs, formatNumberedIOCList } from "../../utils/iocExtraction";
 
 const btn =
   "flex items-center gap-1.5 rounded-md border border-purple-500/40 bg-purple-500/10 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-purple-200 transition-colors hover:bg-purple-500/20";
@@ -741,23 +747,34 @@ export const InvestigationPage: React.FC<{
                                         </div>
                                       )}
                                       {f.status === "complete" && f.findings && f.findings.length > 0 && (
-                                        <ul className="mt-1 space-y-0.5 border-l border-purple-500/20 pl-1.5">
-                                          {f.findings.slice(0, 6).map((ev, i) => (
+                                        <ul className="mt-1 space-y-1 border-l border-purple-500/20 pl-1.5">
+                                          {f.findings.slice(0, 8).map((ev, i) => (
                                             <li key={i} className="font-mono text-[8.5px] leading-snug text-purple-200/60">
-                                              <span className="text-purple-300/80">{ev.claim}:</span>{" "}
-                                              {ev.evidence}
-                                              <span className="text-purple-400/50">
-                                                {" "}— {ev.source} ({Math.round(ev.confidence * 100)}%)
-                                              </span>
-                                              {ev.evidenceType && (
-                                                <span className="ml-1 text-cyan-300/70">[{ev.evidenceType}]</span>
-                                              )}
-                                              {ev.context && (
-                                                <span className="block text-slate-400/60">Context: {ev.context}</span>
-                                              )}
-                                              {ev.limitation && (
-                                                <span className="block text-amber-200/50">Limit: {ev.limitation}</span>
-                                              )}
+                                              <details className="group cursor-pointer">
+                                                <summary className="list-none">
+                                                  <span className="text-purple-300/80 font-semibold">{ev.claim}:</span>{" "}
+                                                  {ev.evidence}
+                                                  <span className="text-purple-400/50">
+                                                    {" "}— {ev.source} ({Math.round(ev.confidence * 100)}%)
+                                                  </span>
+                                                  {ev.evidenceType && (
+                                                    <span className="ml-1 text-cyan-300/70">[{ev.evidenceType}]</span>
+                                                  )}
+                                                  <span className="ml-1.5 text-[7.5px] text-purple-400/70 underline group-open:text-cyan-300">
+                                                    Why detected?
+                                                  </span>
+                                                </summary>
+                                                <div className="mt-1 rounded border border-purple-500/20 bg-black/50 p-1.5 text-[8px] text-purple-200/80 space-y-0.5">
+                                                  <p className="text-cyan-300 font-semibold">Why was this detected?</p>
+                                                  <p><span className="text-purple-400">Evidence:</span> {ev.whyDetected?.evidence || ev.evidence}</p>
+                                                  <p><span className="text-purple-400">↓ Extraction method:</span> {ev.whyDetected?.extractionMethod || ev.analysis_method || ev.source} ({ev.location || "0x0000"})</p>
+                                                  <p><span className="text-purple-400">↓ Agent reasoning:</span> {ev.whyDetected?.agentReasoning || ev.reason || ev.claim}</p>
+                                                  <p><span className="text-purple-400">↓ External confirmation:</span> {ev.whyDetected?.externalConfirmation || "Pending external threat-intel confirmation"}</p>
+                                                  {ev.limitation && (
+                                                    <p className="text-amber-200/70">Limitation: {ev.limitation}</p>
+                                                  )}
+                                                </div>
+                                              </details>
                                             </li>
                                           ))}
                                         </ul>
@@ -781,14 +798,77 @@ export const InvestigationPage: React.FC<{
                                 </div>
                               )}
 
-                              {/* Cross-Agent Correlation & Adversarial Verification */}
+                              {/* Phase 2 Step 5, Phase 7, Phase 8, Phase 9: Discovered IOCs, Agent Consensus, Final Verdict, Correlation & Verification */}
                               {isExpanded && art.agentFindings && art.agentFindings.some((f) => f.status === "complete") && (() => {
                                 const correlations = correlateFindingsAcrossAgents(art, art.agentFindings || []);
                                 const verifications = buildVerificationMatrix(art, art.agentFindings || [], correlations);
-                                if (correlations.length === 0 && verifications.length === 0) return null;
+                                const consensus = buildAgentConsensus(art.agentFindings || []);
+                                const finalVerdict = buildFinalVerdictDetail(art, art.agentFindings || []);
+                                const allArtifactIOCs = extractIOCs({
+                                  fileName: art.name,
+                                  previewContent: art.analysisContent || art.previewContent,
+                                  staticStrings: art.malwareIntelSample?.features
+                                    ? {
+                                        suspicious: art.malwareIntelSample.features.suspiciousStrings,
+                                        network: art.malwareIntelSample.features.networkIndicatorStrings,
+                                        persistence: art.malwareIntelSample.features.persistenceIndicatorStrings,
+                                      }
+                                    : undefined,
+                                });
+                                const numberedIOCLines = formatNumberedIOCList(allArtifactIOCs);
 
                                 return (
                                   <div className="mt-2.5 space-y-2 border-t border-purple-500/15 pt-2">
+                                    {/* Phase 2 Step 5: Show ALL discovered IOCs in the UI */}
+                                    <div className="rounded border border-rose-500/20 bg-rose-950/15 p-2">
+                                      <div className="flex items-center justify-between">
+                                        <span className="font-mono text-[9px] uppercase tracking-wider text-rose-300 font-semibold">
+                                          {allArtifactIOCs.length} IOCs detected
+                                        </span>
+                                      </div>
+                                      {numberedIOCLines.length > 0 ? (
+                                        <div className="mt-1.5 max-h-36 overflow-y-auto space-y-0.5 rounded bg-black/40 p-1.5 font-mono text-[8.5px] text-purple-100">
+                                          {allArtifactIOCs.map((ioc, idx) => (
+                                            <div key={`${ioc.type}-${ioc.value}-${idx}`} className="flex items-center justify-between gap-2 border-b border-purple-500/10 py-0.5 last:border-0">
+                                              <span className="truncate">
+                                                <span className="text-purple-400 mr-1.5">{String(idx + 1).padStart(2, "0")}</span>
+                                                <span className="text-cyan-300 mr-1.5 font-bold">{ioc.type.toUpperCase()}</span>
+                                                <span className="text-white">{ioc.normalizedValue || ioc.value}</span>
+                                              </span>
+                                              <span className="shrink-0 text-[7.5px] text-purple-300/60">
+                                                Src: {ioc.source} · Occ: {ioc.occurrences || 1} · {Math.round(ioc.confidence * 100)}%
+                                              </span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      ) : (
+                                        <p className="mt-1 font-mono text-[8.5px] text-purple-300/50">0 IOCs discovered in static content.</p>
+                                      )}
+                                    </div>
+
+                                    {/* Phase 7 & Phase 9: Agent Consensus & Final Verdict Breakdown */}
+                                    <div className="rounded border border-emerald-500/20 bg-emerald-950/10 p-2 font-mono text-[8.5px]">
+                                      <div className="flex items-center justify-between border-b border-emerald-500/15 pb-1">
+                                        <span className="text-[9px] uppercase tracking-wider text-emerald-300 font-semibold">
+                                          AGENT CONSENSUS & FINAL VERDICT
+                                        </span>
+                                        <span className="rounded bg-purple-500/20 px-1.5 py-0.5 font-bold text-white">
+                                          {finalVerdict.verdict} ({finalVerdict.confidence}%)
+                                        </span>
+                                      </div>
+                                      <div className="mt-1.5 grid grid-cols-2 gap-1 text-[8px]">
+                                        <div><span className="text-purple-300/70">Malware Analysis:</span> <span className="text-white font-bold">{consensus.malwareAnalysis}</span></div>
+                                        <div><span className="text-purple-300/70">IOC Extraction:</span> <span className="text-white font-bold">{consensus.iocExtraction}</span></div>
+                                        <div><span className="text-purple-300/70">Threat Intelligence:</span> <span className="text-white font-bold">{consensus.threatIntelligence}</span></div>
+                                        <div><span className="text-purple-300/70">Verification:</span> <span className="text-amber-300 font-bold">{consensus.verification}</span></div>
+                                      </div>
+                                      <div className="mt-1.5 space-y-0.5 border-t border-purple-500/10 pt-1 text-[8px] text-purple-200/80">
+                                        <p><span className="text-purple-400">Primary evidence:</span> {finalVerdict.primaryEvidence.slice(0, 2).join(" • ")}</p>
+                                        <p><span className="text-purple-400">Supporting agents:</span> {finalVerdict.supportingAgents.join(", ") || "None"}</p>
+                                        <p><span className="text-purple-400">Contradictions:</span> {finalVerdict.contradictions.join(" ")}</p>
+                                        <p><span className="text-purple-400">Limitations:</span> {finalVerdict.limitations.slice(0, 2).join(" ")}</p>
+                                      </div>
+                                    </div>
                                     {correlations.length > 0 && (
                                       <div className="rounded border border-cyan-500/20 bg-cyan-950/20 p-2">
                                         <div className="flex items-center justify-between">
