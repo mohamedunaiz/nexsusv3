@@ -47,8 +47,8 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
   onSelectAgent,
 }) => {
   const [telemetryAgent, setTelemetryAgent] = useState<SpecialistAgent | null>(null);
-  const [flowMode, setFlowMode] = useState<FlowMode>('all');
-  const [gridViewMode, setGridViewMode] = useState<GridViewMode>('panoramic');
+  const flowMode: FlowMode = 'command';
+  const gridViewMode: GridViewMode = 'panoramic';
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const innerContainerRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,6 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
   // Hook dynamically recalculating SVG path coordinates based on getBoundingClientRect and snapping to nearest edges
   const {
     containerDimensions,
-    cardGeometries,
     rowBuses,
     stemX,
     masterBusY,
@@ -89,9 +88,9 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
   );
 
   return (
-    <div id="agent-hierarchy-section" className="space-y-2.5">
-      {/* Section Header with Tier Diagnostics, Pathway Mode Controls & Grid View Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+    <div id="agent-hierarchy-section" className="space-y-2.5 w-full">
+      {/* Section Header with Tier Diagnostics & Command Bus Status */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-0.5">
         <div>
           <h3 className="text-xs sm:text-sm font-cyber font-bold uppercase tracking-widest text-white flex items-center gap-2">
             <span>AGENT ORCHESTRATION HIERARCHY</span>
@@ -104,76 +103,16 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
           </p>
         </div>
 
-        {/* Controls: Grid View Toggle, Flow Mode Switcher & Live Patrol Status */}
+        {/* Controls: Command Bus Indicator & Live Patrol Status */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* Grid Layout Toggle: Panoramic (1x8) vs Matrix (2x4) */}
+          {/* Command Bus Indicator */}
           <div className="flex items-center rounded-lg bg-[#0d051d] p-0.5 border border-purple-500/30 text-[10px] font-mono">
-            <button
-              type="button"
-              onClick={() => setGridViewMode('panoramic')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded transition-all cursor-pointer ${
-                gridViewMode === 'panoramic'
-                  ? 'bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]'
-                  : 'text-purple-300 hover:text-white'
-              }`}
-              title="1x8 Panoramic Horizontal Bus Bar View"
-            >
-              <Columns className="w-2.5 h-2.5" />
-              <span>1x8 Bus</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setGridViewMode('matrix')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded transition-all cursor-pointer ${
-                gridViewMode === 'matrix'
-                  ? 'bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]'
-                  : 'text-purple-300 hover:text-white'
-              }`}
-              title="2x4 Matrix Grid View (fits compact / multi-column layouts)"
-            >
-              <LayoutGrid className="w-2.5 h-2.5" />
-              <span>2x4 Grid</span>
-            </button>
-          </div>
-
-          {/* Flow Mode Switcher */}
-          <div className="flex items-center rounded-lg bg-[#0d051d] p-0.5 border border-purple-500/30 text-[10px] font-mono">
-            <button
-              type="button"
-              onClick={() => setFlowMode('all')}
-              className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                flowMode === 'all'
-                  ? 'bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]'
-                  : 'text-purple-300 hover:text-white'
-              }`}
-              title="Display all executive command lines and inter-agent pipeline telemetry"
-            >
-              All Pathways
-            </button>
-            <button
-              type="button"
-              onClick={() => setFlowMode('command')}
-              className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                flowMode === 'command'
-                  ? 'bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]'
-                  : 'text-purple-300 hover:text-white'
-              }`}
-              title="Show direct Archon CEO delegation bus lines to specialist pods"
+            <span
+              className="px-2.5 py-0.5 rounded bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]"
+              title="Direct Archon CEO delegation bus lines to specialist pods"
             >
               Command Bus
-            </button>
-            <button
-              type="button"
-              onClick={() => setFlowMode('pipeline')}
-              className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                flowMode === 'pipeline'
-                  ? 'bg-purple-600 text-white font-bold shadow-[0_0_8px_rgba(168,85,247,0.5)]'
-                  : 'text-purple-300 hover:text-white'
-              }`}
-              title="Show sequential data pipeline flow between specialist stages"
-            >
-              Pipeline Stream
-            </button>
+            </span>
           </div>
 
           {/* Active Patrol Legend */}
@@ -187,16 +126,35 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
         </div>
       </div>
 
-      {/* Unified Synchronized Canvas Container for SVG Overlay and Agent Card Nodes */}
+      {/* Operational Hierarchy Tier Headers (Positioned cleanly above the SVG Bus Corridor) */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-8 gap-1.5 text-[9px] font-mono select-none">
+        {/* Tier 1: Intake & Triage */}
+        <div className="lg:col-span-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-300/90 min-w-0">
+          <span className="font-bold tracking-wider truncate">TIER 1: INTAKE &amp; TRIAGE</span>
+          <span className="text-[7.5px] text-emerald-400/75 uppercase shrink-0">Sensors &amp; Extraction</span>
+        </div>
+        {/* Tier 2: Correlation & Audit */}
+        <div className="lg:col-span-3 flex items-center justify-between gap-1 px-2.5 py-1 rounded-md bg-sky-950/40 border border-sky-500/30 text-sky-300/90 min-w-0">
+          <span className="font-bold tracking-wider truncate">TIER 2: CORRELATION &amp; AUDIT</span>
+          <span className="text-[7.5px] text-sky-400/75 uppercase shrink-0">PCAP · Feeds · Code</span>
+        </div>
+        {/* Tier 3: Governance & Delivery */}
+        <div className="lg:col-span-3 flex items-center justify-between gap-1 px-2.5 py-1 rounded-md bg-purple-950/40 border border-purple-500/30 text-purple-300/90 min-w-0">
+          <span className="font-bold tracking-wider truncate">TIER 3: GOVERNANCE &amp; SYNTHESIS</span>
+          <span className="text-[7.5px] text-purple-400/75 uppercase shrink-0">Vector · Audit · Brief</span>
+        </div>
+      </div>
+
+      {/* Unified Synchronized Canvas Container for SVG Command Bus Overlay and Agent Card Nodes */}
       <div 
         ref={scrollContainerRef}
-        className={`w-full ${gridViewMode === 'panoramic' ? 'overflow-x-auto pb-2 custom-scrollbar' : ''}`}
+        className="w-full"
       >
         <div 
           ref={innerContainerRef} 
-          className={`${gridViewMode === 'panoramic' ? 'min-w-[1040px]' : 'w-full'} flex flex-col relative`}
+          className="w-full flex flex-col relative"
         >
-          {/* Dynamic Absolute SVG Overlay covering the entire inner container */}
+          {/* Dynamic Absolute SVG Overlay covering the bus corridor and cards */}
           <svg 
             width={containerDimensions.width}
             height={containerDimensions.height}
@@ -233,10 +191,10 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
               </filter>
             </defs>
 
-            {/* ARCHON Central Ingress Stem & Beacon Hub (y = row0BusY) */}
+            {/* ARCHON Central Ingress Stem & Beacon Hub */}
             {(flowMode === 'all' || flowMode === 'command') && (
               <g id="archon-central-stem">
-                {/* Central Vertical Stem from CEO node above down to bus bar */}
+                {/* Central Vertical Stem inside the Bus Corridor */}
                 <line 
                   x1={stemX} 
                   y1={0} 
@@ -258,18 +216,31 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                   className="animate-data-flow"
                 />
                 {/* Central Archon Hub Beacon */}
-                <circle cx={stemX} cy={masterBusY} r="5" fill="#a855f7" className="animate-pulse" />
-                <circle cx={stemX} cy={masterBusY} r="8" fill="none" stroke="#c084fc" strokeWidth="1" strokeOpacity="0.7" />
-                <circle cx={stemX} cy={masterBusY} r="2.5" fill="#ffffff" />
-                {/* Archon Directive Port Label */}
+                <circle cx={stemX} cy={masterBusY} r="4.5" fill="#a855f7" className="animate-pulse" />
+                <circle cx={stemX} cy={masterBusY} r="7.5" fill="none" stroke="#c084fc" strokeWidth="1" strokeOpacity="0.7" />
+                <circle cx={stemX} cy={masterBusY} r="2" fill="#ffffff" />
+                {/* Centered Archon Directive Port Label in corridor gap */}
+                <rect
+                  x={stemX - 42}
+                  y={masterBusY + 6}
+                  width={84}
+                  height={11}
+                  rx={3}
+                  fill="#090316"
+                  fillOpacity="0.9"
+                  stroke="#a855f7"
+                  strokeOpacity="0.35"
+                  strokeWidth="0.75"
+                />
                 <text 
-                  x={stemX + 10} 
-                  y={masterBusY - 3} 
-                  fill="#c084fc" 
-                  fontSize="7.5" 
+                  x={stemX} 
+                  y={masterBusY + 14} 
+                  textAnchor="middle"
+                  fill="#d8b4fe" 
+                  fontSize="6.8" 
                   fontFamily="monospace" 
                   fontWeight="bold" 
-                  opacity="0.85"
+                  letterSpacing="0.04em"
                 >
                   ARCHON MASTER BUS
                 </text>
@@ -452,40 +423,11 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
             )}
           </svg>
 
-          {/* Operational Hierarchy Tier Headers */}
-          <div className={`w-full mb-1 text-[9px] font-mono select-none ${
-            gridViewMode === 'panoramic'
-              ? 'grid grid-cols-8 gap-1.5 sm:gap-2 xl:gap-2.5'
-              : 'grid grid-cols-1 sm:grid-cols-3 gap-1.5'
-          }`}>
-            {/* Tier 1: Intake & Triage */}
-            <div className={`${gridViewMode === 'panoramic' ? 'col-span-2' : ''} flex items-center justify-between px-2 py-0.5 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-300/90`}>
-              <span className="font-bold tracking-wider">TIER 1: INTAKE & TRIAGE</span>
-              <span className="text-[7.5px] text-emerald-400/70 uppercase">Sensors & Extraction</span>
-            </div>
-            {/* Tier 2: Correlation & Audit */}
-            <div className={`${gridViewMode === 'panoramic' ? 'col-span-3' : ''} flex items-center justify-between px-2 py-0.5 rounded-md bg-sky-950/40 border border-sky-500/30 text-sky-300/90`}>
-              <span className="font-bold tracking-wider">TIER 2: CORRELATION & AUDIT</span>
-              <span className="text-[7.5px] text-sky-400/70 uppercase">PCAP · Feeds · Code</span>
-            </div>
-            {/* Tier 3: Governance & Delivery */}
-            <div className={`${gridViewMode === 'panoramic' ? 'col-span-3' : ''} flex items-center justify-between px-2 py-0.5 rounded-md bg-purple-950/40 border border-purple-500/30 text-purple-300/90`}>
-              <span className="font-bold tracking-wider">TIER 3: GOVERNANCE & SYNTHESIS</span>
-              <span className="text-[7.5px] text-purple-400/70 uppercase">Vector · Audit · Brief</span>
-            </div>
-          </div>
-
           {/* Bus Corridor Spacing Zone: Provides exact vertical clearance for Archon master bus & labels */}
-          <div className="w-full h-8 sm:h-9 pointer-events-none" aria-hidden="true" />
+          <div className="w-full h-9 pointer-events-none" aria-hidden="true" />
 
-          {/* 8 Agent Cards in Adaptive Grid Layout */}
-          <div 
-            className={`grid gap-1.5 sm:gap-2 xl:gap-2.5 w-full ${
-              gridViewMode === 'panoramic'
-                ? 'grid-cols-8'
-                : 'grid-cols-2 sm:grid-cols-4'
-            }`}
-          >
+          {/* 8 Agent Cards in Full-Width Responsive 8-Column Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 w-full">
             {agents.map((agent, index) => {
               const isActive = agent.status === 'ACTIVE';
               const isSelected = selectedAgent?.id === agent.id;
@@ -508,7 +450,7 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                       : isActive 
                         ? 'border-purple-500/50 glow-purple' 
                         : 'border-purple-500/25'
-                  } hover:border-purple-300 hover:glow-purple-lg p-2 sm:p-2.5 xl:p-3 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 min-w-0 relative overflow-hidden`}
+                  } hover:border-purple-300 hover:glow-purple-lg p-1.5 sm:p-2 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 min-w-0 relative overflow-hidden`}
                 >
                   {/* Top Center Mechanical Socket Tab: Where connector lines terminate */}
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-1 rounded-b bg-[#1e0d3d] border-b border-x border-purple-400/50 flex items-center justify-center z-20">
@@ -527,19 +469,19 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                   />
 
                   {/* Card Top: Name & Role/Category with Tier Pill */}
-                  <div className="text-center pb-1 sm:pb-1.5 border-b border-purple-500/15 w-full pt-0.5">
+                  <div className="text-center pb-1 border-b border-purple-500/15 w-full pt-0.5">
                     <div className="flex items-center justify-center gap-1 mb-0.5">
                       <span className={`text-[7px] font-mono px-1 py-0.2 rounded border font-bold ${tierColorClass}`}>
                         {tierBadge}
                       </span>
                     </div>
                     <div 
-                      className="w-full font-mono font-bold text-white tracking-tight leading-tight group-hover:text-purple-200 min-h-[2.4em] flex flex-wrap items-center justify-center text-center px-0.5 text-[9.5px] sm:text-[10px] xl:text-[11px]"
+                      className="w-full font-mono font-bold text-white tracking-tight leading-tight group-hover:text-purple-200 min-h-[2.4em] flex flex-wrap items-center justify-center text-center px-0.5 text-[9px] sm:text-[9.5px] xl:text-[10px]"
                       title={agent.name}
                     >
                       <span className="w-full break-words leading-tight">{agent.name.toUpperCase()}</span>
                     </div>
-                    <div className="text-[8px] sm:text-[8.5px] font-mono text-purple-300/80 truncate mt-0.5" title={agent.category}>
+                    <div className="text-[8px] font-mono text-purple-300/80 truncate mt-0.5" title={agent.category}>
                       {agent.category}
                     </div>
                   </div>
@@ -567,12 +509,12 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                       )}
 
                       {/* Icon Box */}
-                      <div className={`relative w-8 h-8 sm:w-9 sm:h-9 xl:w-10 xl:h-10 rounded-xl bg-[#1d0f3c] border ${
+                      <div className={`relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#1d0f3c] border ${
                         isActive 
                           ? 'border-emerald-400/70 shadow-[0_0_12px_rgba(16,185,129,0.3)]' 
                           : 'border-purple-500/40 glow-purple-sm'
                       } flex items-center justify-center shadow-inner group-hover:border-purple-300 group-hover:scale-105 transition-all shrink-0 z-10`}>
-                        <CustomAgentIcon type={agent.id} className="w-4 h-4 sm:w-4.5 sm:h-4.5 xl:w-5 xl:h-5" glow={true} />
+                        <CustomAgentIcon type={agent.id} className="w-4 h-4 sm:w-4.5 sm:h-4.5" glow={true} />
                         
                         {/* Corner Radar Signal Dot */}
                         <span 
@@ -594,27 +536,27 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                     {/* Status Indicator Chip */}
                     <div className="flex items-center gap-1 pt-0.5">
                       <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-emerald-400 animate-ping' : 'bg-purple-400'}`} />
-                      <span className={`text-[8.5px] sm:text-[9px] font-mono font-bold ${isActive ? 'text-emerald-300' : 'text-purple-300/80'}`}>
+                      <span className={`text-[8px] sm:text-[8.5px] font-mono font-bold ${isActive ? 'text-emerald-300' : 'text-purple-300/80'}`}>
                         {isActive ? 'ACTIVE' : 'STANDBY'}
                       </span>
                     </div>
                   </div>
 
                   {/* Model & Task Info */}
-                  <div className="py-1 px-1 rounded-lg bg-[#0b0417]/80 border border-purple-500/15 space-y-0.5 text-[8px] sm:text-[8.5px] font-mono">
-                    <div className="flex items-center justify-between text-purple-300/80 truncate">
-                      <span className="text-purple-400">Model:</span>
+                  <div className="py-1 px-1.5 rounded-lg bg-[#0b0417]/80 border border-purple-500/15 space-y-0.5 text-[7.5px] sm:text-[8px] font-mono min-w-0">
+                    <div className="flex items-center justify-between text-purple-300/80 min-w-0">
+                      <span className="text-purple-400 shrink-0">Model:</span>
                       <span className="text-white font-medium truncate ml-1">{agent.model.replace('gemini-', 'Gemini ').replace('gpt-', 'GPT-')}</span>
                     </div>
-                    <div className="text-purple-300/80 truncate">
-                      <span className="text-purple-400">Task: </span>
-                      <span className="text-slate-200 truncate" title={agent.currentTask}>{agent.currentTask}</span>
+                    <div className="flex items-center justify-between text-purple-300/80 min-w-0">
+                      <span className="text-purple-400 shrink-0">Task:</span>
+                      <span className="text-slate-200 truncate ml-1" title={agent.currentTask}>{agent.currentTask}</span>
                     </div>
                   </div>
 
                   {/* Card Bottom: Progress Bar, Sparkline & Telemetry Trigger */}
-                  <div className="space-y-1 sm:space-y-1.5 pt-1.5 border-t border-purple-500/15">
-                    <div className="flex items-center justify-between text-[8px] sm:text-[8.5px] font-mono text-purple-300/80">
+                  <div className="space-y-1.5 pt-1.5 border-t border-purple-500/15">
+                    <div className="flex items-center justify-between text-[8px] font-mono text-purple-300/80">
                       <span>Cycle</span>
                       <span className="font-bold text-white">{agent.progress}%</span>
                     </div>
@@ -630,8 +572,8 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                       />
                     </div>
 
-                    {/* Mini Real-Time Sparkline */}
-                    <div className="w-full h-4.5 rounded bg-[#090317] border border-purple-500/20 overflow-hidden flex items-center justify-center p-0.5">
+                    {/* Mini Real-Time Sparkline (unclipped full height) */}
+                    <div className="w-full">
                       <AgentSparkline agentId={agent.id} isActive={isActive} type="cpu" />
                     </div>
 
@@ -643,7 +585,7 @@ export const AgentHierarchy: React.FC<AgentHierarchyProps> = ({
                         e.stopPropagation();
                         setTelemetryAgent(agent);
                       }}
-                      className="w-full py-0.5 px-1 rounded-lg bg-[#180c33] hover:bg-purple-900/50 border border-purple-500/30 hover:border-purple-400/60 text-[8px] sm:text-[8.5px] font-mono text-purple-200 hover:text-white flex items-center justify-center gap-1 transition-all group/btn cursor-pointer"
+                      className="w-full py-0.5 px-1 rounded-lg bg-[#180c33] hover:bg-purple-900/50 border border-purple-500/30 hover:border-purple-400/60 text-[8px] font-mono text-purple-200 hover:text-white flex items-center justify-center gap-1 transition-all group/btn cursor-pointer"
                       title="View live terminal logs and system diagnostics"
                     >
                       <Terminal className="w-2.5 h-2.5 text-purple-400 group-hover/btn:text-cyan-300 shrink-0" />

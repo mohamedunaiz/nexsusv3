@@ -427,7 +427,7 @@ export function useAgentHierarchyConnections(
       const colIdx = isMatrix ? idx % cols : idx;
       const rowIdx = isMatrix ? Math.floor(idx / cols) : 0;
       const left = colIdx * (colW + 8);
-      const top = rowIdx === 0 ? 56 : 280;
+      const top = rowIdx === 0 ? 36 : 260;
       const width = colW;
       const height = 230;
       const right = left + width;
