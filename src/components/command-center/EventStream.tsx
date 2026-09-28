@@ -52,7 +52,7 @@ export const EventStream: React.FC<EventStreamProps> = ({
   // Categorization helpers
   const isThreatEvent = (evt: StreamEvent): boolean => {
     if (evt.category === 'threat' || evt.type === 'threat' || evt.type === 'alert' || evt.type === 'warning') return true;
-    const msg = evt.message.toLowerCase();
+    const msg = (evt.message || '').toLowerCase();
     return (
       msg.includes('threat') || 
       msg.includes('malware') || 
@@ -68,7 +68,7 @@ export const EventStream: React.FC<EventStreamProps> = ({
 
   const isDelegationEvent = (evt: StreamEvent): boolean => {
     if (evt.category === 'delegation' || evt.type === 'delegate' || evt.type === 'delegation') return true;
-    const msg = evt.message.toLowerCase();
+    const msg = (evt.message || '').toLowerCase();
     return (
       msg.includes('delegat') || 
       msg.includes('assigned') || 

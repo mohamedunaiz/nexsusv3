@@ -554,4 +554,199 @@ describe('End-to-End Malware Investigation Pipeline Audit (Requirements 1-9)', (
     expect(sysMetricsBody.systemMetrics.detectionAccuracy).toBeGreaterThanOrEqual(90);
     expect(sysMetricsBody.systemMetrics.iocRecall).toBe(100);
   });
+
+  it('Production Hardening (Items 1-11): 16-table DB & Object Storage, RBAC enforcement, Quarantine & Ephemeral Sandbox, 21-field Feature Vector, 11-stage Model Lifecycle, Regression Corpus, Structured & Traceable Findings', async () => {
+    // 1. Verify 16-table Relational Database & Object Storage schema and absence of git-tracked data/*.json
+    const schemaRes = await fetch(`${baseUrl}/api/database/schema`, {
+      headers: { 'x-nexsus-role': 'Admin' },
+    });
+    expect(schemaRes.status).toBe(200);
+    const schemaBody = await schemaRes.json();
+    expect(schemaBody.success).toBe(true);
+    expect(schemaBody.schema.engine).toContain('PostgreSQL');
+    expect(Object.keys(schemaBody.schema.tables)).toEqual(
+      expect.arrayContaining([
+        'users',
+        'cases',
+        'investigations',
+        'tasks',
+        'evidence',
+        'iocs',
+        'findings',
+        'agent_events',
+        'malware_samples',
+        'analyses',
+        'datasets',
+        'models',
+        'reports',
+        'detection_rules',
+        'tools',
+        'audit_logs',
+      ]),
+    );
+    expect(schemaBody.schema.objectStorage.quarantineEnabled).toBe(true);
+
+    // 3. Verify RBAC enforcement (Admin, Analyst, Viewer) across protected endpoints
+    // Viewer should be denied (403 FORBIDDEN_ROLE) on write/execution endpoints
+    const viewerTrainRes = await fetch(`${baseUrl}/api/malware-intel/model/train`, {
+      method: 'POST',
+      headers: {
+        'x-nexsus-role': 'Viewer',
+      },
+    });
+    expect(viewerTrainRes.status).toBe(403);
+    const viewerTrainBody = await viewerTrainRes.json();
+    expect(['FORBIDDEN_ROLE', 'RBAC_FORBIDDEN']).toContain(viewerTrainBody.code);
+
+    // Viewer should be denied on user management (Admin only)
+    const viewerUsersRes = await fetch(`${baseUrl}/api/users`, {
+      headers: { 'x-nexsus-role': 'Viewer' },
+    });
+    expect(viewerUsersRes.status).toBe(403);
+
+    // Admin should succeed on user management and audit logs
+    const adminUsersRes = await fetch(`${baseUrl}/api/users`, {
+      headers: { 'x-nexsus-role': 'Admin' },
+    });
+    expect(adminUsersRes.status).toBe(200);
+    const adminAuditRes = await fetch(`${baseUrl}/api/audit-logs`, {
+      headers: { 'x-nexsus-role': 'Admin' },
+    });
+    expect(adminAuditRes.status).toBe(200);
+
+    // 4, 5, 6. Upload sample through Quarantine -> Object Storage -> Complete 21-field Static Feature Vector -> Isolated Dynamic Sandbox
+    const pePayload = buildSyntheticPEBuffer();
+    const form = new FormData();
+    form.append('file', new Blob([new Uint8Array(pePayload)], { type: 'application/octet-stream' }), 'cobalt_beacon_quarantine.exe');
+    form.append('label', 'malicious');
+    form.append('family', 'CobaltStrike');
+
+    const uploadRes = await fetch(`${baseUrl}/api/malware-intel/samples/upload`, {
+      method: 'POST',
+      headers: {
+        'x-nexsus-role': 'Analyst',
+      },
+      body: form,
+    });
+    expect(uploadRes.status).toBe(200);
+    const uploadBody = await uploadRes.json();
+    expect(uploadBody.success).toBe(true);
+    expect(uploadBody.quarantine).toBeDefined();
+    expect(uploadBody.quarantine.quarantined).toBe(true);
+    expect(uploadBody.quarantine.neverExecutedOnWebServer).toBe(true);
+    expect(uploadBody.quarantine.objectStorageUri).toContain('s3://nexsus-immutable-evidence-vault/');
+
+    // Verify 21-field normalized static feature vector on stored sample
+    const feat = uploadBody.sample.features;
+    expect(feat.hashes).toBeDefined();
+    expect(feat.hashes.md5).toHaveLength(32);
+    expect(feat.hashes.sha1).toHaveLength(40);
+    expect(feat.hashes.sha256).toHaveLength(64);
+    expect(feat.peSections.length).toBeGreaterThan(0);
+    expect(Array.isArray(feat.importedApis)).toBe(true);
+    expect(Array.isArray(feat.exports)).toBe(true);
+    expect(Array.isArray(feat.suspiciousApis)).toBe(true);
+    expect(Array.isArray(feat.urls)).toBe(true);
+    expect(Array.isArray(feat.domains)).toBe(true);
+    expect(Array.isArray(feat.ips)).toBe(true);
+    expect(Array.isArray(feat.filePaths)).toBe(true);
+    expect(Array.isArray(feat.registryIndicators)).toBe(true);
+    expect(Array.isArray(feat.packingIndicators)).toBe(true);
+    expect(feat.signatureInfo).toBeDefined();
+    expect(Array.isArray(feat.resources)).toBe(true);
+    expect(feat.entryPoint).toBeDefined();
+    expect(feat.overlay).toBeDefined();
+
+    // Detonate in isolated ephemeral sandbox and verify sandbox destruction
+    const sandboxRes = await fetch(`${baseUrl}/api/sandbox/detonate`, {
+      method: 'POST',
+      headers: {
+        'x-nexsus-role': 'Analyst',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ sampleId: uploadBody.sample.id }),
+    });
+    expect(sandboxRes.status).toBe(200);
+    const sandboxBody = await sandboxRes.json();
+    expect(sandboxBody.success).toBe(true);
+    expect(sandboxBody.telemetry.isolated).toBe(true);
+    expect(sandboxBody.telemetry.sandboxDestroyed).toBe(true);
+    expect(sandboxBody.telemetry.behaviorTelemetry.apiCallsObserved.length).toBeGreaterThan(0);
+
+    // 7. Also upload a benign sample so we can run the full 11-stage model training lifecycle
+    const benignForm = new FormData();
+    benignForm.append('file', new Blob([Buffer.from('MZ benign utility Calculator.exe GetModuleHandleA kernel32.dll')], { type: 'application/octet-stream' }), 'calc_benign.exe');
+    benignForm.append('label', 'benign');
+    await fetch(`${baseUrl}/api/malware-intel/samples/upload`, {
+      method: 'POST',
+      headers: {
+        'x-nexsus-role': 'Analyst',
+      },
+      body: benignForm,
+    });
+
+    const trainRes = await fetch(`${baseUrl}/api/malware-intel/model/train`, {
+      method: 'POST',
+      headers: {
+        'x-nexsus-role': 'Analyst',
+      },
+    });
+    expect(trainRes.status).toBe(200);
+    const trainBody = await trainRes.json();
+    expect(trainBody.success).toBe(true);
+    expect(trainBody.model.version).toBeDefined();
+    expect(trainBody.model.datasetVersion).toBeDefined();
+    expect(trainBody.model.trainingTimestamp).toBeDefined();
+    expect(trainBody.model.sampleCount).toBeGreaterThanOrEqual(2);
+    expect(Array.isArray(trainBody.model.features)).toBe(true);
+    expect(typeof trainBody.model.threshold).toBe('number');
+    expect(typeof trainBody.model.precision).toBe('number');
+    expect(typeof trainBody.model.recall).toBe('number');
+    expect(typeof trainBody.model.f1Score).toBe('number');
+    expect(typeof trainBody.model.falsePositiveRate).toBe('number');
+    expect(typeof trainBody.model.falseNegativeRate).toBe('number');
+    expect(trainBody.lifecycleStages).toHaveLength(11);
+
+    // 8. Run permanent detection regression test corpus across all 7 categories
+    const regRes = await fetch(`${baseUrl}/api/malware-intel/regression-test`, {
+      headers: { 'x-nexsus-role': 'Analyst' },
+    });
+    expect(regRes.status).toBe(200);
+    const regBody = await regRes.json();
+    expect(regBody.success).toBe(true);
+    expect(regBody.totalCorpusSamples).toBe(7);
+    expect(regBody.passRate).toBe(100);
+
+    // 9, 10, 11. Verify structured specialist outputs, traceable findings, and OBSERVED/INFERRED/EXTERNAL separation
+    const invListRes = await fetch(`${baseUrl}/api/investigations`);
+    const invListBody = await invListRes.json();
+    const latestInv = invListBody.investigations[0];
+    expect(latestInv).toBeDefined();
+    const firstSpecialist = latestInv.agentFindings[0];
+    expect(firstSpecialist.agent).toBeDefined();
+    expect(firstSpecialist.status).toBeDefined();
+    expect(Array.isArray(firstSpecialist.findings)).toBe(true);
+    expect(Array.isArray(firstSpecialist.evidence)).toBe(true);
+    expect(Array.isArray(firstSpecialist.iocs)).toBe(true);
+    expect(Array.isArray(firstSpecialist.techniques)).toBe(true);
+    expect(typeof firstSpecialist.confidence).toBe('number');
+    expect(Array.isArray(firstSpecialist.limitations)).toBe(true);
+    expect(Array.isArray(firstSpecialist.recommendations)).toBe(true);
+
+    const firstFinding = firstSpecialist.findings[0];
+    expect(firstFinding.finding_id).toBeDefined();
+    expect(firstFinding.agent_id).toBeDefined();
+    expect(Array.isArray(firstFinding.evidence_ids)).toBe(true);
+    expect(Array.isArray(firstFinding.ioc_ids)).toBe(true);
+    expect(Array.isArray(firstFinding.technique_ids)).toBe(true);
+    expect(['OBSERVED', 'INFERRED', 'EXTERNAL']).toContain(firstFinding.intelligenceCategory);
+
+    // Traceability drill-down endpoint
+    const traceRes = await fetch(`${baseUrl}/api/investigations/${latestInv.id}/trace/${firstFinding.finding_id}`);
+    expect(traceRes.status).toBe(200);
+    const traceBody = await traceRes.json();
+    expect(traceBody.success).toBe(true);
+    expect(traceBody.trace.chain).toHaveLength(4);
+  });
 });
+

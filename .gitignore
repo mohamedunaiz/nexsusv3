@@ -15,3 +15,5 @@ build/
 *.sqlite3
 *.sqlite-shm
 *.sqlite-wal
+data/
+DRAFT_firestore.rules

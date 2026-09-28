@@ -1,0 +1,287 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Authenticated SOC operator profile with role-based access control.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique Firebase Auth UID of the operator.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the SOC operator.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "description": "Assigned RBAC role.",
+          "enum": ["Admin", "Analyst", "Viewer"]
+        },
+        "badge": {
+          "type": "string",
+          "description": "SOC badge identifier.",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        }
+      },
+      "required": ["uid", "name", "role", "badge", "createdAt"]
+    },
+    "UserPrivateInfo": {
+      "title": "User Private PII",
+      "description": "Isolated private PII record for an operator.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 254
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "AdminRecord": {
+      "title": "Admin Record",
+      "description": "Trusted admin lookup document for RBAC enforcement.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "grantedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "grantedAt"]
+    },
+    "Investigation": {
+      "title": "Security Investigation",
+      "description": "Persistent SOC investigation record with structured findings and evidence provenance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "caseNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "status": {
+          "type": "string",
+          "enum": ["RECEIVED", "VALIDATING", "QUEUED", "ANALYZING", "CORRELATING", "VERIFYING", "COMPLETED", "FAILED"]
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["Critical", "High", "Medium", "Low"]
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "assignedAgent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "reportSummary": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "caseNumber", "title", "status", "severity", "ownerId", "assignedAgent", "createdAt", "updatedAt"]
+    },
+    "MalwareSample": {
+      "title": "Malware Sample",
+      "description": "Persisted malware sample metadata and static feature summary.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sha256": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "fileFormat": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "verdict": {
+          "type": "string",
+          "enum": ["malicious", "suspicious", "clean", "unknown"]
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "name", "sha256", "fileFormat", "verdict", "ownerId", "createdAt"]
+    },
+    "DetectionRule": {
+      "title": "Detection Rule",
+      "description": "Custom YARA/string/IOC detection rule created by analysts.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "pattern": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["string", "ioc", "yara", "api"]
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low"]
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "name", "pattern", "kind", "severity", "ownerId", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "Audit Log Entry",
+      "description": "Immutable security audit log record.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "actorRole": {
+          "type": "string",
+          "enum": ["Admin", "Analyst", "Viewer"]
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "actorId", "actorRole", "action", "resource", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Public operator profile (no PII)."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Isolated PII subcollection for user email."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted admin lookup table."
+    },
+    "/investigations/{investigationId}": {
+      "schema": { "$ref": "#/entities/Investigation" },
+      "description": "Persistent SOC investigations."
+    },
+    "/malware_samples/{sampleId}": {
+      "schema": { "$ref": "#/entities/MalwareSample" },
+      "description": "Persistent malware sample catalog."
+    },
+    "/detection_rules/{ruleId}": {
+      "schema": { "$ref": "#/entities/DetectionRule" },
+      "description": "Persistent custom detection rules."
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Immutable audit trail of SOC actions."
+    }
+  }
+}

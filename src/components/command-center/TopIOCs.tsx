@@ -38,8 +38,9 @@ export const TopIOCs: React.FC<TopIOCsProps> = ({ iocs = [], onSelectIOC, onView
       {/* List */}
       <div className="space-y-1.5">
         {(iocs || []).slice(0, 5).map((ioc) => {
-          const isMalicious = ioc.severity.toLowerCase() === 'malicious';
-          const isSuspicious = ioc.severity.toLowerCase() === 'suspicious';
+          const sev = (ioc.severity || 'Suspicious').toLowerCase();
+          const isMalicious = sev === 'malicious';
+          const isSuspicious = sev === 'suspicious';
 
           return (
             <div 
@@ -60,7 +61,7 @@ export const TopIOCs: React.FC<TopIOCsProps> = ({ iocs = [], onSelectIOC, onView
                 <span className={`text-[10.5px] font-bold ${
                   isMalicious ? 'text-rose-400' : isSuspicious ? 'text-amber-400' : 'text-slate-400'
                 }`}>
-                  • {ioc.severity}
+                  • {ioc.severity || 'Suspicious'}
                 </span>
               </div>
             </div>

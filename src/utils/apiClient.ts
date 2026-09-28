@@ -88,6 +88,17 @@ export async function secureFetch(url: string, options: RequestInit = {}): Promi
     }
   }
 
+  try {
+    const activeRole = localStorage.getItem('nexsus_user_role') || 'Admin';
+    const activeUid = localStorage.getItem('nexsus_user_uid') || 'local-operator';
+    const activeEmail = localStorage.getItem('nexsus_user_email') || 'operator@nexsus.local';
+    if (!headers['x-nexsus-role']) headers['x-nexsus-role'] = activeRole;
+    if (!headers['x-nexsus-uid']) headers['x-nexsus-uid'] = activeUid;
+    if (!headers['x-nexsus-email']) headers['x-nexsus-email'] = activeEmail;
+  } catch {
+    // non-browser or restricted storage
+  }
+
   return fetch(url, {
     ...options,
     credentials: 'include',

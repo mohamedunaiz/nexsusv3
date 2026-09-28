@@ -17,6 +17,7 @@ import { initializeSession, secureFetchWithRecovery } from './utils/apiClient';
 import { buildPipelineOrder, initializeAgentFindings, generateFinding, fetchThreatIntelFinding, computeAggregateVerdict, computeInvestigationMetrics } from './utils/multiAgentAnalysis';
 import { refreshCustomRules } from './utils/customRules';
 import { RULE_CAPABLE_AGENT_IDS } from './types';
+import { signInWithGooglePopup, signOutFirebase, syncInvestigationToFirestore } from './firebase';
 
 // Layout Components
 import { Sidebar } from './components/layout/Sidebar';
@@ -199,10 +200,27 @@ export default function App() {
     return INITIAL_AGENTS;
   });
 
+  const isProdMode = Boolean(import.meta.env.PROD);
+  const [apiUnavailableError, setApiUnavailableError] = useState<string | null>(null);
+  const [operatorUser, setOperatorUser] = useState<{
+    id: string;
+    name: string;
+    email: string;
+    role: 'Admin' | 'Analyst' | 'Viewer';
+    badge: string;
+  }>({
+    id: 'analyst-1',
+    name: 'Lead SOC Operator',
+    email: 'operator@agency.gov',
+    role: 'Admin',
+    badge: 'SOC-771',
+  });
+  const [rbacNotice, setRbacNotice] = useState<string | null>(null);
+
   const [mission, setMission] = useState<MissionData>(INITIAL_MISSION);
-  const [activities, setActivities] = useState<ActivityEvent[]>(INITIAL_ACTIVITIES);
-  const [iocs] = useState(INITIAL_IOCS);
-  const [cases, setCases] = useState(INITIAL_CASES);
+  const [activities, setActivities] = useState<ActivityEvent[]>(() => (isProdMode ? [] : INITIAL_ACTIVITIES));
+  const [iocs, setIocs] = useState<IOCItem[]>(() => (isProdMode ? [] : INITIAL_IOCS));
+  const [cases, setCases] = useState<CaseItem[]>(() => (isProdMode ? [] : INITIAL_CASES));
   
   // AI Providers with LocalStorage persistence (Secrets strictly stripped)
   const [providers, setProviders] = useState<AIProvider[]>(() => {
@@ -222,8 +240,8 @@ export default function App() {
     return stripApiKeys(INITIAL_PROVIDERS);
   });
 
-  const [streamEvents, setStreamEvents] = useState(INITIAL_STREAM_EVENTS);
-  const [artifacts, setArtifacts] = useState<EvidenceArtifact[]>(INITIAL_ARTIFACTS);
+  const [streamEvents, setStreamEvents] = useState<StreamEvent[]>(() => (isProdMode ? [] : INITIAL_STREAM_EVENTS));
+  const [artifacts, setArtifacts] = useState<EvidenceArtifact[]>(() => (isProdMode ? [] : INITIAL_ARTIFACTS));
 
   useEffect(() => {
     const mappedActivities: ActivityEvent[] = streamEvents.slice(0, 60).map((event, index) => ({
@@ -328,72 +346,178 @@ export default function App() {
     ]);
   };
 
+  const handleSwitchOperatorRole = async (newRole: 'Admin' | 'Analyst' | 'Viewer') => {
+    try {
+      const res = await secureFetchWithRecovery('/api/auth/role', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: newRole, email: operatorUser.email, name: operatorUser.name, uid: operatorUser.id }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.user) {
+          setOperatorUser(data.user);
+          setRbacNotice(`Active RBAC role switched to ${data.user.role} (${data.user.badge})`);
+          setTimeout(() => setRbacNotice(null), 4000);
+        }
+      }
+    } catch (err: any) {
+      setApiUnavailableError(`Failed to switch role: ${err?.message || 'API unavailable'}`);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const fbUser = await signInWithGooglePopup();
+      const res = await secureFetchWithRecovery('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          uid: fbUser.uid,
+          email: fbUser.email,
+          name: fbUser.name,
+          role: fbUser.role,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.user) setOperatorUser(data.user);
+      }
+      setRbacNotice(`Authenticated via Firebase Google Sign-In as ${fbUser.email} [${fbUser.role}]`);
+      setTimeout(() => setRbacNotice(null), 5000);
+    } catch (err: any) {
+      setRbacNotice(`Google Sign-In notice: ${err?.message || 'Popup closed'}`);
+      setTimeout(() => setRbacNotice(null), 5000);
+    }
+  };
+
   // Bootstrap operator session on mount
   useEffect(() => {
-    initializeSession();
+    initializeSession().then(async () => {
+      try {
+        const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          if (meData.user) setOperatorUser(meData.user);
+        }
+      } catch {
+        // Handled by syncBackendInvestigationState
+      }
+    });
   }, []);
 
-  // Sync real backend investigation cases and live activity stream
-  useEffect(() => {
-    let cancelled = false;
-    const syncBackendInvestigationState = async () => {
-      try {
-        const [liveRes, casesRes] = await Promise.all([
-          secureFetchWithRecovery('/api/investigations/live-activity'),
-          secureFetchWithRecovery('/api/investigations'),
-        ]);
+  // Sync real backend investigation cases, IOCs, and live activity stream (Item 2: No silent fallback to mockData when API fails)
+  const syncBackendInvestigationState = async () => {
+    try {
+      const [liveRes, casesRes, iocsRes] = await Promise.all([
+        secureFetchWithRecovery('/api/investigations/live-activity'),
+        secureFetchWithRecovery('/api/investigations'),
+        secureFetchWithRecovery('/api/malware-intel/knowledge/iocs'),
+      ]);
 
-        if (!cancelled && liveRes.ok) {
-          const liveData = await liveRes.json();
-          if (Array.isArray(liveData.activities) && liveData.activities.length > 0) {
-            setActivities(liveData.activities);
-          }
+      if (!casesRes.ok || !liveRes.ok) {
+        setApiUnavailableError(
+          `Backend API / Database returned HTTP ${casesRes.status || liveRes.status}. Production mode strictly refuses to display mock fallback data.`,
+        );
+        if (isProdMode) {
+          setCases([]);
+          setActivities([]);
+          setIocs([]);
         }
-
-        if (!cancelled && casesRes.ok) {
-          const casesData = await casesRes.json();
-          if (Array.isArray(casesData.investigations) && casesData.investigations.length > 0) {
-            const mappedCases = casesData.investigations.map((inv: any) => ({
-              id: inv.id,
-              caseNumber: inv.caseNumber,
-              title: inv.title,
-              severity: inv.severity || 'HIGH',
-              status: inv.status || 'COMPLETED',
-              assignedAgent: inv.assignedAgent || 'ARCHON',
-              confidence: inv.confidence || 90,
-              time: new Date(inv.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              lead: inv.assignedAgent || 'ARCHON',
-              indicatorsCount: (inv.evidencePackage?.available_artifacts?.ips?.length || 0) + (inv.evidencePackage?.available_artifacts?.domains?.length || 0) + (inv.evidencePackage?.available_artifacts?.urls?.length || 0) || 6,
-              progress: inv.status === 'COMPLETED' ? 100 : 75,
-              reportSummary: inv.reportSummary,
-              agentFindings: inv.agentFindings,
-              correlatedFindings: inv.correlatedFindings,
-              verificationMatrix: inv.verificationMatrix,
-              mitreAttackTechniques: inv.mitreAttackTechniques,
-            }));
-
-            setCases((prev) => {
-              const result = [...mappedCases];
-              prev.forEach((existing) => {
-                if (!result.some((r) => r.id === existing.id || r.caseNumber === existing.caseNumber)) {
-                  result.push(existing);
-                }
-              });
-              return result;
-            });
-          }
-        }
-      } catch (err) {
-        console.warn('Backend investigation sync paused', err);
+        return;
       }
-    };
 
-    syncBackendInvestigationState();
+      setApiUnavailableError(null);
+
+      if (iocsRes.ok) {
+        const iocsData = await iocsRes.json();
+        if (Array.isArray(iocsData.iocs) && iocsData.iocs.length > 0) {
+          const mappedIocs: IOCItem[] = iocsData.iocs.map((raw: any, idx: number) => {
+            const conf = raw.threatScore || Math.round((raw.confidence || 0.9) * 100);
+            const severity: 'Malicious' | 'Suspicious' | 'Benign' =
+              raw.severity === 'Malicious' || raw.severity === 'Suspicious' || raw.severity === 'Benign'
+                ? raw.severity
+                : conf >= 80
+                  ? 'Malicious'
+                  : conf >= 50
+                    ? 'Suspicious'
+                    : 'Benign';
+            return {
+              id: raw.id || `ioc-db-${idx}`,
+              value: raw.value || raw.ioc || 'unknown',
+              type: raw.type === 'ip' ? 'IP' : raw.type === 'domain' ? 'Domain' : raw.type === 'url' ? 'URL' : 'File Hash',
+              severity,
+              confidence: conf,
+              source: raw.source || 'Malware Analysis',
+              firstSeen: raw.firstSeen || '2026-03-15',
+              lastSeen: 'Active',
+              tags: [raw.extractionMethod || 'extracted', raw.location || 'offset 0x0000'],
+              associatedActor: 'Catalogued Indicator',
+              threatActor: raw.threatActor || 'Catalogued Indicator',
+              description: raw.description || `${raw.extractionMethod || 'static'} @ ${raw.location || 'offset 0x0000'}`,
+              status: 'Active',
+            };
+          });
+          setIocs((prev) => (isProdMode ? mappedIocs : [...mappedIocs, ...prev.filter((p) => !mappedIocs.some((m) => m.value === p.value))]));
+        }
+      }
+
+      const liveData = await liveRes.json();
+      if (Array.isArray(liveData.activities) && liveData.activities.length > 0) {
+        setActivities(liveData.activities);
+      }
+
+      const casesData = await casesRes.json();
+      if (Array.isArray(casesData.investigations) && casesData.investigations.length > 0) {
+        const mappedCases = casesData.investigations.map((inv: any) => ({
+          id: inv.id,
+          caseNumber: inv.caseNumber,
+          title: inv.title,
+          severity: inv.severity || 'HIGH',
+          status: inv.status || 'COMPLETED',
+          assignedAgent: inv.assignedAgent || 'ARCHON',
+          confidence: inv.confidence || 90,
+          time: new Date(inv.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          lead: inv.assignedAgent || 'ARCHON',
+          indicatorsCount:
+            (inv.evidencePackage?.available_artifacts?.ips?.length || 0) +
+              (inv.evidencePackage?.available_artifacts?.domains?.length || 0) +
+              (inv.evidencePackage?.available_artifacts?.urls?.length || 0) || 6,
+          progress: inv.status === 'COMPLETED' ? 100 : 75,
+          reportSummary: inv.reportSummary,
+          agentFindings: inv.agentFindings,
+          correlatedFindings: inv.correlatedFindings,
+          verificationMatrix: inv.verificationMatrix,
+          mitreAttackTechniques: inv.mitreAttackTechniques,
+        }));
+
+        setCases((prev) => {
+          if (isProdMode) return mappedCases;
+          const result = [...mappedCases];
+          prev.forEach((existing) => {
+            if (!result.some((r) => r.id === existing.id || r.caseNumber === existing.caseNumber)) {
+              result.push(existing);
+            }
+          });
+          return result;
+        });
+      }
+    } catch (err: any) {
+      setApiUnavailableError(
+        `API / Database Connection Unavailable (${err?.message || 'Network failure'}). Refusing to silently display mock data.`,
+      );
+      if (isProdMode) {
+        setCases([]);
+        setActivities([]);
+        setIocs([]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    void syncBackendInvestigationState();
     const interval = setInterval(syncBackendInvestigationState, 15000);
-    return () => {
-      cancelled = true;
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   // --- Live investigation heartbeat -----------------------------------
@@ -903,7 +1027,22 @@ export default function App() {
   };
 
   const handleCreateCase = (newCase: CaseItem, assignedAgent: SpecialistAgent) => {
+    if (operatorUser.role === 'Viewer') {
+      setRbacNotice('RBAC Permission Denied: Role "Viewer" cannot create cases. Switch to Analyst or Admin.');
+      setTimeout(() => setRbacNotice(null), 5000);
+      return;
+    }
     setCases(prev => [newCase, ...prev]);
+    void syncInvestigationToFirestore({
+      id: newCase.id,
+      caseNumber: newCase.caseNumber,
+      title: newCase.title,
+      status: 'ANALYZING',
+      severity: newCase.severity === 'CRITICAL' ? 'Critical' : newCase.severity === 'HIGH' ? 'High' : 'Medium',
+      assignedAgent: assignedAgent.name,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }).catch(() => undefined);
 
     // Update assigned specialist agent task and execution log
     setAgents(prev => prev.map(a => {
@@ -1097,20 +1236,25 @@ export default function App() {
   };
 
   const handleSelectAgentByName = (rawName: string): boolean => {
-    const clean = rawName.toLowerCase().replace(/agent/g, '').trim();
-    const found = agents.find(a => 
-      a.name.toLowerCase().includes(clean) || 
-      a.role.toLowerCase().includes(clean) ||
-      a.id.toLowerCase().includes(clean) ||
-      (clean.includes('malware') && a.role.toLowerCase().includes('malware')) ||
-      (clean.includes('ioc') && a.role.toLowerCase().includes('ioc')) ||
-      (clean.includes('threat') && a.role.toLowerCase().includes('threat')) ||
-      (clean.includes('network') && a.role.toLowerCase().includes('network')) ||
-      (clean.includes('code') && a.role.toLowerCase().includes('code')) ||
-      (clean.includes('report') && a.role.toLowerCase().includes('report')) ||
-      (clean.includes('memory') && a.role.toLowerCase().includes('memory')) ||
-      (clean.includes('verification') && a.role.toLowerCase().includes('verification'))
-    );
+    const clean = (rawName || '').toLowerCase().replace(/agent/g, '').trim();
+    const found = agents.find(a => {
+      const name = (a.name || '').toLowerCase();
+      const role = (a.role || '').toLowerCase();
+      const id = (a.id || '').toLowerCase();
+      return (
+        name.includes(clean) || 
+        role.includes(clean) ||
+        id.includes(clean) ||
+        (clean.includes('malware') && role.includes('malware')) ||
+        (clean.includes('ioc') && role.includes('ioc')) ||
+        (clean.includes('threat') && role.includes('threat')) ||
+        (clean.includes('network') && role.includes('network')) ||
+        (clean.includes('code') && role.includes('code')) ||
+        (clean.includes('report') && role.includes('report')) ||
+        (clean.includes('memory') && role.includes('memory')) ||
+        (clean.includes('verification') && role.includes('verification'))
+      );
+    });
     if (found) {
       setSelectedAgent(found);
       return true;
@@ -1119,8 +1263,8 @@ export default function App() {
   };
 
   const handleSelectCaseByNumber = (caseNum: string): boolean => {
-    const clean = caseNum.toLowerCase().replace(/case|incident|#/g, '').trim();
-    const found = cases.find(c => c.caseNumber.toLowerCase().includes(clean) || c.id.toLowerCase().includes(clean));
+    const clean = (caseNum || '').toLowerCase().replace(/case|incident|#/g, '').trim();
+    const found = cases.find(c => (c.caseNumber || '').toLowerCase().includes(clean) || (c.id || '').toLowerCase().includes(clean));
     if (found) {
       setSelectedCase(found);
       return true;
@@ -1276,6 +1420,64 @@ export default function App() {
           threatScore={threatScore}
           activeProvidersCount={providers.filter(p => p.enabled !== false).length}
         />
+
+        {/* Production API / Database Error State Banner (Item 2: Never silently fall back to mock data) */}
+        {apiUnavailableError && (
+          <div
+            role="alert"
+            className="px-4 py-2.5 bg-rose-950/95 border-b border-rose-500/70 text-rose-200 flex items-center justify-between gap-3 text-xs font-mono z-20"
+          >
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded bg-rose-600 text-white font-bold uppercase">API / DB Unavailable</span>
+              <span>{apiUnavailableError}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => void syncBackendInvestigationState()}
+              className="px-3 py-1 rounded bg-rose-700 hover:bg-rose-600 text-white font-semibold border border-rose-400/40 cursor-pointer shrink-0"
+            >
+              Retry Connection
+            </button>
+          </div>
+        )}
+
+        {/* RBAC & Authenticated Operator Bar (Item 3: Server-Side & UI Role Enforcement) */}
+        <div className="px-4 py-1.5 bg-slate-950/90 border-b border-purple-500/25 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono z-20">
+          <div className="flex items-center gap-2 text-slate-300">
+            <span className="text-purple-400 font-semibold">AUTH & RBAC ENFORCEMENT:</span>
+            <span className="px-2 py-0.5 rounded bg-purple-950/80 border border-purple-500/40 text-cyan-300">
+              {operatorUser.name} ({operatorUser.email})
+            </span>
+            <span className="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-bold">
+              ROLE: {operatorUser.role.toUpperCase()}
+            </span>
+            {rbacNotice && <span className="text-amber-300 ml-2">{rbacNotice}</span>}
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="text-slate-400 mr-1">Switch Role:</span>
+            {(['Admin', 'Analyst', 'Viewer'] as const).map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => void handleSwitchOperatorRole(r)}
+                className={`px-2 py-0.5 rounded border transition-all cursor-pointer ${
+                  operatorUser.role === r
+                    ? 'bg-purple-600 text-white border-purple-400 font-bold'
+                    : 'bg-slate-900 text-slate-400 border-slate-700 hover:text-slate-200'
+                }`}
+              >
+                {r}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => void handleGoogleSignIn()}
+              className="ml-2 px-2.5 py-0.5 rounded bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-200 cursor-pointer"
+            >
+              Google Sign-In
+            </button>
+          </div>
+        </div>
 
         {/* Global Emergency Override DEFCON-1 Banner */}
         {isEmergencyActive && (

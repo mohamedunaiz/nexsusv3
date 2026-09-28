@@ -1,0 +1,214 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Pillar 1 & Phase 4.1: Global Safety Net (Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Hardened Global Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isBootstrappedAdmin() {
+      return isVerified() && request.auth.token.email == 'friends20052005@gmail.com';
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (isVerified() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    // Validation Blueprints (Pillar 2)
+    function isValidUserProfile(data) {
+      return data.keys().hasAll(['uid', 'name', 'role', 'badge', 'createdAt']) &&
+        data.keys().hasOnly(['uid', 'name', 'role', 'badge', 'createdAt']) &&
+        data.uid is string && data.uid.size() >= 1 && data.uid.size() <= 128 && data.uid.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.name is string && data.name.size() >= 1 && data.name.size() <= 120 &&
+        data.role is string && data.role in ['Admin', 'Analyst', 'Viewer'] &&
+        data.badge is string && data.badge.size() >= 1 && data.badge.size() <= 40 &&
+        data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    function isValidUserPrivateInfo(data) {
+      return data.keys().hasAll(['uid', 'email']) &&
+        data.keys().hasOnly(['uid', 'email']) &&
+        data.uid is string && data.uid.size() >= 1 && data.uid.size() <= 128 && data.uid.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.email is string && data.email.size() >= 3 && data.email.size() <= 254;
+    }
+
+    function isValidAdminRecord(data) {
+      return data.keys().hasAll(['uid', 'grantedAt']) &&
+        data.keys().hasOnly(['uid', 'grantedAt']) &&
+        data.uid is string && data.uid.size() >= 1 && data.uid.size() <= 128 && data.uid.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.grantedAt is string && data.grantedAt.size() <= 64;
+    }
+
+    function isValidInvestigation(data) {
+      return data.keys().hasAll(['id', 'caseNumber', 'title', 'status', 'severity', 'ownerId', 'assignedAgent', 'createdAt', 'updatedAt']) &&
+        data.keys().hasOnly(['id', 'caseNumber', 'title', 'status', 'severity', 'ownerId', 'assignedAgent', 'reportSummary', 'createdAt', 'updatedAt']) &&
+        data.id is string && data.id.size() >= 1 && data.id.size() <= 128 && data.id.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.caseNumber is string && data.caseNumber.size() >= 1 && data.caseNumber.size() <= 64 &&
+        data.title is string && data.title.size() >= 1 && data.title.size() <= 300 &&
+        data.status is string && data.status in ['RECEIVED', 'VALIDATING', 'QUEUED', 'ANALYZING', 'CORRELATING', 'VERIFYING', 'COMPLETED', 'FAILED'] &&
+        data.severity is string && data.severity in ['Critical', 'High', 'Medium', 'Low'] &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.assignedAgent is string && data.assignedAgent.size() >= 1 && data.assignedAgent.size() <= 100 &&
+        (!('reportSummary' in data) || (data.reportSummary is string && data.reportSummary.size() <= 5000)) &&
+        data.createdAt is string && data.createdAt.size() <= 64 &&
+        data.updatedAt is string && data.updatedAt.size() <= 64;
+    }
+
+    function isValidMalwareSample(data) {
+      return data.keys().hasAll(['id', 'name', 'sha256', 'fileFormat', 'verdict', 'ownerId', 'createdAt']) &&
+        data.keys().hasOnly(['id', 'name', 'sha256', 'fileFormat', 'verdict', 'ownerId', 'createdAt']) &&
+        data.id is string && data.id.size() >= 1 && data.id.size() <= 128 && data.id.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.name is string && data.name.size() >= 1 && data.name.size() <= 256 &&
+        data.sha256 is string && data.sha256.size() == 64 && data.sha256.matches('^[a-fA-F0-9]{64}$') &&
+        data.fileFormat is string && data.fileFormat.size() >= 1 && data.fileFormat.size() <= 64 &&
+        data.verdict is string && data.verdict in ['malicious', 'suspicious', 'clean', 'unknown'] &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    function isValidDetectionRule(data) {
+      return data.keys().hasAll(['id', 'name', 'pattern', 'kind', 'severity', 'ownerId', 'createdAt']) &&
+        data.keys().hasOnly(['id', 'name', 'pattern', 'kind', 'severity', 'ownerId', 'createdAt']) &&
+        data.id is string && data.id.size() >= 1 && data.id.size() <= 128 && data.id.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.name is string && data.name.size() >= 1 && data.name.size() <= 160 &&
+        data.pattern is string && data.pattern.size() >= 1 && data.pattern.size() <= 1000 &&
+        data.kind is string && data.kind in ['string', 'ioc', 'yara', 'api'] &&
+        data.severity is string && data.severity in ['critical', 'high', 'medium', 'low'] &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    function isValidAuditLog(data) {
+      return data.keys().hasAll(['id', 'actorId', 'actorRole', 'action', 'resource', 'timestamp']) &&
+        data.keys().hasOnly(['id', 'actorId', 'actorRole', 'action', 'resource', 'timestamp']) &&
+        data.id is string && data.id.size() >= 1 && data.id.size() <= 128 && data.id.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.actorId is string && data.actorId.size() >= 1 && data.actorId.size() <= 128 && data.actorId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.actorRole is string && data.actorRole in ['Admin', 'Analyst', 'Viewer'] &&
+        data.action is string && data.action.size() >= 1 && data.action.size() <= 120 &&
+        data.resource is string && data.resource.size() >= 1 && data.resource.size() <= 200 &&
+        data.timestamp is string && data.timestamp.size() <= 64;
+    }
+
+    // Collection: /users/{userId}
+    match /users/{userId} {
+      allow get: if isSignedIn() && isValidId(userId) && (request.auth.uid == userId || isAdmin());
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isVerified() && isValidId(userId) && isValidUserProfile(incoming()) &&
+        incoming().uid == request.auth.uid && incoming().uid == userId &&
+        (incoming().role in ['Analyst', 'Viewer'] || isAdmin());
+      allow update: if isVerified() && isValidId(userId) && isValidUserProfile(incoming()) &&
+        incoming().uid == existing().uid &&
+        incoming().createdAt == existing().createdAt && (
+          isAdmin() ||
+          (request.auth.uid == userId && incoming().role == existing().role && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'badge']))
+        );
+      allow delete: if isAdmin() && isValidId(userId);
+
+      // Subcollection: /users/{userId}/private/{docId} (PII Isolation - Pillar 6)
+      match /private/{docId} {
+        allow get: if isSignedIn() && isValidId(userId) && isValidId(docId) &&
+          exists(/databases/$(database)/documents/users/$(userId)) &&
+          (request.auth.uid == userId || isAdmin());
+        allow list: if false;
+        allow create: if isVerified() && isValidId(userId) && isValidId(docId) &&
+          isValidUserPrivateInfo(incoming()) &&
+          incoming().uid == request.auth.uid && incoming().uid == userId &&
+          exists(/databases/$(database)/documents/users/$(userId));
+        allow update: if isVerified() && isValidId(userId) && isValidId(docId) &&
+          isValidUserPrivateInfo(incoming()) &&
+          incoming().uid == existing().uid &&
+          exists(/databases/$(database)/documents/users/$(userId)) &&
+          (isAdmin() || (request.auth.uid == userId && incoming().diff(existing()).affectedKeys().hasOnly(['email'])));
+        allow delete: if isAdmin() && isValidId(userId) && isValidId(docId);
+      }
+    }
+
+    // Collection: /admins/{adminId}
+    match /admins/{adminId} {
+      allow get: if isSignedIn() && isValidId(adminId) && (request.auth.uid == adminId || isAdmin());
+      allow list: if false;
+      allow create, update: if isAdmin() && isValidId(adminId) && isValidAdminRecord(incoming()) && incoming().uid == adminId;
+      allow delete: if isAdmin() && isValidId(adminId);
+    }
+
+    // Collection: /investigations/{investigationId}
+    match /investigations/{investigationId} {
+      allow get: if isSignedIn() && isValidId(investigationId) && (existing().ownerId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      allow create: if isVerified() && isValidId(investigationId) && isValidInvestigation(incoming()) &&
+        incoming().id == investigationId && incoming().ownerId == request.auth.uid;
+      allow update: if isVerified() && isValidId(investigationId) && isValidInvestigation(incoming()) &&
+        incoming().id == existing().id &&
+        incoming().ownerId == existing().ownerId &&
+        incoming().createdAt == existing().createdAt && (
+          isAdmin() ||
+          (existing().ownerId == request.auth.uid && existing().status != 'COMPLETED' &&
+            incoming().diff(existing()).affectedKeys().hasOnly(['title', 'status', 'severity', 'assignedAgent', 'reportSummary', 'updatedAt']))
+        );
+      allow delete: if isAdmin() && isValidId(investigationId);
+    }
+
+    // Collection: /malware_samples/{sampleId}
+    match /malware_samples/{sampleId} {
+      allow get: if isSignedIn() && isValidId(sampleId) && (existing().ownerId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      allow create: if isVerified() && isValidId(sampleId) && isValidMalwareSample(incoming()) &&
+        incoming().id == sampleId && incoming().ownerId == request.auth.uid;
+      allow update: if isVerified() && isValidId(sampleId) && isValidMalwareSample(incoming()) &&
+        incoming().id == existing().id &&
+        incoming().ownerId == existing().ownerId &&
+        incoming().sha256 == existing().sha256 &&
+        incoming().createdAt == existing().createdAt && (
+          isAdmin() ||
+          (existing().ownerId == request.auth.uid && incoming().diff(existing()).affectedKeys().hasOnly(['verdict', 'name']))
+        );
+      allow delete: if isAdmin() && isValidId(sampleId);
+    }
+
+    // Collection: /detection_rules/{ruleId}
+    match /detection_rules/{ruleId} {
+      allow get: if isSignedIn() && isValidId(ruleId) && (existing().ownerId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      allow create: if isVerified() && isValidId(ruleId) && isValidDetectionRule(incoming()) &&
+        incoming().id == ruleId && incoming().ownerId == request.auth.uid;
+      allow update: if isVerified() && isValidId(ruleId) && isValidDetectionRule(incoming()) &&
+        incoming().id == existing().id &&
+        incoming().ownerId == existing().ownerId &&
+        incoming().createdAt == existing().createdAt && (
+          isAdmin() ||
+          (existing().ownerId == request.auth.uid && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'pattern', 'severity']))
+        );
+      allow delete: if isAdmin() && isValidId(ruleId);
+    }
+
+    // Collection: /audit_logs/{logId}
+    match /audit_logs/{logId} {
+      allow get: if isSignedIn() && isValidId(logId) && (existing().actorId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && resource.data.actorId == request.auth.uid;
+      allow create: if isVerified() && isValidId(logId) && isValidAuditLog(incoming()) &&
+        incoming().id == logId && incoming().actorId == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}

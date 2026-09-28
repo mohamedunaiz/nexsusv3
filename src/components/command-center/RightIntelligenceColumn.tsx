@@ -209,8 +209,9 @@ export const RightIntelligenceColumn: React.FC<RightIntelligenceColumnProps> = (
         {activeTab === 'iocs' && (
           <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
             {iocs.map((ioc) => {
-              const isMalicious = ioc.severity.toLowerCase() === 'malicious';
-              const isSuspicious = ioc.severity.toLowerCase() === 'suspicious';
+              const sev = (ioc.severity || 'Suspicious').toLowerCase();
+              const isMalicious = sev === 'malicious';
+              const isSuspicious = sev === 'suspicious';
 
               return (
                 <div

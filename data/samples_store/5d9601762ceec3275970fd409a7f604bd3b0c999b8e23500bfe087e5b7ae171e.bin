@@ -1,1 +1,0 @@
-int main() { const char* tag = "NEXSUS_APT_NOVEL_IMPLANT_WATERMARK_1790500623284"; const char* build = "v2_new_hash"; return 0; }

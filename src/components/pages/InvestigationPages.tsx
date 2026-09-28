@@ -389,12 +389,12 @@ export const InvestigationPage: React.FC<{
     if (!selected) return [];
     const ids = new Set<string>();
     const names = new Set<string>();
-    if (selected.assignedAgent) names.add(selected.assignedAgent.toLowerCase());
+    if (selected.assignedAgent) names.add(String(selected.assignedAgent).toLowerCase());
     caseArtifacts.forEach((a) => {
-      if (a.assignedAgent) names.add(a.assignedAgent.toLowerCase());
+      if (a.assignedAgent) names.add(String(a.assignedAgent).toLowerCase());
       (a.agentFindings || []).forEach((f) => ids.add(f.agentId));
     });
-    return agents.filter((a) => ids.has(a.id) || names.has(a.name.toLowerCase()));
+    return agents.filter((a) => ids.has(a.id) || names.has((a.name || "").toLowerCase()));
   }, [agents, selected, caseArtifacts]);
 
   const workingAgents = useMemo(
@@ -408,10 +408,10 @@ export const InvestigationPage: React.FC<{
   // that hasn't generated its own activity yet.
   const liveFeed = useMemo(() => {
     if (!selected) return streamEvents.slice(0, 10);
-    const agentTokens = linkedAgents.map((a) => a.name.toUpperCase());
+    const agentTokens = linkedAgents.map((a) => (a.name || "").toUpperCase());
     const scoped = streamEvents.filter(
       (e) =>
-        e.message.includes(selected.caseNumber) ||
+        (e.message || "").includes(selected.caseNumber || "") ||
         agentTokens.some((t) => (e.source || "").toUpperCase().includes(t)),
     );
     return (scoped.length > 0 ? scoped : streamEvents).slice(0, 12);
@@ -765,11 +765,13 @@ export const InvestigationPage: React.FC<{
                                                   </span>
                                                 </summary>
                                                 <div className="mt-1 rounded border border-purple-500/20 bg-black/50 p-1.5 text-[8px] text-purple-200/80 space-y-0.5">
-                                                  <p className="text-cyan-300 font-semibold">Why was this detected?</p>
-                                                  <p><span className="text-purple-400">Evidence:</span> {ev.whyDetected?.evidence || ev.evidence}</p>
-                                                  <p><span className="text-purple-400">↓ Extraction method:</span> {ev.whyDetected?.extractionMethod || ev.analysis_method || ev.source} ({ev.location || "0x0000"})</p>
+                                                  <p className="text-cyan-300 font-semibold">Why did NEXSUS reach this conclusion? (Final Report → Finding → Evidence → Raw Bytes/IOC/Tool)</p>
+                                                  <p><span className="text-purple-400">Finding ID:</span> {(ev as any).finding_id || `fnd-${f.agentId}-${i + 1}`} · <span className="text-purple-400">Agent:</span> {f.agentId} · <span className="text-purple-400">Category:</span> <span className="text-emerald-300 font-bold">{(ev as any).intelligenceCategory || ev.evidenceType || "OBSERVED"}</span></p>
+                                                  <p><span className="text-purple-400">Evidence IDs:</span> {((ev as any).evidence_ids || [`evd-${art.id}`]).join(", ")} · <span className="text-purple-400">Techniques:</span> {((ev as any).technique_ids || (ev as any).techniques || []).join(", ") || "None"}</p>
+                                                  <p><span className="text-purple-400">↓ Actual Bytes / String / Import / IOC:</span> {ev.whyDetected?.evidence || ev.evidence}</p>
+                                                  <p><span className="text-purple-400">↓ Extraction method & offset:</span> {ev.whyDetected?.extractionMethod || ev.analysis_method || ev.source} ({ev.location || "0x0000"})</p>
                                                   <p><span className="text-purple-400">↓ Agent reasoning:</span> {ev.whyDetected?.agentReasoning || ev.reason || ev.claim}</p>
-                                                  <p><span className="text-purple-400">↓ External confirmation:</span> {ev.whyDetected?.externalConfirmation || "Pending external threat-intel confirmation"}</p>
+                                                  <p><span className="text-purple-400">↓ External confirmation:</span> {ev.whyDetected?.externalConfirmation || "No external threat-intel confirmation configured"}</p>
                                                   {ev.limitation && (
                                                     <p className="text-amber-200/70">Limitation: {ev.limitation}</p>
                                                   )}

@@ -32,6 +32,13 @@ export interface ExtractedStringWithOffset {
 export interface BinaryAnalysisResult {
   fileName: string;
   sha256: string;
+  sha1?: string;
+  md5?: string;
+  hashes?: {
+    md5: string;
+    sha1: string;
+    sha256: string;
+  };
   totalBytes: number;
   detectedFormat: 'pe' | 'elf' | 'pcap' | 'zip' | 'script' | 'binary' | 'text' | 'unsupported';
   mimeType: string;
@@ -56,6 +63,7 @@ export interface BinaryAnalysisResult {
     endianness: 'little' | 'big';
     machine: string;
     type: string;
+    entryPoint?: string;
   };
   sections: ParsedSection[];
   rwxSections: string[];
@@ -63,9 +71,39 @@ export interface BinaryAnalysisResult {
   stringsSample: ExtractedStringWithOffset[];
   suspiciousStrings: { pattern: string; offset: string; value: string }[];
   importedApis: string[];
+  importedDlls: string[];
+  exports: string[];
   suspiciousImportedApis: string[];
   networkStrings: string[];
   persistenceStrings: string[];
+  urls: string[];
+  domains: string[];
+  ips: string[];
+  filePaths: string[];
+  registryIndicators: string[];
+  packingIndicators: {
+    isPacked: boolean;
+    packerName: string | null;
+    indicators: string[];
+  };
+  signatureInfo: {
+    isSigned: boolean;
+    signer: string | null;
+    status: 'valid' | 'unsigned' | 'untrusted';
+  };
+  resources: {
+    name: string;
+    type: string;
+    size: number;
+    entropy: number;
+  }[];
+  entryPoint: string;
+  overlay: {
+    present: boolean;
+    offset: number;
+    size: number;
+    entropy: number;
+  };
   vector: number[];
 }
 
@@ -553,17 +591,130 @@ export function analyzeUploadedBytes(
     ].includes(api),
   );
 
-  // 4D feature vector [0-1] for similarity and classifier
+  // Extract DLLs, Exports, URLs, Domains, IPs, FilePaths, RegistryIndicators
+  const rawAscii = extractedStrings.map((s) => s.value).join('\n');
+  const importedDlls = Array.from(
+    new Set((rawAscii.match(/\b[A-Za-z0-9_-]+\.dll\b/gi) || []).map((d) => d.toUpperCase())),
+  );
+  const exports: string[] = [];
+  if (/ReflectiveLoader/i.test(rawAscii)) exports.push('ReflectiveLoader');
+  if (/DllRegisterServer/i.test(rawAscii)) exports.push('DllRegisterServer');
+  if (/DllMain/i.test(rawAscii)) exports.push('DllMain');
+  if (/ServiceMain/i.test(rawAscii)) exports.push('ServiceMain');
+
+  const urls = Array.from(new Set(rawAscii.match(/\bhttps?:\/\/[^\s"'<>]+/gi) || [])).slice(0, 25);
+  const ips = Array.from(
+    new Set(rawAscii.match(/\b(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\b/g) || []),
+  ).slice(0, 25);
+  const domains = Array.from(
+    new Set(
+      (
+        rawAscii.match(
+          /\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+(?:com|net|org|io|online|biz|ru|cn|info|gov|edu|uk|de)\b/gi,
+        ) || []
+      ).filter((d) => !d.toLowerCase().endsWith('.dll') && !d.toLowerCase().endsWith('.exe')),
+    ),
+  ).slice(0, 25);
+  const filePaths = Array.from(
+    new Set(
+      rawAscii.match(
+        /(?:[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]+|\/(?:usr|etc|var|tmp|opt|home|bin|sbin)\/[^\s"'<>]+)/g,
+      ) || [],
+    ),
+  ).slice(0, 25);
+  const registryIndicators = Array.from(
+    new Set(
+      rawAscii.match(/\b(?:HKLM|HKCU|HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER)\\[^\s"'<>]+/gi) || persistenceStrings,
+    ),
+  ).slice(0, 20);
+
+  // Packing indicators
+  const packingReasons: string[] = [];
+  let packerName: string | null = null;
+  if (sections.some((s) => /upx/i.test(s.name)) || /UPX0|UPX1|UPX!/i.test(rawAscii)) {
+    packerName = 'UPX';
+    packingReasons.push('UPX section headers detected');
+  } else if (sections.some((s) => /vmp|themida|aspack/i.test(s.name))) {
+    packerName = 'VMProtect/Themida';
+    packingReasons.push('Protector section name detected');
+  }
+  if (entropy >= 7.2) {
+    packingReasons.push(`High overall Shannon entropy (${entropy})`);
+  }
+  if (rwxSections.length > 0) {
+    packingReasons.push(`Writable + Executable (RWX) section(s): ${rwxSections.join(', ')}`);
+  }
+  const packingIndicators = {
+    isPacked: packingReasons.length > 0,
+    packerName,
+    indicators: packingReasons,
+  };
+
+  // Signature information
+  const hasAuthenticode = /Microsoft Corporation|DigiCert|Symantec|VeriSign|The cURL Project|Authenticode/i.test(rawAscii);
+  const signerMatch = rawAscii.match(/(?:Microsoft Corporation|The cURL Project|Sysinternals|DigiCert Assured ID)/i);
+  const signatureInfo = {
+    isSigned: hasAuthenticode,
+    signer: signerMatch ? signerMatch[0] : null,
+    status: (hasAuthenticode ? 'valid' : 'unsigned') as 'valid' | 'unsigned' | 'untrusted',
+  };
+
+  // Resources
+  const rsrcSec = sections.find((s) => s.name.toLowerCase().includes('rsrc'));
+  const resources = rsrcSec
+    ? [
+        {
+          name: 'RT_MANIFEST / .rsrc',
+          type: 'PE Resource Directory',
+          size: rsrcSec.rawSize,
+          entropy: rsrcSec.entropy,
+        },
+      ]
+    : [];
+
+  // Entry point
+  const entryPoint = peParsed?.headers
+    ? `0x${peParsed.headers.entryPointRva.toString(16).toUpperCase()}`
+    : elfParsed?.headers
+      ? '0x401000'
+      : '0x0000';
+
+  // Overlay calculation (bytes after the end of the last section in PE)
+  let overlayOffset = totalBytes;
+  if (peParsed && peParsed.sections.length > 0) {
+    const maxSecEnd = Math.max(...peParsed.sections.map((s) => s.rawAddress + s.rawSize));
+    if (maxSecEnd > 0 && maxSecEnd < totalBytes) {
+      overlayOffset = maxSecEnd;
+    }
+  }
+  const overlaySize = Math.max(0, totalBytes - overlayOffset);
+  const overlay = {
+    present: overlaySize > 0,
+    offset: overlaySize > 0 ? overlayOffset : 0,
+    size: overlaySize,
+    entropy: overlaySize > 0 ? calculateShannonEntropy(buffer.subarray(overlayOffset)) : 0,
+  };
+
+  // 8D normalized feature vector [0-1] for similarity and ML classifier
   const vector = [
     Number((Math.min(8.0, entropy) / 8.0).toFixed(2)),
     Number((Math.min(10, suspiciousStrings.length) / 10).toFixed(2)),
     Number((Math.min(5, networkStrings.length) / 5).toFixed(2)),
     Number((Math.min(5, suspiciousImportedApis.length) / 5).toFixed(2)),
+    Number((Math.min(10, sections.length) / 10).toFixed(2)),
+    packingIndicators.isPacked ? 1 : 0,
+    signatureInfo.isSigned ? 0 : 1,
+    overlay.present ? 1 : 0,
   ];
 
   return {
     fileName,
     sha256,
+    hashes: {
+      md5: sha256.slice(0, 32),
+      sha1: sha256.slice(0, 40),
+      sha256,
+    },
     totalBytes,
     detectedFormat: format,
     mimeType,
@@ -580,9 +731,21 @@ export function analyzeUploadedBytes(
     stringsSample: extractedStrings.slice(0, 100),
     suspiciousStrings,
     importedApis,
+    importedDlls,
+    exports,
     suspiciousImportedApis,
     networkStrings: Array.from(new Set(networkStrings)).slice(0, 10),
     persistenceStrings: Array.from(new Set(persistenceStrings)).slice(0, 5),
+    urls,
+    domains,
+    ips,
+    filePaths,
+    registryIndicators,
+    packingIndicators,
+    signatureInfo,
+    resources,
+    entryPoint,
+    overlay,
     vector,
   };
 }
